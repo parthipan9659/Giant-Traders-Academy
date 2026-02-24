@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Giant Traders Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* Instant font fallback — prevent layout shift */
+  :root { --font-heading: 'Syne', 'Arial Black', 'Arial Bold', sans-serif; --font-body: 'Space Grotesk', 'Inter', 'Segoe UI', Arial, sans-serif; --font-mono: 'JetBrains Mono', 'Consolas', 'Courier New', monospace; }
+  body { font-family: var(--font-body); }
+  h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); }
+</style>
+<link rel="stylesheet" href="shared.css">
+<style>
+.legal-layout { display: grid; grid-template-columns: 220px 1fr; gap: 60px; padding: 80px 0; }
+.legal-nav { position: sticky; top: 90px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; height: fit-content; }
+.legal-nav h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 14px; letter-spacing: 1px; }
+.legal-nav a { display: block; color: var(--muted2); text-decoration: none; font-size: 13px; padding: 8px 10px; border-radius: 7px; transition: all 0.2s; margin-bottom: 2px; }
+.legal-nav a:hover { background: rgba(245,200,66,0.08); color: var(--gold); }
+.legal-content h2 { font-family: 'Syne', 'Arial Black', sans-serif; font-size: 26px; font-weight: 900; margin: 48px 0 16px; padding-top: 48px; border-top: 1px solid var(--border); }
+.legal-content h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.legal-content p { font-size: 15px; color: var(--muted2); line-height: 1.85; margin-bottom: 16px; }
+.legal-content ul { margin: 12px 0 20px 0; display: flex; flex-direction: column; gap: 8px; }
+.legal-content ul li { font-size: 15px; color: var(--muted2); line-height: 1.7; display: flex; gap: 10px; }
+.legal-content ul li::before { content: '→'; color: var(--gold); font-family: 'JetBrains Mono', monospace; flex-shrink: 0; margin-top: 1px; }
+.legal-content strong { color: var(--text); }
+.legal-meta { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 40px; display: flex; gap: 32px; flex-wrap: wrap; }
+.legal-meta-item .legal-meta-label { color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-bottom: 4px; }
+.legal-meta-item .legal-meta-val { color: var(--text); font-weight: 600; font-size: 13px; }
+.disclaimer-box { background: rgba(255,71,87,0.06); border: 1px solid rgba(255,71,87,0.2); border-radius: 12px; padding: 24px 28px; margin: 28px 0; }
+.disclaimer-box p { color: #fca5a5; font-size: 14px; margin: 0; }
+.disclaimer-box strong { color: var(--red); }
+@media(max-width:900px){
+  .legal-layout { grid-template-columns: 1fr; gap: 28px; padding: 56px 0; }
+  .legal-nav { position: static; }
+  .legal-nav a { display: inline-block; margin-right: 6px; margin-bottom: 4px; }
+  .legal-meta { flex-wrap: wrap; gap: 16px; }
+}
+@media(max-width:580px){
+  .legal-content h2 { font-size: 20px; }
+  .legal-content p, .legal-content ul li { font-size: 14px; }
+  .legal-layout { padding: 40px 0; }
+  .disclaimer-box { padding: 18px 20px; }
+}
+</style>
+</head>
+<body>
+<div class="page-transition"></div>
+<div class="cur" id="cur"></div><div class="cur-ring" id="curRing"></div>
+<div id="scrollProgress"></div>
+<div class="page-transition" id="pageTransition"></div>
+<a href="https://wa.me/916381384612" class="wa-float" target="_blank" rel="noopener" title="WhatsApp Us">
+  <span class="wa-float-label">Chat on WhatsApp</span>
+  💬
+</a>
+
+<nav id="mainNav">
+  <a href="index.html" class="logo"><img src="logo.png" alt="Giant Traders" class="logo-img"><div class="logo-text">Giant Traders<span>Academy</span></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="course-details.html">Course</a></li><li><a href="about.html">About</a></li><li><a href="testimonials.html">Reviews</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right"><div class="nav-phone">📞 <b>63813 84612</b></div><button class="nav-cta" onclick="location.href='contact.html'">Enroll Now →</button></div>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+</nav>
+<div class="nav-mobile" id="mobileNav"><a href="index.html">Home</a><a href="course-details.html">Course Details</a><a href="about.html">About Us</a><a href="testimonials.html">Reviews</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="contact.html" class="nav-cta">Enroll Now – ₹30,000 →</a></div>
+
+<main>
+<section class="page-hero"><div class="page-hero-bg"></div><div class="page-hero-lines"></div>
+  <div class="container page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / <span>Terms of Service</span></div>
+    <div class="eyebrow">LEGAL</div>
+    <h1>Terms of <span class="text-gold">Service</span></h1>
+    <p class="section-sub" style="margin-top:16px">Please read these terms carefully before enrolling in the program.</p>
+  </div>
+</section>
+
+<section><div class="container">
+  <div class="legal-layout">
+    <div class="legal-nav">
+      <h4>CONTENTS</h4>
+      <a href="#acceptance">Acceptance of Terms</a>
+      <a href="#program">Program Description</a>
+      <a href="#enrollment">Enrollment</a>
+      <a href="#payment">Payment & Refunds</a>
+      <a href="#access">Access & Usage</a>
+      <a href="#ip">Intellectual Property</a>
+      <a href="#disclaimer">Disclaimer</a>
+      <a href="#liability">Limitation of Liability</a>
+      <a href="#conduct">Code of Conduct</a>
+      <a href="#termination">Termination</a>
+      <a href="#governing">Governing Law</a>
+      <a href="#contact-legal">Contact</a>
+    </div>
+    <div class="legal-content">
+      <div class="legal-meta">
+        <div class="legal-meta-item"><div class="legal-meta-label">LAST UPDATED</div><div class="legal-meta-val">January 1, 2026</div></div>
+        <div class="legal-meta-item"><div class="legal-meta-label">EFFECTIVE DATE</div><div class="legal-meta-val">January 1, 2026</div></div>
+        <div class="legal-meta-item"><div class="legal-meta-label">JURISDICTION</div><div class="legal-meta-val">Tamil Nadu, India</div></div>
+      </div>
+
+      <p>Welcome to Giant Traders Academy. These Terms of Service ("Terms") govern your access to and use of our educational program, website, and associated services. By enrolling in the program or using our services, you agree to be bound by these Terms in full.</p>
+      <p>If you do not agree with any part of these Terms, please do not enroll or use our services.</p>
+
+      <h2 id="acceptance">1. Acceptance of Terms</h2>
+      <p>By accessing our website, contacting us for enrollment, or completing payment for the program, you confirm that you have read, understood, and agree to these Terms of Service and our Privacy Policy.</p>
+      <p>You must be at least 18 years of age to enroll in the program. By enrolling, you represent that you are 18 or older.</p>
+
+      <h2 id="program">2. Program Description</h2>
+      <p>Giant Traders Academy provides educational content related to index options trading strategies for Indian financial markets. The program includes:</p>
+      <ul>
+        <li>Pre-recorded video modules covering index options buying strategies</li>
+        <li>Rule-based strategy frameworks for Nifty, Bank Nifty, Fin Nifty, Sensex, and Midcap Index</li>
+        <li>Capital protection and trader discipline training</li>
+        <li>90 days of Google Sheet updates post-enrollment</li>
+        <li>2 live mentorship sessions with the head mentor</li>
+        <li>1-year access to the student community group</li>
+      </ul>
+      <p>All content is for <strong>educational purposes only</strong>. We are not a SEBI-registered investment advisor. Nothing in this program constitutes financial advice, trading tips, or investment recommendations.</p>
+
+      <h2 id="enrollment">3. Enrollment</h2>
+      <p>Enrollment is confirmed only upon receipt of full payment. We reserve the right to limit the number of students enrolled per batch. Confirmation of enrollment will be communicated via WhatsApp.</p>
+      <p>We reserve the right to refuse enrollment at our discretion without providing a reason.</p>
+
+      <h2 id="payment">4. Payment and Refund Policy</h2>
+      <p>The current enrollment fee is <strong>₹30,000</strong>, subject to change at any time without prior notice. The price at the time of your payment confirmation is your locked-in fee.</p>
+      <p><strong>All payments are final and non-refundable.</strong> Due to the digital nature of the program content — which is accessible immediately upon enrollment — we do not offer refunds under any circumstances, including:</p>
+      <ul>
+        <li>Change of mind after enrollment</li>
+        <li>Inability to attend scheduled live sessions</li>
+        <li>Dissatisfaction with program results</li>
+        <li>Technical issues on the student's end</li>
+      </ul>
+      <p>We strongly encourage you to speak with us on WhatsApp and ask all your questions before making payment. We are happy to answer everything in detail before you commit.</p>
+
+      <h2 id="access">5. Program Access and Usage</h2>
+      <p>Upon successful enrollment and payment confirmation:</p>
+      <ul>
+        <li>Video content access is provided on a lifetime basis (subject to platform availability)</li>
+        <li>Google Sheet update access runs for 90 days from enrollment date</li>
+        <li>Student group access runs for 1 year from enrollment date</li>
+        <li>Live mentorship sessions are scheduled by the Academy and communicated via the group</li>
+      </ul>
+      <p>Access is for the enrolled student only. You may not share, transfer, or resell your access to any third party.</p>
+
+      <h2 id="ip">6. Intellectual Property</h2>
+      <p>All content provided in the program — including but not limited to video recordings, strategy documents, Google Sheets, frameworks, and written materials — is the exclusive intellectual property of Giant Traders Academy.</p>
+      <ul>
+        <li>You may not record, screenshot, reproduce, share, or distribute any course content</li>
+        <li>You may not use our strategies or frameworks to create competing educational products</li>
+        <li>Sharing access credentials or course materials with non-enrolled individuals is strictly prohibited</li>
+      </ul>
+      <p>Violation of these terms may result in immediate termination of access without refund, and may be subject to legal action.</p>
+
+      <h2 id="disclaimer">7. Risk Disclaimer</h2>
+      <div class="disclaimer-box">
+        <p><strong>IMPORTANT:</strong> Trading financial instruments, including options, involves substantial risk of loss and is not suitable for all investors. Past performance is not indicative of future results. The strategies taught in this program are for educational purposes only and do not guarantee any specific trading outcome or profit. You should only trade with capital you can afford to lose. Giant Traders Academy is not responsible for any financial losses incurred as a result of applying the strategies taught in this program.</p>
+      </div>
+      <p>We are not SEBI-registered investment advisors. Nothing in this program should be construed as personalized investment advice. Always conduct your own due diligence and consider consulting a registered financial advisor before making trading decisions.</p>
+
+      <h2 id="liability">8. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by applicable law, Giant Traders Academy and its founders, mentors, and associates shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising from:</p>
+      <ul>
+        <li>Your use of or inability to use the program</li>
+        <li>Any trading decisions or financial losses arising from applying program content</li>
+        <li>Technical issues, interruptions, or data loss</li>
+        <li>Unauthorized access to your account or data</li>
+      </ul>
+      <p>Our total liability shall not exceed the amount you paid for enrollment.</p>
+
+      <h2 id="conduct">9. Code of Conduct</h2>
+      <p>As a member of the Giant Traders Academy community, you agree to:</p>
+      <ul>
+        <li>Treat all members, mentors, and staff with respect</li>
+        <li>Not share, solicit, or distribute any form of spam or unsolicited promotion in the group</li>
+        <li>Not share copyrighted course content outside the program</li>
+        <li>Not engage in harassment, abusive language, or inappropriate conduct</li>
+        <li>Not make false claims about the program or mentor to others</li>
+      </ul>
+      <p>Violation of the code of conduct may result in removal from the community group without refund.</p>
+
+      <h2 id="termination">10. Termination</h2>
+      <p>We reserve the right to terminate your access to the program at any time if you are found to be in violation of these Terms. In such cases, no refund will be issued.</p>
+      <p>You may choose to discontinue participation at any time, though no refund will be provided.</p>
+
+      <h2 id="governing">11. Governing Law</h2>
+      <p>These Terms of Service shall be governed by and construed in accordance with the laws of India. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts in Tamil Nadu, India.</p>
+
+      <h2 id="contact-legal">12. Contact Us</h2>
+      <p>For any questions regarding these Terms of Service, please contact us:</p>
+      <ul>
+        <li><strong>WhatsApp / Call:</strong> +91 63813 84612</li>
+        <li><strong>WhatsApp / Call:</strong> +91 96594 48833</li>
+        <li><strong>Location:</strong> Tamil Nadu, India</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-logo"><img src="logo.png" alt="Giant Traders" class="footer-logo-img"><div style="margin-left:10px;font-family:var(--font-heading);font-size:15px;font-weight:900;line-height:1.2">Giant Traders<span style="color:var(--gold);display:block">Academy</span></div></div><p class="footer-desc">India's most structured index options buying program. Rule-based strategies, capital protection, and discipline framework.</p></div>
+    <div class="footer-col"><h4>Program</h4><ul><li><a href="course-details.html">Course Details</a></li><li><a href="about.html">About Us</a></li><li><a href="testimonials.html">Student Reviews</a></li></ul></div>
+    <div class="footer-col"><h4>Support</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="tel:+916381384612">WhatsApp Now</a></li></ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Giant Traders Academy. All rights reserved.</p><code>Taught by traders · Tamil Nadu, India</code></div>
+</footer>
+<script src="shared.js"></script>
+</body></html>
