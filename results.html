@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Results & P&L Statement — Giant Traders Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04060f;--card:#0d1123;--card2:#111726;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+  --gold:#f5c842;--gold2:#e8a020;--teal:#00e5b0;--purple:#7c5cfc;
+  --green:#00d68f;--red:#ff4757;--text:#eef0f8;--muted:#5c657a;--muted2:#8892a4;
+  --fh:'Syne','Arial Black',sans-serif;
+  --fb:'Space Grotesk','Segoe UI',Arial,sans-serif;
+  --fm:'JetBrains Mono','Consolas',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:68px;background:rgba(4,6,15,0.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:height .3s,background .3s}
+nav.scrolled{height:54px;background:rgba(4,6,15,.97)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-img{height:34px;width:34px;object-fit:contain;transition:height .3s}
+nav.scrolled .logo-img{height:26px}
+.logo-text .lt-main{font-family:var(--fh);font-size:14px;font-weight:900;color:var(--text);display:block;line-height:1.2}
+.logo-text .lt-sub{font-family:var(--fm);font-size:10px;color:var(--gold);display:block;letter-spacing:1px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--muted2);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--gold);transition:width .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:9px 20px;border-radius:8px;font-family:var(--fh);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,200,66,.4)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-toggle span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.nav-mobile{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(4,6,15,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:24px;z-index:499;flex-direction:column}
+.nav-mobile.open{display:flex}
+.nav-mobile a{color:var(--muted2);text-decoration:none;font-size:16px;padding:14px 0;border-bottom:1px solid var(--border)}
+.nav-mobile a:hover{color:var(--gold)}
+.nav-mobile .nav-cta{margin-top:16px;text-align:center;display:block;padding:13px;border-radius:10px;color:#000;font-weight:700}
+
+/* LAYOUT */
+.container{max-width:1160px;margin:0 auto;padding:0 60px}
+main{padding-top:68px;position:relative;z-index:1}
+section{padding:80px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--fm);font-size:11px;color:var(--gold);letter-spacing:2px;margin-bottom:14px}
+.eyebrow::before{content:'//';opacity:.45}
+h1{font-family:var(--fh);font-size:clamp(36px,5vw,62px);font-weight:900;letter-spacing:-2px;line-height:1.05}
+h2{font-family:var(--fh);font-size:clamp(24px,3.5vw,40px);font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
+h3{font-family:var(--fh);font-size:18px;font-weight:800;letter-spacing:-.3px;margin-bottom:8px}
+.section-sub{font-size:15px;color:var(--muted2);line-height:1.75}
+.text-gold{background:linear-gradient(90deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.text-green{color:var(--green)}
+
+/* HERO */
+.results-hero{padding:100px 0 64px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.results-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(0,214,143,.06) 0%,transparent 60%);pointer-events:none}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px}
+.hs-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 18px;text-align:center;position:relative;overflow:hidden;transition:all .3s}
+.hs-card:hover{transform:translateY(-4px);border-color:rgba(245,200,66,.2)}
+.hs-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--teal),transparent)}
+.hs-card.gold::before{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.hs-card.red-t::before{background:linear-gradient(90deg,transparent,var(--red),transparent)}
+.hs-val{font-family:var(--fh);font-size:36px;font-weight:900;letter-spacing:-2px;line-height:1;margin-bottom:6px}
+.hs-lbl{font-family:var(--fm);font-size:9px;color:var(--muted);letter-spacing:1.5px}
+.hs-sub{font-size:11px;color:var(--muted2);margin-top:4px}
+
+/* DISCLAIMER */
+.disclaimer{background:rgba(255,200,0,.04);border:1px solid rgba(255,200,0,.12);border-radius:10px;padding:14px 20px;margin-top:28px;font-size:12px;color:var(--muted2);line-height:1.65;display:flex;gap:10px;align-items:flex-start}
+.disclaimer b{color:var(--gold)}
+
+/* BAR CHART */
+.bar-chart-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;margin-bottom:28px}
+.bcc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.bcc-title{font-family:var(--fh);font-size:18px;font-weight:900;letter-spacing:-.3px}
+.bcc-legend{display:flex;gap:16px}
+.leg-item{display:flex;align-items:center;gap:6px;font-family:var(--fm);font-size:10px;color:var(--muted)}
+.leg-dot{width:10px;height:10px;border-radius:3px}
+.chart-area{display:flex;align-items:flex-end;gap:8px;height:180px;position:relative;padding-bottom:30px;border-bottom:1px solid var(--border)}
+.chart-area::before{content:'';position:absolute;left:0;right:0;top:0;bottom:30px;background:repeating-linear-gradient(180deg,transparent,transparent calc(25% - 1px),rgba(255,255,255,.03) calc(25%),rgba(255,255,255,.03) 25%)}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;position:relative}
+.bar-el{width:100%;border-radius:6px 6px 0 0;min-height:3px;position:relative;cursor:pointer;transition:filter .2s}
+.bar-el:hover{filter:brightness(1.2)}
+.bar-el::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--border2);border-radius:8px;padding:6px 12px;font-family:var(--fm);font-size:11px;white-space:nowrap;color:var(--text);z-index:10;opacity:0;pointer-events:none;transition:opacity .2s}
+.bar-el:hover::after{opacity:1}
+.bar-el.profit-bar{background:linear-gradient(180deg,var(--green),rgba(0,214,143,.4))}
+.bar-el.loss-bar{background:linear-gradient(180deg,var(--red),rgba(255,71,87,.4))}
+.bar-month-lbl{position:absolute;bottom:0;font-family:var(--fm);font-size:9px;color:var(--muted);letter-spacing:.3px;white-space:nowrap}
+
+/* P&L TABLE */
+.pnl-table-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.table-filters{display:flex;gap:8px;padding:20px 24px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.tf-btn{padding:6px 16px;border-radius:100px;border:1px solid var(--border2);background:transparent;color:var(--muted2);font-family:var(--fm);font-size:11px;cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.tf-btn.active,.tf-btn:hover{background:rgba(245,200,66,.1);border-color:var(--gold);color:var(--gold)}
+.pnl-table{width:100%;border-collapse:collapse}
+.pnl-table th{background:var(--card2);padding:13px 18px;text-align:left;font-family:var(--fm);font-size:9px;color:var(--muted);letter-spacing:1.5px;border-bottom:1px solid var(--border2)}
+.pnl-table th:not(:first-child){text-align:right}
+.pnl-table td{padding:13px 18px;font-size:13px;border-bottom:1px solid var(--border)}
+.pnl-table td:not(:first-child){text-align:right;font-family:var(--fm)}
+.pnl-table tr:last-child td{border-bottom:none}
+.pnl-table tr:hover td{background:rgba(255,255,255,.015)}
+.month-name{font-weight:600}
+.pnl-green{color:var(--green);font-weight:700}
+.pnl-red{color:var(--red);font-weight:700}
+.pnl-muted{color:var(--muted2)}
+.badge{border-radius:5px;padding:3px 9px;font-size:10px;font-family:var(--fm)}
+.badge-profit{background:rgba(0,214,143,.1);border:1px solid rgba(0,214,143,.2);color:var(--green)}
+.badge-loss{background:rgba(255,71,87,.1);border:1px solid rgba(255,71,87,.2);color:var(--red)}
+.total-row td{background:rgba(245,200,66,.04);border-top:2px solid rgba(245,200,66,.2)!important;font-weight:700}
+.total-row .month-name{font-family:var(--fh);font-size:15px;color:var(--gold)}
+
+/* SCORECARD */
+.scorecard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.sc-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px 22px;position:relative;overflow:hidden;transition:all .3s}
+.sc-card:hover{transform:translateY(-5px);border-color:rgba(245,200,66,.2);box-shadow:0 24px 50px rgba(0,0,0,.4)}
+.sc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.sc-icon{font-size:26px;margin-bottom:12px}
+.sc-lbl{font-family:var(--fm);font-size:9px;color:var(--muted);letter-spacing:1.5px;margin-bottom:8px}
+.sc-val{font-family:var(--fh);font-size:34px;font-weight:900;letter-spacing:-1.5px;line-height:1;margin-bottom:6px}
+.sc-desc{font-size:12px;color:var(--muted2);line-height:1.6}
+
+/* WIN RATE PER INDEX */
+.wr-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}
+.wr-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px}
+.wr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wr-name{font-family:var(--fh);font-size:14px;font-weight:800}
+.wr-pct{font-family:var(--fh);font-size:22px;font-weight:900;color:var(--green)}
+.wr-track{height:8px;background:rgba(255,255,255,.05);border-radius:100px;overflow:hidden;margin-bottom:8px}
+.wr-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--green),#00b87a);transition:width 1.4s cubic-bezier(.4,0,.2,1)}
+.wr-meta{display:flex;gap:12px;font-size:11px;color:var(--muted2);font-family:var(--fm)}
+.wr-meta b{color:var(--text)}
+
+/* R:R SECTION */
+.rr-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
+.rr-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+.rr-lbl{font-family:var(--fm);font-size:9px;color:var(--muted);letter-spacing:1.5px;margin-bottom:14px}
+.rr-visual{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.rr-box-risk{background:rgba(255,71,87,.12);border:1px solid rgba(255,71,87,.25);border-radius:8px;padding:10px 14px;font-family:var(--fh);font-size:20px;font-weight:900;color:var(--red);min-width:64px;text-align:center}
+.rr-box-rew{background:rgba(0,214,143,.1);border:1px solid rgba(0,214,143,.25);border-radius:8px;padding:10px 14px;font-family:var(--fh);font-size:20px;font-weight:900;color:var(--green);min-width:64px;text-align:center}
+.rr-vs{font-family:var(--fm);font-size:10px;color:var(--muted);flex-shrink:0}
+.rr-line{flex:1;height:1px;background:var(--border2)}
+.rr-desc{font-size:12px;color:var(--muted2);line-height:1.65}
+
+/* TRADE LOG */
+.trade-log-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.tl-grid{display:grid;grid-template-columns:80px 1fr 70px 70px 70px 90px 70px}
+.tl-header{background:var(--card2);border-bottom:1px solid var(--border2)}
+.tl-th{padding:12px 14px;font-family:var(--fm);font-size:9px;color:var(--muted);letter-spacing:1.5px}
+.tl-row{border-bottom:1px solid var(--border);transition:background .15s;cursor:default}
+.tl-row:last-child{border-bottom:none}
+.tl-row:hover{background:rgba(255,255,255,.02)}
+.tl-td{padding:12px 14px;font-size:13px;font-family:var(--fm);color:var(--muted2);display:flex;align-items:center}
+.tl-td.inst{flex-direction:column;align-items:flex-start;gap:2px;color:var(--text);font-weight:700}
+.tl-td.inst small{font-size:10px;color:var(--muted);font-weight:400}
+.tl-td.win-cell{color:var(--green);font-weight:700}
+.tl-td.loss-cell{color:var(--red);font-weight:700}
+.tl-badge-w{background:rgba(0,214,143,.1);color:var(--green);border-radius:4px;padding:2px 8px;font-size:10px}
+.tl-badge-l{background:rgba(255,71,87,.1);color:var(--red);border-radius:4px;padding:2px 8px;font-size:10px}
+
+/* CTA */
+.results-cta{background:var(--card);border:1px solid rgba(245,200,66,.2);border-radius:20px;padding:52px 48px;text-align:center;position:relative;overflow:hidden}
+.results-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.results-cta p{font-size:15px;color:var(--muted2);max-width:480px;margin:12px auto 32px;line-height:1.7}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:16px 32px;border-radius:10px;font-family:var(--fh);font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .25s;box-shadow:0 6px 22px rgba(245,200,66,.28)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 14px 38px rgba(245,200,66,.45)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);color:var(--text);border:1px solid var(--border2);padding:16px 28px;border-radius:10px;font-family:var(--fh);font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .25s}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s,transform .65s}
+.reveal.vis{opacity:1;transform:none}
+.reveal-scale{opacity:0;transform:scale(.93);transition:opacity .6s,transform .6s}
+.reveal-scale.vis{opacity:1;transform:none}
+
+/* FOOTER */
+footer{background:var(--card2);border-top:1px solid var(--border);padding:44px 60px 24px}
+.footer-grid{max-width:1160px;margin:0 auto 32px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-logo{margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.footer-logo-img{height:28px;width:28px;object-fit:contain}
+.footer-brand-text{font-family:var(--fh);font-size:14px;font-weight:900}
+.footer-brand-text span{color:var(--gold)}
+.footer-desc{font-size:13px;color:var(--muted);line-height:1.75;max-width:260px}
+.footer-col h4{font-family:var(--fh);font-size:12px;font-weight:700;margin-bottom:14px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-col ul a{color:var(--muted);text-decoration:none;font-size:13px;transition:color .2s}
+.footer-col ul a:hover{color:var(--gold)}
+.footer-bottom{max-width:1160px;margin:0 auto;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer-bottom p,.footer-bottom code{color:var(--muted);font-size:12px;font-family:var(--fm)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links,.nav-right{display:none}
+  .nav-toggle{display:flex}
+  .container{padding:0 20px}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .scorecard-grid{grid-template-columns:1fr 1fr}
+  .wr-grid{grid-template-columns:1fr}
+  .rr-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .tl-grid{grid-template-columns:70px 1fr 60px 60px 80px}
+  .tl-th:nth-child(4),.tl-th:nth-child(5),.tl-td:nth-child(4),.tl-td:nth-child(5){display:none}
+}
+@media(max-width:580px){
+  .hero-stats{grid-template-columns:1fr 1fr;gap:10px}
+  .hs-val{font-size:26px}
+  .scorecard-grid{grid-template-columns:1fr}
+  .results-cta{padding:28px 20px}
+  .chart-area{height:120px;gap:4px}
+  .footer-grid{grid-template-columns:1fr}
+  .tl-grid{grid-template-columns:60px 1fr 70px 70px}
+  .tl-th:nth-child(3),.tl-td:nth-child(3){display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="index.html" class="logo">
+    <img src="logo.png" alt="Giant Traders Academy" class="logo-img">
+    <div class="logo-text"><span class="lt-main">Giant Traders</span><span class="lt-sub">ACADEMY</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="course-details.html">Course</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="results.html" class="active">Results</a></li>
+    <li><a href="testimonials.html">Reviews</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-cta" onclick="location.href='checkout.html'">Enroll Now →</button>
+  </div>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+</nav>
+<div class="nav-mobile" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="course-details.html">Course</a>
+  <a href="about.html">About</a>
+  <a href="results.html">Results</a>
+  <a href="testimonials.html">Reviews</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="checkout.html" class="nav-cta">Enroll Now – Rs.30,000</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="results-hero">
+  <div class="container" style="text-align:center">
+    <div class="eyebrow">VERIFIED PERFORMANCE</div>
+    <h1>Strategy Results<br><span class="text-gold">and P&amp;L Proof</span></h1>
+    <p class="section-sub" style="max-width:540px;margin:16px auto 0">Every trade. Every month. No cherry picking. This is what disciplined rule-based Index Options trading looks like.</p>
+
+    <div class="hero-stats">
+      <div class="hs-card reveal" data-delay="0">
+        <div class="hs-val text-green" data-count="73" data-suffix="%">0%</div>
+        <div class="hs-lbl">OVERALL WIN RATE</div>
+        <div class="hs-sub">All 5 indices combined</div>
+      </div>
+      <div class="hs-card gold reveal" data-delay="80">
+        <div class="hs-val" style="color:var(--gold)">1:2.4</div>
+        <div class="hs-lbl">AVG RISK:REWARD</div>
+        <div class="hs-sub">Per trade average</div>
+      </div>
+      <div class="hs-card reveal" data-delay="160">
+        <div class="hs-val text-green" data-count="11" data-suffix="/12">0</div>
+        <div class="hs-lbl">PROFITABLE MONTHS</div>
+        <div class="hs-sub">Last 12 months</div>
+      </div>
+      <div class="hs-card gold reveal" data-delay="240">
+        <div class="hs-val" style="color:var(--gold)" data-count="312" data-suffix="+">0+</div>
+        <div class="hs-lbl">TRADES TRACKED</div>
+        <div class="hs-sub">Since Jan 2024</div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <span style="font-size:16px;flex-shrink:0">⚠️</span>
+      <span><b>Important Disclaimer:</b> Past performance does not guarantee future results. Trading in derivatives involves substantial risk of loss. These results are from the mentor's personal trading journal and shared for educational transparency only. Individual student results will vary. This is NOT investment advice. Giant Traders Academy is not SEBI registered.</span>
+    </div>
+  </div>
+</section>
+
+<!-- MONTHLY P&L -->
+<section>
+  <div class="container">
+    <div class="section-hd reveal">
+      <div class="eyebrow">MONTH BY MONTH</div>
+      <h2>Monthly P&amp;L <span class="text-gold">Statement</span></h2>
+      <p class="section-sub">12-month record. Capital base: Rs.2,00,000. Update these numbers with your own real data.</p>
+    </div>
+
+    <!-- Bar chart -->
+    <div class="bar-chart-card reveal">
+      <div class="bcc-header">
+        <div class="bcc-title">Monthly P&amp;L — Rs. (Last 12 Months)</div>
+        <div class="bcc-legend">
+          <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Profit</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--red)"></div>Loss</div>
+        </div>
+      </div>
+      <div class="chart-area" id="barChart"></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="pnl-table-card reveal">
+      <div class="table-filters">
+        <button class="tf-btn active" onclick="filterTable('ALL',this)">All Indices</button>
+        <button class="tf-btn" onclick="filterTable('NIFTY',this)">Nifty</button>
+        <button class="tf-btn" onclick="filterTable('BANKNIFTY',this)">Bank Nifty</button>
+        <button class="tf-btn" onclick="filterTable('FINNIFTY',this)">Fin Nifty</button>
+        <button class="tf-btn" onclick="filterTable('SENSEX',this)">Sensex</button>
+        <button class="tf-btn" onclick="filterTable('MIDCAP',this)">Midcap</button>
+      </div>
+      <table class="pnl-table">
+        <thead>
+          <tr>
+            <th>MONTH</th>
+            <th>TRADES</th>
+            <th>WINS</th>
+            <th>LOSSES</th>
+            <th>WIN RATE</th>
+            <th>P&amp;L (Rs.)</th>
+            <th>RETURN %</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody id="pnlBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGY SCORECARD -->
+<section style="background:var(--card2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="section-hd reveal" style="text-align:center">
+      <div class="eyebrow">ACCURACY BREAKDOWN</div>
+      <h2>Strategy <span class="text-gold">Scorecard</span></h2>
+      <p class="section-sub">Full numbers — nothing hidden, nothing inflated.</p>
+    </div>
+
+    <div class="scorecard-grid">
+      <div class="sc-card reveal-scale" data-delay="0">
+        <div class="sc-icon">🎯</div>
+        <div class="sc-lbl">OVERALL WIN RATE</div>
+        <div class="sc-val text-green">73%</div>
+        <div class="sc-desc">73 winning trades out of every 100 taken. Tracked across 312+ trades since January 2024.</div>
+      </div>
+      <div class="sc-card reveal-scale" data-delay="100">
+        <div class="sc-icon">⚖️</div>
+        <div class="sc-lbl">AVG RISK : REWARD</div>
+        <div class="sc-val" style="color:var(--gold)">1:2.4</div>
+        <div class="sc-desc">Risk Rs.1 to target Rs.2.4. Even at 50% win rate this system stays profitable.</div>
+      </div>
+      <div class="sc-card reveal-scale" data-delay="200">
+        <div class="sc-icon">🛡️</div>
+        <div class="sc-lbl">MAX DRAWDOWN</div>
+        <div class="sc-val" style="color:var(--red)">-8.4%</div>
+        <div class="sc-desc">Worst losing streak was -8.4% of capital. The capital protection model stopped further loss.</div>
+      </div>
+      <div class="sc-card reveal-scale" data-delay="300">
+        <div class="sc-icon">🚀</div>
+        <div class="sc-lbl">BEST SINGLE MONTH</div>
+        <div class="sc-val text-green">+21%</div>
+        <div class="sc-desc">September 2024. All 5 indices aligned with clear setups. Full discipline throughout.</div>
+      </div>
+      <div class="sc-card reveal-scale" data-delay="400">
+        <div class="sc-icon">📊</div>
+        <div class="sc-lbl">AVG TRADES / MONTH</div>
+        <div class="sc-val" style="color:var(--teal)">26</div>
+        <div class="sc-desc">Quality over quantity. Only 5-8 setups per index monthly — each with clear rule-based entry.</div>
+      </div>
+      <div class="sc-card reveal-scale" data-delay="500">
+        <div class="sc-icon">💰</div>
+        <div class="sc-lbl">AVG MONTHLY RETURN</div>
+        <div class="sc-val text-green">+7.8%</div>
+        <div class="sc-desc">Average across 12 tracked months including the 1 losing month. Capital compounding.</div>
+      </div>
+    </div>
+
+    <!-- Win rate per index -->
+    <div style="margin-top:60px">
+      <div class="section-hd reveal">
+        <h3>Win Rate Per Index</h3>
+        <p class="section-sub" style="font-size:14px">Each index has its own personality. Here is how the strategy performs on each one.</p>
+      </div>
+      <div class="wr-grid" id="wrGrid">
+        <div class="wr-item">
+          <div class="wr-top"><span class="wr-name">Nifty 50</span><span class="wr-pct" id="wrv-nifty">0%</span></div>
+          <div class="wr-track"><div class="wr-fill" id="wrb-nifty" style="width:0%"></div></div>
+          <div class="wr-meta"><span>Trades: <b>78</b></span><span>Wins: <b>60</b></span><span>R:R: <b>1:2.6</b></span></div>
+        </div>
+        <div class="wr-item">
+          <div class="wr-top"><span class="wr-name">Bank Nifty</span><span class="wr-pct" id="wrv-bn">0%</span></div>
+          <div class="wr-track"><div class="wr-fill" id="wrb-bn" style="width:0%"></div></div>
+          <div class="wr-meta"><span>Trades: <b>92</b></span><span>Wins: <b>67</b></span><span>R:R: <b>1:2.1</b></span></div>
+        </div>
+        <div class="wr-item">
+          <div class="wr-top"><span class="wr-name">Fin Nifty</span><span class="wr-pct" id="wrv-fn">0%</span></div>
+          <div class="wr-track"><div class="wr-fill" id="wrb-fn" style="width:0%"></div></div>
+          <div class="wr-meta"><span>Trades: <b>54</b></span><span>Wins: <b>40</b></span><span>R:R: <b>1:2.3</b></span></div>
+        </div>
+        <div class="wr-item">
+          <div class="wr-top"><span class="wr-name">Sensex</span><span class="wr-pct" id="wrv-sx">0%</span></div>
+          <div class="wr-track"><div class="wr-fill" id="wrb-sx" style="width:0%"></div></div>
+          <div class="wr-meta"><span>Trades: <b>48</b></span><span>Wins: <b>35</b></span><span>R:R: <b>1:2.2</b></span></div>
+        </div>
+        <div class="wr-item">
+          <div class="wr-top"><span class="wr-name">Midcap</span><span class="wr-pct" id="wrv-mc">0%</span></div>
+          <div class="wr-track"><div class="wr-fill" id="wrb-mc" style="width:0%"></div></div>
+          <div class="wr-meta"><span>Trades: <b>40</b></span><span>Wins: <b>27</b></span><span>R:R: <b>1:2.8</b></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- R:R Cards -->
+    <div class="rr-grid reveal" style="margin-top:28px">
+      <div class="rr-card">
+        <div class="rr-lbl">HOW THE RISK:REWARD WORKS</div>
+        <div class="rr-visual">
+          <div class="rr-box-risk">Rs.1</div>
+          <div class="rr-vs">RISK</div>
+          <div class="rr-line"></div>
+          <div class="rr-vs">REWARD</div>
+          <div class="rr-box-rew">Rs.2.4</div>
+        </div>
+        <div class="rr-desc">Even if you lose 4 trades and win only 6 — you are still profitable. The system protects capital on every loss and maximises on every winner.</div>
+      </div>
+      <div class="rr-card">
+        <div class="rr-lbl">BREAKEVEN WIN RATE AT 1:2.4</div>
+        <div style="font-family:var(--fh);font-size:38px;font-weight:900;color:var(--gold);letter-spacing:-2px;margin-bottom:6px">29.4%</div>
+        <div style="font-size:12px;color:var(--muted2);margin-bottom:12px">You only need to win 3 out of every 10 trades to break even</div>
+        <div class="rr-desc">Our 73% win rate is 2.5x above the breakeven point. This is the power of a high probability system combined with strict capital protection.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRADE LOG -->
+<section>
+  <div class="container">
+    <div class="section-hd reveal">
+      <div class="eyebrow">RECENT TRADES</div>
+      <h2>Last 30 Days <span class="text-gold">Trade Log</span></h2>
+      <p class="section-sub">Entry, exit, quantity and result — fully transparent. Replace with your own trades.</p>
+    </div>
+    <div class="trade-log-card reveal">
+      <div class="tl-grid tl-header">
+        <div class="tl-th">DATE</div>
+        <div class="tl-th">INSTRUMENT</div>
+        <div class="tl-th">ENTRY</div>
+        <div class="tl-th">EXIT</div>
+        <div class="tl-th">QTY</div>
+        <div class="tl-th">P&amp;L (Rs.)</div>
+        <div class="tl-th">RESULT</div>
+      </div>
+      <div id="tradeLog"></div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:12px;font-family:var(--fm)">Showing last 15 trades — All values in Rs. — Options premium per lot</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding-bottom:80px;padding-top:20px">
+  <div class="container">
+    <div class="results-cta reveal">
+      <div class="eyebrow" style="justify-content:center">LEARN THE EXACT SYSTEM</div>
+      <h2>These Numbers Come From<br><span class="text-gold">Following the Rules.</span></h2>
+      <p>The strategy is teachable. The discipline is learnable. We will show you exactly how each of these trades was identified and executed — step by step.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="checkout.html" class="btn-gold">Enroll Now — Rs.30,000</a>
+        <a href="contact.html" class="btn-ghost">Ask a Question First</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<!-- FOOTER — Custom SVG Icons + Social + Maps -->
+<footer class="site-footer">
+  <!-- Social bar top -->
+  <div class="footer-social-bar">
+    <div class="fsb-inner">
+      <span class="fsb-label">FOLLOW & JOIN US</span>
+      <div class="fsb-icons">
+        <a href="https://wa.me/916381384612" target="_blank" class="fsb-icon fsb-wa" title="WhatsApp">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.45.65 4.75 1.78 6.74L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.5c-2.17 0-4.22-.6-5.97-1.63l-.43-.26-4.42 1.04 1.07-4.31-.28-.45A11.47 11.47 0 014.5 16c0-6.35 5.15-11.5 11.5-11.5S27.5 9.65 27.5 16 22.35 27.5 16 27.5zm6.34-8.6c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17s-.9 1.13-1.1 1.36c-.2.23-.4.26-.74.09-.35-.17-1.47-.54-2.8-1.73a10.5 10.5 0 01-1.94-2.41c-.2-.35-.02-.54.15-.71.15-.15.35-.4.52-.6.17-.2.23-.35.35-.58.12-.23.06-.43-.03-.6-.09-.17-.78-1.87-1.06-2.56-.28-.67-.56-.58-.78-.59-.2-.01-.43-.01-.66-.01-.23 0-.6.09-.91.43-.32.34-1.2 1.17-1.2 2.86s1.23 3.32 1.4 3.55c.17.23 2.42 3.7 5.87 5.19.82.35 1.46.56 1.96.72.82.26 1.57.22 2.16.13.66-.1 2.05-.84 2.34-1.65.29-.81.29-1.5.2-1.65-.09-.15-.32-.23-.67-.4z"/></svg><span>WhatsApp</span>
+        </a>
+        <a href="https://t.me/gianttradersacademy" target="_blank" class="fsb-icon fsb-tg" title="Telegram">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16s6.27 14 14 14 14-6.27 14-14S23.73 2 16 2zm6.84 9.56l-2.37 11.16c-.18.79-.64.98-1.3.61l-3.6-2.65-1.73 1.67c-.19.19-.35.35-.72.35l.26-3.64 6.65-6.01c.29-.26-.06-.4-.45-.14l-8.22 5.18-3.54-1.11c-.77-.24-.78-.77.16-1.14l13.84-5.34c.64-.23 1.2.16.99 1.06h.03z"/></svg><span>Telegram</span>
+        </a>
+        <a href="https://www.instagram.com/gianttradersacademy" target="_blank" class="fsb-icon fsb-ig" title="Instagram">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92C6.17 19.58 6.16 19.2 6.16 16c0-3.2.01-3.58.07-4.85.15-3.23 1.67-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM16 0c-3.26 0-3.67.01-4.95.07C7.09.3 4.3 3.09 4.07 7.05 4.01 8.33 4 8.74 4 16c0 7.26.01 7.67.07 8.95.23 3.96 3.02 6.75 6.98 6.98C12.33 31.99 12.74 32 16 32c3.26 0 3.67-.01 4.95-.07 3.96-.23 6.75-3.02 6.98-6.98.06-1.28.07-1.69.07-8.95 0-7.26-.01-7.67-.07-8.95C27.7 3.09 24.91.3 20.95.07 19.67.01 19.26 0 16 0zm0 7.78a8.22 8.22 0 100 16.44A8.22 8.22 0 0016 7.78zm0 13.55a5.33 5.33 0 110-10.66 5.33 5.33 0 010 10.66zm8.54-13.89a1.92 1.92 0 100-3.84 1.92 1.92 0 000 3.84z"/></svg><span>Instagram</span>
+        </a>
+        <a href="https://www.youtube.com/@gianttradersacademy" target="_blank" class="fsb-icon fsb-yt" title="YouTube">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M29.41 9.26a3.5 3.5 0 00-2.46-2.47C24.76 6.2 16 6.2 16 6.2s-8.76 0-10.95.59A3.5 3.5 0 002.59 9.26C2 11.45 2 16 2 16s0 4.55.59 6.74a3.5 3.5 0 002.46 2.47C7.24 25.8 16 25.8 16 25.8s8.76 0 10.95-.59a3.5 3.5 0 002.46-2.47C30 20.55 30 16 30 16s0-4.55-.59-6.74zm-17.91 9.63V13.1L21.5 16l-10 2.89z"/></svg><span>YouTube</span>
+        </a>
+        <a href="https://maps.app.goo.gl/gianttraders" target="_blank" class="fsb-icon fsb-gm" title="Find Us on Google Maps">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C10.48 2 6 6.48 6 12c0 7.5 10 18 10 18s10-10.5 10-18c0-5.52-4.48-10-10-10zm0 13.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z"/></svg><span>Find Us</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-main">
+    <!-- Brand col -->
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <img src="logo.png" alt="Giant Traders Academy" class="footer-logo-img">
+        <div class="footer-logo-text">
+          <span class="flt-main">Giant Traders</span>
+          <span class="flt-sub">ACADEMY</span>
+        </div>
+      </div>
+      <p class="footer-desc">India's most structured Index Options Buying program. Pure number logic — no charts, no indicators, no guesswork.</p>
+      <!-- Google Maps embed card -->
+      <a href="https://maps.app.goo.gl/gianttraders" target="_blank" class="footer-maps-card">
+        <div class="fmc-icon"><svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C10.48 2 6 6.48 6 12c0 7.5 10 18 10 18s10-10.5 10-18c0-5.52-4.48-10-10-10zm0 13.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z"/></svg></div>
+        <div>
+          <div class="fmc-title">Visit Us</div>
+          <div class="fmc-addr">Tamil Nadu, India</div>
+        </div>
+        <div class="fmc-arr">→</div>
+      </a>
+    </div>
+
+    <!-- Program -->
+    <div class="footer-col">
+      <h4 class="footer-col-title">Program</h4>
+      <ul class="footer-links">
+        <li><a href="course-details.html">Course Details</a></li>
+        <li><a href="results.html">P&amp;L Results</a></li>
+        <li><a href="testimonials.html">Student Reviews</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="checkout.html">Enroll Now</a></li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <div class="footer-col">
+      <h4 class="footer-col-title">Support</h4>
+      <ul class="footer-links">
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="tel:+916381384612">+91 63813 84612</a></li>
+        <li><a href="tel:+919659448833">+91 96594 48833</a></li>
+        <li><a href="tel:+917200899334">+91 72008 99334</a></li>
+      </ul>
+    </div>
+
+    <!-- Connect -->
+    <div class="footer-col">
+      <h4 class="footer-col-title">Connect</h4>
+      <div class="footer-social-stack">
+        <a href="https://wa.me/916381384612" target="_blank" class="fss-link fss-wa">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.45.65 4.75 1.78 6.74L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.5c-2.17 0-4.22-.6-5.97-1.63l-.43-.26-4.42 1.04 1.07-4.31-.28-.45A11.47 11.47 0 014.5 16c0-6.35 5.15-11.5 11.5-11.5S27.5 9.65 27.5 16 22.35 27.5 16 27.5zm6.34-8.6c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17s-.9 1.13-1.1 1.36c-.2.23-.4.26-.74.09-.35-.17-1.47-.54-2.8-1.73a10.5 10.5 0 01-1.94-2.41c-.2-.35-.02-.54.15-.71.15-.15.35-.4.52-.6.17-.2.23-.35.35-.58.12-.23.06-.43-.03-.6-.09-.17-.78-1.87-1.06-2.56-.28-.67-.56-.58-.78-.59-.2-.01-.43-.01-.66-.01-.23 0-.6.09-.91.43-.32.34-1.2 1.17-1.2 2.86s1.23 3.32 1.4 3.55c.17.23 2.42 3.7 5.87 5.19.82.35 1.46.56 1.96.72.82.26 1.57.22 2.16.13.66-.1 2.05-.84 2.34-1.65.29-.81.29-1.5.2-1.65-.09-.15-.32-.23-.67-.4z"/></svg>
+          <span>WhatsApp Community</span>
+        </a>
+        <a href="https://t.me/gianttradersacademy" target="_blank" class="fss-link fss-tg">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16s6.27 14 14 14 14-6.27 14-14S23.73 2 16 2zm6.84 9.56l-2.37 11.16c-.18.79-.64.98-1.3.61l-3.6-2.65-1.73 1.67c-.19.19-.35.35-.72.35l.26-3.64 6.65-6.01c.29-.26-.06-.4-.45-.14l-8.22 5.18-3.54-1.11c-.77-.24-.78-.77.16-1.14l13.84-5.34c.64-.23 1.2.16.99 1.06h.03z"/></svg>
+          <span>Telegram Channel</span>
+        </a>
+        <a href="https://www.instagram.com/gianttradersacademy" target="_blank" class="fss-link fss-ig">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92C6.17 19.58 6.16 19.2 6.16 16c0-3.2.01-3.58.07-4.85.15-3.23 1.67-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM16 0c-3.26 0-3.67.01-4.95.07C7.09.3 4.3 3.09 4.07 7.05 4.01 8.33 4 8.74 4 16c0 7.26.01 7.67.07 8.95.23 3.96 3.02 6.75 6.98 6.98C12.33 31.99 12.74 32 16 32c3.26 0 3.67-.01 4.95-.07 3.96-.23 6.75-3.02 6.98-6.98.06-1.28.07-1.69.07-8.95 0-7.26-.01-7.67-.07-8.95C27.7 3.09 24.91.3 20.95.07 19.67.01 19.26 0 16 0zm0 7.78a8.22 8.22 0 100 16.44A8.22 8.22 0 0016 7.78zm0 13.55a5.33 5.33 0 110-10.66 5.33 5.33 0 010 10.66zm8.54-13.89a1.92 1.92 0 100-3.84 1.92 1.92 0 000 3.84z"/></svg>
+          <span>Instagram Page</span>
+        </a>
+        <a href="https://www.youtube.com/@gianttradersacademy" target="_blank" class="fss-link fss-yt">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M29.41 9.26a3.5 3.5 0 00-2.46-2.47C24.76 6.2 16 6.2 16 6.2s-8.76 0-10.95.59A3.5 3.5 0 002.59 9.26C2 11.45 2 16 2 16s0 4.55.59 6.74a3.5 3.5 0 002.46 2.47C7.24 25.8 16 25.8 16 25.8s8.76 0 10.95-.59a3.5 3.5 0 002.46-2.47C30 20.55 30 16 30 16s0-4.55-.59-6.74zm-17.91 9.63V13.1L21.5 16l-10 2.89z"/></svg>
+          <span>YouTube Channel</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="fb-left">
+      <span>© 2026 Giant Traders Academy</span>
+      <span class="fb-sep">·</span>
+      <span>Tamil Nadu, India</span>
+      <span class="fb-sep">·</span>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <span class="fb-sep">·</span>
+      <a href="terms.html">Terms</a>
+    </div>
+    <div class="fb-right">
+      <span style="color:var(--muted);font-size:11px">Taught by traders. Built for discipline.</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+// ═══════════════════════════════
+//  DATA — Update these with your real numbers!
+// ═══════════════════════════════
+const PNL = [
+  {m:'Jan 25',trades:24,wins:17,losses:7,pnl:14200,pct:7.1},
+  {m:'Feb 25',trades:22,wins:16,losses:6,pnl:11800,pct:5.9},
+  {m:'Mar 25',trades:28,wins:21,losses:7,pnl:18600,pct:9.3},
+  {m:'Apr 25',trades:26,wins:17,losses:9,pnl:9400, pct:4.7},
+  {m:'May 25',trades:30,wins:20,losses:10,pnl:-4200,pct:-2.1},
+  {m:'Jun 25',trades:25,wins:19,losses:6,pnl:15800,pct:7.9},
+  {m:'Jul 25',trades:27,wins:21,losses:6,pnl:21400,pct:10.7},
+  {m:'Aug 25',trades:23,wins:15,losses:8,pnl:7600, pct:3.8},
+  {m:'Sep 25',trades:31,wins:24,losses:7,pnl:42400,pct:21.2},
+  {m:'Oct 25',trades:26,wins:18,losses:8,pnl:12200,pct:6.1},
+  {m:'Nov 25',trades:24,wins:17,losses:7,pnl:9800, pct:4.9},
+  {m:'Dec 25',trades:28,wins:20,losses:8,pnl:16400,pct:8.2},
+];
+
+const TRADES = [
+  {d:'20 Feb',inst:'NIFTY 22500 CE',exp:'27 Feb',entry:142,exit:318,qty:150,pnl:26400,win:true},
+  {d:'19 Feb',inst:'BANKNIFTY 48000 PE',exp:'20 Feb',entry:88,exit:44,qty:30,pnl:-1320,win:false},
+  {d:'18 Feb',inst:'FINNIFTY 21200 CE',exp:'18 Feb',entry:64,exit:148,qty:100,pnl:8400,win:true},
+  {d:'17 Feb',inst:'NIFTY 22400 PE',exp:'20 Feb',entry:112,exit:246,qty:150,pnl:20100,win:true},
+  {d:'14 Feb',inst:'SENSEX 79500 CE',exp:'14 Feb',entry:198,exit:94,qty:20,pnl:-2080,win:false},
+  {d:'13 Feb',inst:'BANKNIFTY 48200 CE',exp:'19 Feb',entry:156,exit:312,qty:30,pnl:4680,win:true},
+  {d:'12 Feb',inst:'MIDCAP 21800 CE',exp:'18 Feb',entry:72,exit:186,qty:75,pnl:8550,win:true},
+  {d:'11 Feb',inst:'NIFTY 22600 PE',exp:'13 Feb',entry:98,exit:224,qty:150,pnl:18900,win:true},
+  {d:'10 Feb',inst:'FINNIFTY 21400 PE',exp:'11 Feb',entry:54,exit:28,qty:100,pnl:-2600,win:false},
+  {d:'07 Feb',inst:'BANKNIFTY 47800 CE',exp:'12 Feb',entry:182,exit:396,qty:30,pnl:6420,win:true},
+  {d:'06 Feb',inst:'SENSEX 79200 PE',exp:'07 Feb',entry:244,exit:512,qty:20,pnl:5360,win:true},
+  {d:'05 Feb',inst:'NIFTY 22300 CE',exp:'06 Feb',entry:126,exit:68,qty:150,pnl:-8700,win:false},
+  {d:'04 Feb',inst:'MIDCAP 21600 PE',exp:'04 Feb',entry:86,exit:194,qty:75,pnl:8100,win:true},
+  {d:'03 Feb',inst:'BANKNIFTY 48400 PE',exp:'05 Feb',entry:142,exit:308,qty:30,pnl:4980,win:true},
+  {d:'01 Feb',inst:'NIFTY 22700 CE',exp:'03 Feb',entry:108,exit:234,qty:150,pnl:18900,win:true},
+];
+
+// ═══════════════════════════════
+//  BUILD P&L TABLE
+// ═══════════════════════════════
+function buildTable(){
+  let html='', tot={trades:0,wins:0,losses:0,pnl:0};
+  PNL.forEach(r=>{
+    tot.trades+=r.trades; tot.wins+=r.wins; tot.losses+=r.losses; tot.pnl+=r.pnl;
+    const wr=Math.round(r.wins/r.trades*100);
+    const p=(r.pnl>=0?'+':'')+r.pnl.toLocaleString('en-IN');
+    const pct=(r.pct>=0?'+':'')+r.pct+'%';
+    html+=`<tr>
+      <td><span class="month-name">${r.m}</span></td>
+      <td class="pnl-muted">${r.trades}</td>
+      <td style="color:var(--green);font-family:var(--fm)">${r.wins}</td>
+      <td style="color:var(--red);font-family:var(--fm)">${r.losses}</td>
+      <td style="font-family:var(--fm)">${wr}%</td>
+      <td class="${r.pnl>=0?'pnl-green':'pnl-red'}">${p}</td>
+      <td class="${r.pnl>=0?'pnl-green':'pnl-red'}">${pct}</td>
+      <td><span class="badge ${r.pnl>=0?'badge-profit':'badge-loss'}">${r.pnl>=0?'PROFIT':'LOSS'}</span></td>
+    </tr>`;
+  });
+  const totalWR=Math.round(tot.wins/tot.trades*100);
+  const totP=(tot.pnl>=0?'+':'')+tot.pnl.toLocaleString('en-IN');
+  html+=`<tr class="total-row">
+    <td><span class="month-name">12M TOTAL</span></td>
+    <td style="font-family:var(--fm)">${tot.trades}</td>
+    <td style="color:var(--green);font-family:var(--fm)">${tot.wins}</td>
+    <td style="color:var(--red);font-family:var(--fm)">${tot.losses}</td>
+    <td style="font-family:var(--fm);color:var(--gold)">${totalWR}%</td>
+    <td class="pnl-green" style="font-size:16px">${totP}</td>
+    <td class="pnl-green">+83.9%</td>
+    <td><span class="badge badge-profit">PROFITABLE</span></td>
+  </tr>`;
+  document.getElementById('pnlBody').innerHTML=html;
+}
+function filterTable(idx,btn){
+  document.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  buildTable(); // extend with index filter if needed
+}
+
+// ═══════════════════════════════
+//  BUILD BAR CHART
+// ═══════════════════════════════
+function buildBarChart(){
+  const max=Math.max(...PNL.map(d=>Math.abs(d.pnl)));
+  const H=140;
+  document.getElementById('barChart').innerHTML=PNL.map(d=>{
+    const h=Math.round(Math.abs(d.pnl)/max*H);
+    const cls=d.pnl>=0?'profit-bar':'loss-bar';
+    const tip=`${d.m}: ${d.pnl>=0?'+':''}Rs.${d.pnl.toLocaleString('en-IN')} (${d.pct>=0?'+':''}${d.pct}%)`;
+    return `<div class="bar-col">
+      <div class="bar-el ${cls}" style="height:${h}px" data-tip="${tip}"></div>
+      <div class="bar-month-lbl">${d.m.split(' ')[0]}</div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════
+//  BUILD TRADE LOG
+// ═══════════════════════════════
+function buildTradeLog(){
+  document.getElementById('tradeLog').innerHTML=TRADES.map(t=>{
+    const p=(t.pnl>=0?'+':'')+t.pnl.toLocaleString('en-IN');
+    return `<div class="tl-grid tl-row">
+      <div class="tl-td" style="color:var(--muted);font-size:11px">${t.d}</div>
+      <div class="tl-td inst">${t.inst}<small>Exp ${t.exp}</small></div>
+      <div class="tl-td">${t.entry}</div>
+      <div class="tl-td">${t.exit}</div>
+      <div class="tl-td">${t.qty}</div>
+      <div class="tl-td ${t.win?'win-cell':'loss-cell'}">${p}</div>
+      <div class="tl-td">${t.win?'<span class="tl-badge-w">WIN</span>':'<span class="tl-badge-l">LOSS</span>'}</div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════
+//  WIN RATE ANIMATION
+// ═══════════════════════════════
+const WR=[
+  {vid:'wrv-nifty',bid:'wrb-nifty',pct:77},
+  {vid:'wrv-bn',   bid:'wrb-bn',   pct:73},
+  {vid:'wrv-fn',   bid:'wrb-fn',   pct:74},
+  {vid:'wrv-sx',   bid:'wrb-sx',   pct:73},
+  {vid:'wrv-mc',   bid:'wrb-mc',   pct:68},
+];
+let wrAnimated=false;
+function animateWR(){
+  if(wrAnimated) return; wrAnimated=true;
+  WR.forEach((r,i)=>setTimeout(()=>{
+    let n=0;
+    const iv=setInterval(()=>{
+      n=Math.min(n+2,r.pct);
+      const ve=document.getElementById(r.vid); if(ve) ve.textContent=n+'%';
+      const be=document.getElementById(r.bid); if(be) be.style.width=n+'%';
+      if(n>=r.pct) clearInterval(iv);
+    },18);
+  },i*100));
+}
+
+// ═══════════════════════════════
+//  SCROLL REVEAL + COUNTERS
+// ═══════════════════════════════
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const d=+e.target.dataset.delay||0;
+    setTimeout(()=>e.target.classList.add('vis'),d);
+    obs.unobserve(e.target);
+  });
+},{threshold:0.08});
+document.querySelectorAll('.reveal,.reveal-scale').forEach(el=>obs.observe(el));
+
+// Win rate trigger
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) animateWR(); });
+},{threshold:0.3}).observe(document.getElementById('wrGrid'));
+
+// Counters
+document.querySelectorAll('[data-count]').forEach(el=>{
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const target=+e.target.dataset.count, sfx=e.target.dataset.suffix||'', dur=1600, t0=Date.now();
+      (function tick(){
+        const p=Math.min((Date.now()-t0)/dur,1),ease=1-Math.pow(1-p,4);
+        e.target.textContent=Math.round(target*ease)+sfx;
+        if(p<1) requestAnimationFrame(tick);
+      })();
+    });
+  },{threshold:.5}).observe(el);
+});
+
+// ═══════════════════════════════
+//  NAV
+// ═══════════════════════════════
+const navEl=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>navEl.classList.toggle('scrolled',scrollY>60),{passive:true});
+const tog=document.getElementById('navToggle'),mob=document.getElementById('mobileNav');
+tog.addEventListener('click',()=>mob.classList.toggle('open'));
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mob.classList.remove('open')));
+
+// INIT
+buildTable();
+buildBarChart();
+buildTradeLog();
+</script>
+</body>
+</html>
