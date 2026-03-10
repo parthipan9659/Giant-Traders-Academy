@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giant Traders Academy — India's #1 Index Options Program</title>
+<meta name="description" content="Learn rule-based index options buying strategies for Nifty, Bank Nifty, Fin Nifty, Sensex & Midcap. No indicators. No guesswork. Just proven systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--font-heading:'Syne','Arial Black',Impact,sans-serif;--font-body:'Space Grotesk','Inter','Segoe UI',Arial,sans-serif;--font-mono:'JetBrains Mono','Consolas','Courier New',monospace;}
+  body{font-family:var(--font-body);}
+  h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);}
+</style>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ══════════════════════════════════════════════════════
+   HERO — PREMIUM REDESIGN v7
+   Mobile-first, bold typography, zero JS fragility
+══════════════════════════════════════════════════════ */
+
+/* ── H1 animated lines — pure CSS, no JS needed ── */
+.h1-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(28px);
+  animation: h1Rise 0.65s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+.h1-gold  { color: var(--gold); }
+.h1-muted { color: var(--muted2); font-size: 0.58em; font-weight: 700; letter-spacing: -0.5px; }
+@keyframes h1Rise {
+  to { opacity: 1; transform: none; }
+}
+
+/* ── Hero shell ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 72px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 10% 30%, rgba(245,200,66,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 90% 70%, rgba(124,92,252,0.08) 0%, transparent 55%); }
+.hero-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%); }
+#chartCanvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.22; pointer-events: none; z-index: 0; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4,6,15,0.25) 0%, rgba(4,6,15,0.0) 50%, rgba(4,6,15,0.7) 100%); z-index: 2; }
+
+/* ── Hero layout ── */
+.hero-bgvid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: saturate(0.25) brightness(0.2);
+  transform: scale(1.06);
+  pointer-events: none;
+}
+.hero-vid-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(4,6,15,0.55) 0%, rgba(4,6,15,0.2) 40%, rgba(4,6,15,0.75) 100%),
+    linear-gradient(90deg, rgba(4,6,15,0.4) 0%, transparent 60%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 80px 48px;
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 64px;
+  align-items: center;
+}
+
+/* ── H1 typography — PREMIUM BOLD ── */
+.hero h1 {
+  font-family: 'Syne', 'Arial Black', Impact, sans-serif;
+  font-size: clamp(42px, 5.5vw, 82px);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -3px;
+  margin-bottom: 24px;
+  color: #ffffff;
+}
+
+/* Live pill */
+.live-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,229,176,0.08); border: 1px solid rgba(0,229,176,0.2); border-radius: 100px; padding: 5px 14px 5px 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #00e5b0; margin-bottom: 24px; }
+.live-dot { width: 20px; height: 20px; border-radius: 50%; background: rgba(0,229,176,0.12); display: flex; align-items: center; justify-content: center; }
+.live-dot::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #00e5b0; animation: livePulse 1.5s infinite; }
+.hero h1 { margin-bottom: 20px; animation: fadeUp 0.7s ease both; }
+.hero-desc { font-size: 17px; color: var(--muted2); line-height: 1.75; max-width: 480px; margin-bottom: 36px; animation: fadeUp 0.7s 0.15s ease both; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp 0.7s 0.25s ease both; }
+.hero-trust { margin-top: 40px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; animation: fadeUp 0.7s 0.35s ease both; }
+.trust-avs { display: flex; }
+.trust-av { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--bg); margin-left: -10px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #000; font-family: 'Syne', 'Arial Black', sans-serif; }
+.trust-av:first-child { margin-left: 0; }
+.trust-info { font-size: 13px; color: var(--muted2); }
+.trust-info strong { color: var(--text); display: block; }
+.trust-stars { color: var(--gold); }
+.trust-div { width: 1px; height: 28px; background: var(--border2); }
+
+/* Hero right - course card */
+.hero-right { animation: fadeUp 0.8s 0.2s ease both; position: relative; }
+.fc { position: absolute; background: var(--card2); border: 1px solid var(--border2); border-radius: 12px; padding: 12px 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 2; }
+.fc1 { top: -20px; right: -20px; animation: bob1 5s ease-in-out infinite; }
+.fc2 { bottom: 16px; left: -24px; animation: bob2 6s ease-in-out infinite; }
+@keyframes bob1{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes bob2{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.fc-lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 4px; }
+.fc-val { font-family: 'Syne', 'Arial Black', sans-serif; font-size: 20px; font-weight: 900; color: var(--green); }
+.fc-val.gold { color: var(--gold); }
+.fc-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+.course-card { background: var(--card); border: 1px solid var(--border2); border-radius: 20px; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.6); position: relative; }
+.course-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.cc-hd { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+.cc-hd-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.cc-seats { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--red); display: flex; align-items: center; gap: 5px; }
+.cc-seats::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: livePulse 1.5s infinite; }
+.cc-title { font-family: 'Syne', 'Arial Black', sans-serif; font-size: 16px; font-weight: 800; line-height: 1.3; }
+.cc-mods { padding: 16px 24px; display: flex; flex-direction: column; gap: 8px; }
+.cc-mod { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; transition: all 0.2s; }
+.cc-mod:hover { background: rgba(245,200,66,0.04); border-color: rgba(245,200,66,0.15); }
+.cc-mod-ic { font-size: 15px; width: 30px; text-align: center; flex-shrink: 0; }
+.cc-mod-name { font-size: 13px; font-weight: 600; flex: 1; }
+.cc-mod-tag { font-size: 10px; color: var(--gold); font-family: 'JetBrains Mono', monospace; }
+.cc-ft { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.cc-pr-orig { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--muted); text-decoration: line-through; }
+.cc-pr-now { font-family: 'Syne', 'Arial Black', sans-serif; font-size: 30px; font-weight: 900; color: var(--gold); letter-spacing: -1px; }
+.cc-enroll { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000; border: none; padding: 10px 20px; border-radius: 8px; font-family: 'Syne', 'Arial Black', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.cc-enroll:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(245,200,66,0.4); }
+
+/* ── STATS ── */
+.stats-belt { padding: 80px 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+.stat-item { padding: 44px 32px; border-right: 1px solid var(--border); position: relative; transition: background 0.3s; }
+.stat-item:last-child { border-right: none; }
+.stat-item::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0; transition: opacity 0.3s; }
+.stat-item:hover { background: rgba(245,200,66,0.03); }
+.stat-item:hover::after { opacity: 1; }
+.stat-num { font-family: 'Syne', 'Arial Black', sans-serif; font-size: 52px; font-weight: 900; color: var(--gold); letter-spacing: -2px; line-height: 1; display: block; margin-bottom: 6px; }
+.stat-label { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.stat-sub { font-size: 12px; color: var(--muted); }
+
+/* ── LEARN CARDS ── */
+.learn-section { padding: 100px 0; }
+.section-hd { text-align: center; max-width: 620px; margin: 0 auto 64px; }
+.cards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.learn-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 34px 30px; position: relative; overflow: hidden; transition: all 0.35s; }
+.learn-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(245,200,66,0.5), transparent); opacity: 0; transition: opacity 0.3s; }
+.learn-card:hover { border-color: rgba(245,200,66,0.2); transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+.learn-card:hover::before { opacity: 1; }
+.lc-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 18px; letter-spacing: 1px; }
+.lc-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; background: rgba(245,200,66,0.08); border: 1px solid rgba(245,200,66,0.12); }
+.learn-card p { font-size: 14px; color: var(--muted2); line-height: 1.75; }
+
+/* ── JOURNEY ── */
+.journey-section { padding: 100px 0; }
+.steps-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin-top: 64px; position: relative; }
+.steps-row::before { content: ''; position: absolute; top: 35px; left: 12%; right: 12%; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.step-item { text-align: center; }
+.step-n { width: 70px; height: 70px; border-radius: 50%; background: var(--card); border: 1px solid rgba(245,200,66,0.4); display: flex; align-items: center; justify-content: center; font-family: 'Syne', 'Arial Black', sans-serif; font-size: 22px; font-weight: 900; color: var(--gold); margin: 0 auto 24px; position: relative; z-index: 1; box-shadow: 0 0 30px rgba(245,200,66,0.12); }
+.step-item h3 { font-family: 'Syne', 'Arial Black', sans-serif; font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+.step-item p { font-size: 13px; color: var(--muted2); line-height: 1.65; padding: 0 10px; }
+
+/* ── PRICING ── */
+.pricing-section { padding: 100px 0; }
+.pricing-layout { display: grid; grid-template-columns: 1fr 400px; gap: 32px; align-items: start; }
+.value-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; }
+.value-card h3 { font-family: 'Syne', 'Arial Black', sans-serif; font-size: 20px; font-weight: 900; margin-bottom: 28px; }
+.vlist { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.vlist li { display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--muted2); padding: 13px 0; border-bottom: 1px solid var(--border); }
+.vlist li:last-child { border-bottom: none; }
+.vcheck { width: 22px; height: 22px; border-radius: 6px; background: rgba(0,214,143,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 11px; color: var(--green); }
+.vtotals { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--border2); display: flex; justify-content: space-between; }
+.vt-block .lbl { font-size: 12px; color: var(--muted); margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; }
+.vt-orig { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: var(--muted); text-decoration: line-through; }
+.vt-offer { font-family: 'Syne', 'Arial Black', sans-serif; font-size: 28px; font-weight: 900; color: var(--gold); letter-spacing: -1px; }
+.price-card-sticky { position: sticky; top: 88px; }
+
+/* Pricing card inner details */
+.pc-inner { padding: 36px; }
+.pc-course { font-family: 'Syne', 'Arial Black', sans-serif; font-size: 18px; font-weight: 900; line-height: 1.3; margin: 20px 0 24px; }
+.pc-feats { padding: 22px 36px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); }
+.pc-feat { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 13px; color: var(--muted2); border-bottom: 1px solid var(--border); }
+.pc-feat:last-child { border-bottom: none; }
+.pc-feat .ico { color: #00e5b0; }
+
+/* ── TESTIMONIALS ── */
+.testi-section { padding: 100px 0; }
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+
+/* ── FAQ MINI ── */
+.faq-mini { padding: 100px 0; }
+.faq-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.faq-sticky { position: sticky; top: 100px; }
+.faq-cta-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-top: 28px; }
+.faq-cta-box p { font-size: 14px; color: var(--muted2); margin-bottom: 16px; }
+
+/* ── CONTACT STRIP ── */
+.contact-strip { padding: 80px 0; }
+.contact-cards { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 44px; }
+
+/* ── FINAL CTA ── */
+.final-cta { padding: 120px 0; text-align: center; background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(245,200,66,0.06) 0%, transparent 65%); border-top: 1px solid var(--border); }
+.final-cta h2 { font-size: clamp(34px,5vw,60px); margin-bottom: 18px; }
+.final-cta p { font-size: 16px; color: var(--muted2); max-width: 460px; margin: 0 auto 40px; line-height: 1.7; }
+
+
+/* ── LEAD CAPTURE ── */
+.lead-section { padding: 100px 0; background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); border-top: 1px solid var(--border); position: relative; overflow: hidden; }
+.lead-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(245,200,66,0.05) 0%, transparent 70%); pointer-events: none; }
+.lead-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.lead-left h2 { margin-bottom: 16px; }
+.lead-left .section-sub { margin-bottom: 32px; }
+.lead-promises { display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+.lead-promise { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--muted2); line-height: 1.5; }
+.lp-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.lead-contact-strip { padding: 20px 24px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; }
+.lcs-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 2px; margin-bottom: 12px; }
+.lcs-numbers { display: flex; gap: 16px; flex-wrap: wrap; }
+.lcs-numbers a { color: var(--gold); text-decoration: none; font-family: var(--font-heading); font-size: 17px; font-weight: 800; letter-spacing: -0.3px; transition: opacity 0.2s; }
+.lcs-numbers a:hover { opacity: 0.75; }
+
+/* Form card */
+.lead-form-card { background: var(--card); border: 1px solid rgba(245,200,66,0.25); border-radius: 22px; overflow: hidden; box-shadow: 0 0 60px rgba(245,200,66,0.06), 0 40px 80px rgba(0,0,0,0.5); position: sticky; top: 88px; }
+.lead-form-card::before { content: ''; display: block; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.lf-header { padding: 28px 32px 0; }
+.lf-title { font-family: var(--font-heading); font-size: 20px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 4px; }
+.lf-sub { font-size: 13px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+.lf-body { padding: 24px 32px 32px; }
+.lf-group { margin-bottom: 18px; }
+.lf-group label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 1.5px; margin-bottom: 8px; }
+.lf-group input, .lf-group select, .lf-group textarea { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border2); border-radius: 10px; padding: 12px 14px; color: var(--text); font-family: var(--font-body); font-size: 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; resize: none; cursor: auto; }
+.lf-group input:focus, .lf-group select:focus, .lf-group textarea:focus { border-color: rgba(245,200,66,0.5); box-shadow: 0 0 0 3px rgba(245,200,66,0.08); }
+.lf-group select option { background: var(--card2); }
+.lf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+/* Chips */
+.lf-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.chip { padding: 7px 14px; border-radius: 100px; border: 1px solid var(--border2); font-size: 13px; color: var(--muted2); cursor: pointer; transition: all 0.2s; user-select: none; }
+.chip:hover { border-color: rgba(245,200,66,0.4); color: var(--gold); }
+.chip.active { background: rgba(245,200,66,0.12); border-color: var(--gold); color: var(--gold); font-weight: 600; }
+/* Submit btn */
+.lf-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000; border: none; border-radius: 12px; font-family: var(--font-heading); font-size: 17px; font-weight: 900; cursor: pointer; transition: all 0.25s; box-shadow: 0 8px 28px rgba(245,200,66,0.3); margin-top: 4px; letter-spacing: -0.3px; }
+.lf-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 44px rgba(245,200,66,0.45); }
+.lf-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.lf-disclaimer { font-size: 11px; color: var(--muted); text-align: center; margin-top: 12px; line-height: 1.6; }
+/* Success */
+.lf-success { padding: 48px 32px; text-align: center; }
+.lf-success-icon { font-size: 52px; margin-bottom: 16px; }
+.lf-success h3 { font-family: var(--font-heading); font-size: 24px; font-weight: 900; margin-bottom: 10px; color: var(--green); }
+.lf-success p { font-size: 14px; color: var(--muted2); line-height: 1.7; }
+/* Responsive */
+@media(max-width:900px){ .lead-wrap { grid-template-columns: 1fr; gap: 40px; } .lead-form-card { position: static; } }
+@media(max-width:520px){ .lf-header { padding: 22px 20px 0; } .lf-body { padding: 20px 20px 24px; } .lf-row { grid-template-columns: 1fr; gap: 0; } .lcs-numbers { flex-direction: column; gap: 10px; } }
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — MOBILE FIRST — COMPLETE FIX
+════════════════════════════════════════════ */
+
+/* ── Large tablet ── */
+@media(max-width:1100px){
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    padding: 60px 40px 80px;
+    text-align: center;
+  }
+  .hero h1  { font-size: clamp(40px,7vw,64px); letter-spacing:-2px; }
+  .hero-desc{ font-size:16px; max-width:100%; }
+  .hero-btns{ justify-content:center; }
+  .hero-trust{ justify-content:center; }
+  .hero-right{ max-width:500px; margin:0 auto; }
+  .fc1,.fc2 { display:none; }
+  .pricing-layout { grid-template-columns:1fr; }
+  .price-card-sticky { position:static; }
+  .faq-layout { grid-template-columns:1fr; }
+  .faq-sticky { position:static; }
+}
+
+/* ── Mobile ── */
+@media(max-width:768px){
+  /* Reset any overflow issues */
+  html, body { overflow-x:hidden; max-width:100vw; }
+  * { min-width:0; }
+
+  .hero { min-height:100svh; }
+  .hero-inner {
+    grid-template-columns: 1fr !important;
+    padding: 48px 18px 60px !important;
+    gap: 36px !important;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 10vw, 52px) !important;
+    letter-spacing: -1.5px !important;
+    line-height: 1.06 !important;
+  }
+  .h1-muted { font-size: 0.52em !important; }
+  .hero-desc {
+    font-size: 15px !important;
+    line-height: 1.75 !important;
+    max-width: 100% !important;
+    color: rgba(200,214,235,0.92) !important;
+  }
+  .hero-btns {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .hero-btns a { text-align:center; width:100%; }
+  .hero-trust { flex-wrap:wrap; gap:12px; justify-content:center; }
+  .trust-div  { display:none; }
+  .live-pill  { font-size:10px; padding:4px 12px; }
+  .live-widget { flex-wrap:wrap; gap:8px; justify-content:center; margin-top:16px; }
+  .hero-right { max-width:100%; }
+
+  /* Stats */
+  .stats-grid { grid-template-columns:1fr 1fr; }
+  .stat-item  { padding:24px 16px; }
+  .stat-num   { font-size:34px; }
+
+  /* Cards */
+  .cards-grid { grid-template-columns:1fr; gap:14px; }
+  .learn-card { padding:26px 20px; }
+
+  /* Testimonials */
+  .testi-grid { grid-template-columns:1fr; gap:14px; }
+
+  /* Steps */
+  .steps-row { grid-template-columns:1fr 1fr; gap:24px; }
+  .steps-row::before { display:none; }
+  .step-n { width:54px; height:54px; font-size:18px; }
+
+  /* Course card */
+  .cc-hd,.cc-mods,.cc-ft { padding-left:16px; padding-right:16px; }
+  .cc-mod  { padding:8px 10px; }
+  .cc-pr-now { font-size:26px; }
+
+  /* Other */
+  .value-card { padding:24px 16px; }
+  .contact-cards { flex-direction:column; }
+  .final-cta { padding:72px 0; }
+  .vtotals { flex-direction:column; gap:12px; }
+}
+
+/* ── Small phones ── */
+@media(max-width:430px){
+  html, body { overflow-x:hidden; }
+
+  .hero-inner {
+    padding: 40px 14px 52px !important;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 11vw, 42px) !important;
+    letter-spacing: -1px !important;
+  }
+  .stats-grid { grid-template-columns:1fr 1fr; }
+  .cards-grid,.testi-grid { grid-template-columns:1fr; }
+  .steps-row { grid-template-columns:1fr; gap:18px; }
+  .cc-hd,.cc-mods,.cc-ft { padding-left:14px; padding-right:14px; }
+  h2 { font-size:clamp(22px,9vw,32px) !important; letter-spacing:-0.5px; }
+  .section-sub { font-size:14px !important; }
+  .container { padding:0 14px !important; }
+  .live-pill { font-size:9px; }
+}
+</style>
+</head>
+<body>
+
+
+
+<div id="scrollProgress"></div>
+<div class="page-transition" id="pageTransition"></div>
+<a href="https://wa.me/916381384612" class="wa-float" target="_blank" rel="noopener" title="WhatsApp Us">
+  <span class="wa-float-label">Chat on WhatsApp</span>
+  💬
+</a>
+
+
+<div id="scrollProg"></div>
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="index.html" class="logo"><img src="logo.png" alt="Giant Traders Academy" class="logo-img"><div class="logo-text"><span class="lt-main">Giant Traders</span><span class="lt-sub">ACADEMY</span></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="course-details.html">Course</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="testimonials.html">Reviews</a></li>
+    <li><a href="results.html">Results</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-phone">📞 <b>63813 84612</b></div>
+    <button class="nav-cta" onclick="location.href='checkout.html'">Enroll Now →</button>
+  </div>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+</nav>
+<div class="nav-mobile" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="course-details.html">Course Details</a>
+  <a href="about.html">About Us</a>
+  <a href="testimonials.html">Reviews</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="nav-cta">Enroll Now – ₹30,000 →</a>
+</div>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <!-- HERO BACKGROUND VIDEO -->
+  <video class="hero-bgvid" id="heroBgVid" autoplay muted loop playsinline preload="auto">
+    <source src="https://videos.pexels.com/video-files/7578542/7578542-hd_1920_1080_25fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/3775709/3775709-hd_1920_1080_25fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/4779468/4779468-hd_1920_1080_24fps.mp4" type="video/mp4">
+  </video>
+  <div class="hero-vid-overlay"></div>
+  <canvas id="chartCanvas"></canvas>
+  <div class="mesh-bg"></div>
+  <div class="orb orb-gold" style="width:600px;height:600px;top:-200px;left:-100px"></div>
+  <div class="orb orb-teal" style="width:400px;height:400px;bottom:-100px;right:0"></div>
+  <div class="orb orb-purple" style="width:500px;height:500px;top:50%;right:-200px"></div>
+  <div class="spotlight" id="heroSpotlight"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div id="particleContainer" style="position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="live-pill"><div class="live-dot"></div> NOW ENROLLING — BATCH 2026</div>
+      <h1>
+  <span class="h1-line" style="animation-delay:0.05s">Trade Index</span>
+  <span class="h1-line" style="animation-delay:0.12s">Options</span>
+  <span class="h1-line h1-gold" style="animation-delay:0.22s">Like a Pro.</span>
+  <span class="h1-line h1-muted" style="animation-delay:0.32s">Not Like a Gambler.</span>
+</h1>
+      <p class="hero-desc">India's most structured Index Options Buying program. Rule-based strategies for Nifty, Bank Nifty, Fin Nifty, Sensex & Midcap — no indicators, no guesswork.</p>
+      <div class="hero-btns">
+        <a href="contact.html" class="btn-gold">🎓 Enroll Now – ₹30,000</a>
+        <a href="course-details.html" class="btn-ghost">See Curriculum →</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-avs">
+          <div class="trust-av" style="background:linear-gradient(135deg,#f5c842,#e8a020)">R</div>
+          <div class="trust-av" style="background:linear-gradient(135deg,#7c5cfc,#00e5b0)">M</div>
+          <div class="trust-av" style="background:linear-gradient(135deg,#ff4757,#f5c842)">K</div>
+          <div class="trust-av" style="background:linear-gradient(135deg,#00e5b0,#7c5cfc)">S</div>
+          <div class="trust-av" style="background:linear-gradient(135deg,#f5c842,#7c5cfc)">A</div>
+        </div>
+        <div class="trust-info">
+          <div class="trust-stars">★★★★★</div>
+          <strong>500+ students</strong> trained across India
+        </div>
+        <div class="trust-div"></div>
+        <div class="trust-info">
+          <div style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700">ALL 5 INDICES COVERED</div>
+          Nifty · BN · FN · Sensex · Midcap
+        </div>
+
+      <!-- LIVE INDEX WIDGET -->
+      <div class="live-widget" id="liveWidget">
+        <div class="lw-item"><span class="lw-sym">NIFTY</span><span class="lw-price" id="lw-nifty">22,541</span><span class="lw-chg up" id="lw-nifty-chg">▲ 0.43%</span></div>
+        <div class="lw-item"><span class="lw-sym">BNIFTY</span><span class="lw-price" id="lw-bn">48,210</span><span class="lw-chg up" id="lw-bn-chg">▲ 0.21%</span></div>
+        <div class="lw-item"><span class="lw-sym">FINNIFTY</span><span class="lw-price" id="lw-fn">21,380</span><span class="lw-chg dn" id="lw-fn-chg">▼ 0.14%</span></div>
+      </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="fc fc1"><div class="fc-lbl">STUDENTS TRAINED</div><div class="fc-val gold">500+</div><div class="fc-sub">Across India 🇮🇳</div></div>
+      <div class="course-card">
+        <div class="cc-hd">
+          <div class="cc-hd-top">
+            <div class="gold-badge">🎓 PRO MASTER PROGRAM</div>
+            <div class="cc-seats">Limited Seats</div>
+          </div>
+          <div class="cc-title">Index Options Buying<br>Pro Master Program</div>
+        </div>
+        <div class="cc-mods">
+          <div class="cc-mod"><div class="cc-mod-ic">🔢</div><div class="cc-mod-name">Numerical Strategy System</div><div class="cc-mod-tag">CORE</div></div>
+          <div class="cc-mod"><div class="cc-mod-ic">📈</div><div class="cc-mod-name">Nifty + Bank Nifty Buying</div><div class="cc-mod-tag">STRATEGIES</div></div>
+          <div class="cc-mod"><div class="cc-mod-ic">🛡️</div><div class="cc-mod-name">Capital Protection Model</div><div class="cc-mod-tag">RISK</div></div>
+          <div class="cc-mod"><div class="cc-mod-ic">🤝</div><div class="cc-mod-name">2 Live Mentorship + 1yr Group</div><div class="cc-mod-tag">SUPPORT</div></div>
+        </div>
+        <div class="cc-ft">
+          <div><div class="cc-pr-orig">₹50,000</div><div class="cc-pr-now">₹30,000</div></div>
+          <button class="cc-enroll" onclick="location.href='checkout.html'">Enroll Now →</button>
+        </div>
+      </div>
+      <div class="fc fc2"><div class="fc-lbl">INDICES COVERED</div><div class="fc-val" style="font-size:22px">5 📊</div><div class="fc-sub">Nifty·BN·FN·Sensex·Mid</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap"><div class="ticker">
+  <div class="ti"><span class="ti-sym">NIFTY</span><span class="ti-up">▲ 22,541 +0.43%</span></div>
+  <div class="ti"><span class="ti-sym">BANKNIFTY</span><span class="ti-dn">▼ 48,210 -0.21%</span></div>
+  <div class="ti"><span class="ti-sym">SENSEX</span><span class="ti-up">▲ 74,119 +0.52%</span></div>
+  <div class="ti"><span class="ti-sym">FINNIFTY</span><span class="ti-up">▲ 21,380 +0.66%</span></div>
+  <div class="ti"><span class="ti-sym">MIDCPNIFTY</span><span class="ti-dn">▼ 11,240 -0.14%</span></div>
+  <div class="ti"><span class="ti-sym">RELIANCE</span><span class="ti-up">▲ 2,892 +1.10%</span></div>
+  <div class="ti"><span class="ti-sym">HDFC</span><span class="ti-up">▲ 1,715 +0.74%</span></div>
+  <div class="ti"><span class="ti-sym">NIFTY</span><span class="ti-up">▲ 22,541 +0.43%</span></div>
+  <div class="ti"><span class="ti-sym">BANKNIFTY</span><span class="ti-dn">▼ 48,210 -0.21%</span></div>
+  <div class="ti"><span class="ti-sym">SENSEX</span><span class="ti-up">▲ 74,119 +0.52%</span></div>
+  <div class="ti"><span class="ti-sym">FINNIFTY</span><span class="ti-up">▲ 21,380 +0.66%</span></div>
+  <div class="ti"><span class="ti-sym">MIDCPNIFTY</span><span class="ti-dn">▼ 11,240 -0.14%</span></div>
+  <div class="ti"><span class="ti-sym">RELIANCE</span><span class="ti-up">▲ 2,892 +1.10%</span></div>
+  <div class="ti"><span class="ti-sym">HDFC</span><span class="ti-up">▲ 1,715 +0.74%</span></div>
+</div></div>
+
+<!-- TRUST MARQUEE -->
+<div class="trust-marquee">
+  <div class="trust-track">
+    <div class="trust-item"><span class="ti-icon">🏆</span> 500+ Students Trained</div>
+    <div class="trust-item"><span class="ti-icon">📈</span> Nifty Options Strategy</div>
+    <div class="trust-item"><span class="ti-icon">🏦</span> Bank Nifty Strategy</div>
+    <div class="trust-item"><span class="ti-icon">🎯</span> Fin Nifty Strategy</div>
+    <div class="trust-item"><span class="ti-icon">📊</span> Sensex Strategy</div>
+    <div class="trust-item"><span class="ti-icon">🚀</span> Midcap Strategy</div>
+    <div class="trust-item"><span class="ti-icon">🛡️</span> Capital Protection System</div>
+    <div class="trust-item"><span class="ti-icon">🧠</span> Trader Discipline Framework</div>
+    <div class="trust-item"><span class="ti-icon">♾️</span> Lifetime Video Access</div>
+    <div class="trust-item"><span class="ti-icon">🤝</span> Live Mentorship Sessions</div>
+    <div class="trust-item"><span class="ti-icon">⭐</span> 4.9/5 Rating</div>
+    <div class="trust-item"><span class="ti-icon">🇮🇳</span> Made for Indian Markets</div>
+    <!-- duplicate for infinite scroll -->
+    <div class="trust-item"><span class="ti-icon">🏆</span> 500+ Students Trained</div>
+    <div class="trust-item"><span class="ti-icon">📈</span> Nifty Options Strategy</div>
+    <div class="trust-item"><span class="ti-icon">🏦</span> Bank Nifty Strategy</div>
+    <div class="trust-item"><span class="ti-icon">🎯</span> Fin Nifty Strategy</div>
+    <div class="trust-item"><span class="ti-icon">📊</span> Sensex Strategy</div>
+    <div class="trust-item"><span class="ti-icon">🚀</span> Midcap Strategy</div>
+    <div class="trust-item"><span class="ti-icon">🛡️</span> Capital Protection System</div>
+    <div class="trust-item"><span class="ti-icon">🧠</span> Trader Discipline Framework</div>
+    <div class="trust-item"><span class="ti-icon">♾️</span> Lifetime Video Access</div>
+    <div class="trust-item"><span class="ti-icon">🤝</span> Live Mentorship Sessions</div>
+    <div class="trust-item"><span class="ti-icon">⭐</span> 4.9/5 Rating</div>
+    <div class="trust-item"><span class="ti-icon">🇮🇳</span> Made for Indian Markets</div>
+  </div>
+</div>
+
+
+<!-- LIVE MARKET TICKER v2 -->
+<div class="ticker-wrap2" id="marketTicker">
+  <div class="ticker-inner2" id="tickerInner2">
+    <div class="t2-item"><span class="t2-sym">NIFTY</span><span class="t2-price" id="tk-nifty">22,541.30</span><span class="t2-chg-up" id="tkc-nifty">▲ +96.45 (+0.43%)</span></div>
+    <div class="t2-item"><span class="t2-sym">BANKNIFTY</span><span class="t2-price" id="tk-bn">48,210.80</span><span class="t2-chg-up" id="tkc-bn">▲ +101.20 (+0.21%)</span></div>
+    <div class="t2-item"><span class="t2-sym">FINNIFTY</span><span class="t2-price" id="tk-fn">21,380.55</span><span class="t2-chg-dn" id="tkc-fn">▼ -30.10 (-0.14%)</span></div>
+    <div class="t2-item"><span class="t2-sym">SENSEX</span><span class="t2-price" id="tk-sx">73,847.20</span><span class="t2-chg-up" id="tkc-sx">▲ +215.60 (+0.29%)</span></div>
+    <div class="t2-item"><span class="t2-sym">MIDCAP</span><span class="t2-price" id="tk-mc">44,621.90</span><span class="t2-chg-up" id="tkc-mc">▲ +88.30 (+0.20%)</span></div>
+    <div class="t2-item"><span class="t2-sym">VIX</span><span class="t2-price">12.84</span><span class="t2-chg-dn">▼ -0.42</span></div>
+    <div class="t2-item"><span class="t2-sym">USD/INR</span><span class="t2-price">84.22</span><span class="t2-chg-dn">▼ -0.08</span></div>
+    <!-- duplicate for infinite scroll -->
+    <div class="t2-item"><span class="t2-sym">NIFTY</span><span class="t2-price">22,541.30</span><span class="t2-chg-up">▲ +96.45 (+0.43%)</span></div>
+    <div class="t2-item"><span class="t2-sym">BANKNIFTY</span><span class="t2-price">48,210.80</span><span class="t2-chg-up">▲ +101.20 (+0.21%)</span></div>
+    <div class="t2-item"><span class="t2-sym">FINNIFTY</span><span class="t2-price">21,380.55</span><span class="t2-chg-dn">▼ -30.10 (-0.14%)</span></div>
+    <div class="t2-item"><span class="t2-sym">SENSEX</span><span class="t2-price">73,847.20</span><span class="t2-chg-up">▲ +215.60 (+0.29%)</span></div>
+    <div class="t2-item"><span class="t2-sym">MIDCAP</span><span class="t2-price">44,621.90</span><span class="t2-chg-up">▲ +88.30 (+0.20%)</span></div>
+    <div class="t2-item"><span class="t2-sym">VIX</span><span class="t2-price">12.84</span><span class="t2-chg-dn">▼ -0.42</span></div>
+    <div class="t2-item"><span class="t2-sym">USD/INR</span><span class="t2-price">84.22</span><span class="t2-chg-dn">▼ -0.08</span></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats-belt"><div class="container">
+  <div class="stats-grid">
+    <div class="stat-item"><span class="stat-num" data-count="500" data-suffix="+">0</span><div class="stat-label">Students Trained</div><div class="stat-sub">Growing every batch</div></div>
+    <div class="stat-item"><span class="stat-num">5+</span><div class="stat-label">Index Strategies</div><div class="stat-sub">Nifty · BN · FN · Sensex · Mid</div></div>
+    <div class="stat-item"><span class="stat-num" data-count="90" data-suffix="d">0</span><div class="stat-label">Post Support</div><div class="stat-sub">Google Sheet updates</div></div>
+    <div class="stat-item"><span class="stat-num">∞</span><div class="stat-label">Lifetime Access</div><div class="stat-sub">Videos, forever</div></div>
+  </div>
+</div></section>
+
+<!-- WHAT YOU LEARN -->
+<section class="learn-section" id="learn"><div class="container">
+  <div class="section-hd">
+    <div class="eyebrow">CURRICULUM</div>
+    <h2>Everything You'll Master</h2>
+    <p class="section-sub">Six focused modules built around one goal: making you a disciplined, rule-based index options trader.</p>
+  </div>
+  <div class="cards-grid">
+    <div class="learn-card glass-card grad-border reveal"><div class="lc-num">01 / 06</div><div class="lc-icon">🔢</div><h3>Numerical Strategy System</h3><p>A complete rule-based framework built on numbers — not feelings. Read the market objectively and act with precision every time.</p></div>
+    <div class="learn-card glass-card grad-border reveal"><div class="lc-num">02 / 06</div><div class="lc-icon">📈</div><h3>Index Options Buying</h3><p>Master options buying across all 5 major indices with structured entry, exit, and position-sizing logic.</p></div>
+    <div class="learn-card glass-card grad-border reveal"><div class="lc-num">03 / 06</div><div class="lc-icon">🛡️</div><h3>Capital Protection Model</h3><p>A dedicated risk management framework that protects your capital through every market phase — built into every strategy.</p></div>
+    <div class="learn-card glass-card grad-border reveal"><div class="lc-num">04 / 06</div><div class="lc-icon">📋</div><h3>Structured Entry Logic</h3><p>Every trade follows a defined logic that removes emotion and replaces gut-feel with a repeatable, systematic decision process.</p></div>
+    <div class="learn-card glass-card grad-border reveal"><div class="lc-num">05 / 06</div><div class="lc-icon">🧠</div><h3>Trader Discipline Framework</h3><p>Strategy is 50%. Discipline is the other 50%. Learn the behavioral framework that separates consistent traders from gamblers.</p></div>
+    <div class="learn-card glass-card grad-border reveal"><div class="lc-num">06 / 06</div><div class="lc-icon">🤝</div><h3>Live Mentorship & Community</h3><p>2 live mentorship sessions plus 1 full year in our active student group — learn and trade alongside peers.</p></div>
+  </div>
+  <div style="text-align:center;margin-top:40px"><a href="course-details.html" class="btn-ghost">View Full Curriculum →</a></div>
+</div></section>
+
+<!-- JOURNEY -->
+<section class="journey-section"><div class="container">
+  <div class="section-hd">
+    <div class="eyebrow">YOUR JOURNEY</div>
+    <h2>From Day 1 to Confident Trader</h2>
+  </div>
+  <div class="steps-row">
+    <div class="step-item reveal"><div class="step-n">01</div><h3>Learn the System</h3><p>Lifetime video access to the full numerical strategy framework at your own pace.</p></div>
+    <div class="step-item reveal"><div class="step-n">02</div><h3>Practice Strategies</h3><p>Apply each index strategy using 90-day live Google Sheet updates.</p></div>
+    <div class="step-item reveal"><div class="step-n">03</div><h3>Get Mentored</h3><p>2 live sessions with your mentor. Real questions, full clarity.</p></div>
+    <div class="step-item reveal"><div class="step-n">04</div><h3>Trade with Conviction</h3><p>Execute with discipline, protect capital, grow consistently.</p></div>
+  </div>
+</div></section>
+
+
+<!-- URGENCY COUNTDOWN + SEATS -->
+<section class="urgency-section">
+  <div class="container">
+    <div class="urgency-grid">
+      <div class="urgency-block">
+        <div class="ub-label">⏰ OFFER CLOSES IN</div>
+        <div class="countdown-wrap">
+          <div class="cd-unit"><div class="cd-num" id="cdDays">02</div><div class="cd-lbl">Days</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit"><div class="cd-num" id="cdHours">14</div><div class="cd-lbl">Hours</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit"><div class="cd-num" id="cdMins">37</div><div class="cd-lbl">Mins</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit"><div class="cd-num" id="cdSecs">00</div><div class="cd-lbl">Secs</div></div>
+        </div>
+      </div>
+      <div class="urgency-div"></div>
+      <div class="urgency-block">
+        <div class="ub-label">🔥 SEATS REMAINING</div>
+        <div class="seat-wrap">
+          <div class="seat-bar-track"><div class="seat-bar-fill" style="width:73%"></div></div>
+          <div class="seat-info"><span class="seat-taken">22 seats taken</span><span class="seat-left">Only <b>8 left!</b></span></div>
+        </div>
+      </div>
+      <div class="urgency-div"></div>
+      <div class="urgency-block">
+        <div class="ub-label">👁️ RIGHT NOW</div>
+        <div class="viewers-wrap">
+          <div class="viewers-dot"></div>
+          <span class="viewers-num" id="viewersNum">23</span>
+          <span class="viewers-lbl">people viewing this page</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing"><div class="container">
+  <div class="section-hd">
+    <div class="eyebrow">ENROLL TODAY</div>
+    <h2>One Investment. A Lifetime Edge.</h2>
+  </div>
+  <div class="pricing-layout">
+    <div class="value-card">
+      <h3>✦ Everything Included</h3>
+      <ul class="vlist">
+        <li><div class="vcheck">✔</div>Complete Numerical Strategy System</li>
+        <li><div class="vcheck">✔</div>Nifty Options Buying Strategy</li>
+        <li><div class="vcheck">✔</div>Bank Nifty Options Buying Strategy</li>
+        <li><div class="vcheck">✔</div>Fin Nifty Strategy</li>
+        <li><div class="vcheck">✔</div>Sensex Options Framework</li>
+        <li><div class="vcheck">✔</div>Midcap Index Strategy</li>
+        <li><div class="vcheck">✔</div>90 Days Google Sheet Updates</li>
+        <li><div class="vcheck">✔</div>2 Live Mentorship Sessions</li>
+        <li><div class="vcheck">✔</div>1 Year Student Group Access</li>
+        <li><div class="vcheck">✔</div>Lifetime Video Access</li>
+      </ul>
+      <div class="vtotals">
+        <div class="vt-block"><div class="lbl">TOTAL VALUE</div><div class="vt-orig">₹50,000</div></div>
+        <div class="vt-block" style="text-align:right"><div class="lbl" style="color:var(--gold)">TODAY'S OFFER</div><div class="vt-offer">₹30,000</div></div>
+      </div>
+    </div>
+    <div class="price-card-sticky">
+      <div class="price-card">
+        <div class="pc-inner">
+          <div class="gold-badge">⭐ LIMITED TIME OFFER</div>
+          <div class="pc-course">Index Options Buying<br>Pro Master Program</div>
+          <div><span class="price-orig">₹50,000</span><span class="price-save">Save ₹20,000</span></div>
+          <div class="price-now"><sup>₹</sup>30,000</div>
+          <p style="font-size:13px;color:var(--muted2);margin:12px 0 24px;font-style:italic;line-height:1.6">Premium structured program. Serious traders only. Limited seats available.</p>
+          <hr style="border:none;border-top:1px solid var(--border);margin:0 -36px 24px">
+          <button class="enroll-btn" onclick="location.href='checkout.html'">Enroll Now – ₹30,000 →</button>
+          <div class="urgency-small">⚠ Price may return to ₹50,000 anytime</div>
+        </div>
+        <div class="pc-feats">
+          <div class="pc-feat"><span class="ico">🎓</span> Lifetime video access</div>
+          <div class="pc-feat"><span class="ico">📊</span> 90-day Google Sheet updates</div>
+          <div class="pc-feat"><span class="ico">🤝</span> 2 live mentorship sessions</div>
+          <div class="pc-feat"><span class="ico">👥</span> 1-year student group</div>
+          <div class="pc-feat"><span class="ico">📞</span> Direct WhatsApp support</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:24px"><div class="urgency-bar"><strong>⚠ URGENT:</strong> This limited-time offer may end anytime. Price returns to <strong>₹50,000</strong> without prior notice.</div></div>
+</div></section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section"><div class="container">
+  <div class="section-hd">
+    <div class="eyebrow">STUDENT REVIEWS</div>
+    <h2>What Our Students Say</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><p class="testi-text">Before this program, I was trading on RSI and MACD — losing consistently. The numerical system completely changed how I see the market. I trade with a clear rule now.</p><div class="testi-author"><div class="testi-av" style="background:linear-gradient(135deg,#f5c842,#e8a020)">R</div><div><div class="testi-name">Ravi Kumar</div><div class="testi-loc">Chennai · BANKNIFTY</div></div><div class="testi-tag">BANKNIFTY</div></div></div>
+    <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><p class="testi-text">The capital protection model alone was worth the entire fee. I stopped blowing up my account. The discipline framework made me understand why I was self-sabotaging.</p><div class="testi-author"><div class="testi-av" style="background:linear-gradient(135deg,#7c5cfc,#00e5b0)">M</div><div><div class="testi-name">Meena Srinivasan</div><div class="testi-loc">Coimbatore · NIFTY</div></div><div class="testi-tag">NIFTY</div></div></div>
+    <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><p class="testi-text">I tried 3 courses before this. None had a proper risk system. Giant Traders is the first that taught me how to NOT lose before teaching me how to win.</p><div class="testi-author"><div class="testi-av" style="background:linear-gradient(135deg,#00e5b0,#7c5cfc)">K</div><div><div class="testi-name">Karthik Balaji</div><div class="testi-loc">Madurai · FINNIFTY</div></div><div class="testi-tag">FINNIFTY</div></div></div>
+  </div>
+  <div style="text-align:center;margin-top:36px"><a href="testimonials.html" class="btn-ghost">Read All Reviews →</a></div>
+</div></section>
+
+<!-- STUDENT SUCCESS WALL -->
+<section class="success-section">
+  <div class="container">
+    <div class="section-hd text-center">
+      <div class="eyebrow">SUCCESS STORIES</div>
+      <h2>Real Traders. <span class="text-gold">Real Results.</span></h2>
+      <p class="section-sub" style="max-width:500px;margin:0 auto">Every student who joins commits to discipline. These are traders who did exactly that.</p>
+    </div>
+    <div class="success-grid">
+      <div class="success-card reveal-scale" data-delay="0">
+        <div class="sc-av" style="background:linear-gradient(135deg,#f5c842,#e8a020)">R</div>
+        <div class="sc-name">Ravi Kumar</div>
+        <div class="sc-loc">📍 Chennai</div>
+        <div class="sc-index">BANKNIFTY</div>
+        <div class="sc-quote">"Went from losing ₹15,000/month to consistently profitable in 60 days."</div>
+        <div class="sc-stars">★★★★★</div>
+      </div>
+      <div class="success-card reveal-scale" data-delay="80">
+        <div class="sc-av" style="background:linear-gradient(135deg,#7c5cfc,#00e5b0)">M</div>
+        <div class="sc-name">Meena Srinivasan</div>
+        <div class="sc-loc">📍 Coimbatore</div>
+        <div class="sc-index">NIFTY</div>
+        <div class="sc-quote">"The capital protection model stopped me from blowing my account."</div>
+        <div class="sc-stars">★★★★★</div>
+      </div>
+      <div class="success-card reveal-scale" data-delay="160">
+        <div class="sc-av" style="background:linear-gradient(135deg,#00e5b0,#7c5cfc)">K</div>
+        <div class="sc-name">Karthik Balaji</div>
+        <div class="sc-loc">📍 Madurai</div>
+        <div class="sc-index">FINNIFTY</div>
+        <div class="sc-quote">"3 courses before this. None taught me how to NOT lose first."</div>
+        <div class="sc-stars">★★★★★</div>
+      </div>
+      <div class="success-card reveal-scale" data-delay="240">
+        <div class="sc-av" style="background:linear-gradient(135deg,#ff4757,#f5c842)">S</div>
+        <div class="sc-name">Suresh Babu</div>
+        <div class="sc-loc">📍 Tiruppur</div>
+        <div class="sc-index">SENSEX</div>
+        <div class="sc-quote">"Live mentorship sessions answered every specific question I had."</div>
+        <div class="sc-stars">★★★★★</div>
+      </div>
+      <div class="success-card reveal-scale" data-delay="320">
+        <div class="sc-av" style="background:linear-gradient(135deg,#f5c842,#7c5cfc)">A</div>
+        <div class="sc-name">Arjun Nair</div>
+        <div class="sc-loc">📍 Erode</div>
+        <div class="sc-index">MIDCAP</div>
+        <div class="sc-quote">"Strategy so clear I was trading Midcap Index in my first week."</div>
+        <div class="sc-stars">★★★★★</div>
+      </div>
+      <div class="success-card reveal-scale" data-delay="400">
+        <div class="sc-av" style="background:linear-gradient(135deg,#00e5b0,#ff4757)">P</div>
+        <div class="sc-name">Priya Venkat</div>
+        <div class="sc-loc">📍 Trichy</div>
+        <div class="sc-index">NIFTY</div>
+        <div class="sc-quote">"1 year later the student group is still active and valuable every day."</div>
+        <div class="sc-stars">★★★★★</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     BG VIDEO 1 — TRADING MINDSET
+═══════════════════════════════════════ -->
+<section class="bgvid-section" id="bgvid1">
+  <video class="bgvid-video" autoplay muted loop playsinline preload="none" id="bgv1">
+    <source src="https://videos.pexels.com/video-files/7947464/7947464-hd_1920_1080_25fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/3778966/3778966-hd_1920_1080_30fps.mp4" type="video/mp4">
+  </video>
+  <div class="bgvid-overlay bgvid-overlay-dark"></div>
+  <div class="bgvid-noise"></div>
+  <div class="container bgvid-content">
+    <div class="bgvid-eyebrow reveal">THE TRANSFORMATION</div>
+    <h2 class="bgvid-heading reveal">
+      Stop Trading on Feelings.<br>
+      <span class="grad-cycle">Start Trading on Rules.</span>
+    </h2>
+    <p class="bgvid-sub reveal">Most traders lose because they react. Our students win because they follow a system — entry, target, stop. Every time. No emotion.</p>
+    <div class="bgvid-stats reveal">
+      <div class="bgvid-stat">
+        <div class="bgvid-stat-num">500+</div>
+        <div class="bgvid-stat-lbl">Students Trained</div>
+      </div>
+      <div class="bgvid-stat-div"></div>
+      <div class="bgvid-stat">
+        <div class="bgvid-stat-num">73%</div>
+        <div class="bgvid-stat-lbl">Win Rate</div>
+      </div>
+      <div class="bgvid-stat-div"></div>
+      <div class="bgvid-stat">
+        <div class="bgvid-stat-num">5</div>
+        <div class="bgvid-stat-lbl">Indices Covered</div>
+      </div>
+      <div class="bgvid-stat-div"></div>
+      <div class="bgvid-stat">
+        <div class="bgvid-stat-num">+83.9%</div>
+        <div class="bgvid-stat-lbl">12-Month Return</div>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:36px">
+      <a href="checkout.html" class="btn-gold" style="font-size:17px;padding:17px 38px">Start Your Transformation →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     BG VIDEO 2 — WHY MOST TRADERS FAIL  
+═══════════════════════════════════════ -->
+<section class="bgvid-section bgvid-section-split" id="bgvid2">
+  <div class="bgvid-split-left">
+    <video class="bgvid-video" autoplay muted loop playsinline preload="none" id="bgv2">
+      <source src="https://videos.pexels.com/video-files/7578542/7578542-hd_1920_1080_25fps.mp4" type="video/mp4">
+      <source src="https://videos.pexels.com/video-files/4667480/4667480-hd_1920_1080_25fps.mp4" type="video/mp4">
+    </video>
+    <div class="bgvid-overlay bgvid-overlay-left"></div>
+  </div>
+  <div class="bgvid-split-right">
+    <div class="bgvid-eyebrow reveal">WHY 90% OF TRADERS LOSE</div>
+    <h2 class="bgvid-heading-sm reveal">They have no system.<br>We give you one.</h2>
+    <div class="bvs-points">
+      <div class="bvs-point reveal" data-delay="0">
+        <div class="bvs-icon bvs-red">✗</div>
+        <div>
+          <div class="bvs-title">Trading on RSI, MACD, tips</div>
+          <div class="bvs-desc">Indicators lag. Tips are noise. You need levels that actually matter.</div>
+        </div>
+      </div>
+      <div class="bvs-point reveal" data-delay="80">
+        <div class="bvs-icon bvs-red">✗</div>
+        <div>
+          <div class="bvs-title">No capital protection rule</div>
+          <div class="bvs-desc">One bad week wipes 3 good weeks. Our model stops this permanently.</div>
+        </div>
+      </div>
+      <div class="bvs-point reveal" data-delay="160">
+        <div class="bvs-icon bvs-red">✗</div>
+        <div>
+          <div class="bvs-title">Averaging down on losing trades</div>
+          <div class="bvs-desc">Hope is not a strategy. We teach you to cut fast and compound wins.</div>
+        </div>
+      </div>
+      <div class="bvs-point reveal" data-delay="240">
+        <div class="bvs-icon bvs-green">✓</div>
+        <div>
+          <div class="bvs-title">Rule-based system solves all three</div>
+          <div class="bvs-desc">Entry rule. Target rule. Stop rule. Capital rule. That is the complete system.</div>
+        </div>
+      </div>
+    </div>
+    <a href="results.html" class="btn-ghost reveal" style="margin-top:8px">See Proof — P&amp;L Results →</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     BG VIDEO 3 — YOUR FUTURE
+═══════════════════════════════════════ -->
+<section class="bgvid-section bgvid-section-center" id="bgvid3">
+  <video class="bgvid-video" autoplay muted loop playsinline preload="none" id="bgv3">
+    <source src="https://videos.pexels.com/video-files/3774657/3774657-hd_1920_1080_25fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/7989387/7989387-hd_1920_1080_25fps.mp4" type="video/mp4">
+  </video>
+  <div class="bgvid-overlay bgvid-overlay-heavy"></div>
+  <div class="bgvid-scan-lines"></div>
+  <div class="container bgvid-content-center">
+    <div class="bgvid-quote reveal">
+      <div class="bgvid-quote-mark">"</div>
+      <div class="bgvid-quote-text">The best traders I know don't predict. They react to rules.<br>We teach you exactly those rules.</div>
+      <div class="bgvid-quote-author">— Giant Traders Academy Mentor</div>
+    </div>
+    <div class="bgvid-cta-row reveal">
+      <div class="bgvid-price-box">
+        <div class="bgvid-price-orig">₹50,000</div>
+        <div class="bgvid-price-now">₹30,000</div>
+        <div class="bgvid-price-save">Save ₹20,000 today</div>
+      </div>
+      <div class="bgvid-cta-btns">
+        <a href="checkout.html" class="btn-gold" style="font-size:17px;padding:17px 38px">Enroll Now →</a>
+        <a href="contact.html" class="btn-ghost">WhatsApp Us First</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ANIMATED EQUITY CURVE + LIVE STATS
+═══════════════════════════════════════ -->
+<section class="equity-section">
+  <div class="container">
+    <div class="eq-grid">
+      <div class="eq-left reveal">
+        <div class="eyebrow">12-MONTH TRACK RECORD</div>
+        <h2>₹2L Grew to<br><span class="text-gold">₹3.68 Lakhs</span></h2>
+        <p class="section-sub">Disciplined compounding over 12 months. 11 profitable months out of 12. Real numbers, not simulated.</p>
+        <div class="eq-stats">
+          <div class="eq-stat"><div class="eq-stat-val text-green">+83.9%</div><div class="eq-stat-lbl">Total Return</div></div>
+          <div class="eq-stat"><div class="eq-stat-val" style="color:var(--gold)">+7.8%</div><div class="eq-stat-lbl">Avg / Month</div></div>
+          <div class="eq-stat"><div class="eq-stat-val" style="color:var(--red)">-8.4%</div><div class="eq-stat-lbl">Max Drawdown</div></div>
+        </div>
+        <a href="results.html" class="btn-ghost" style="margin-top:8px">View Full P&L Statement →</a>
+      </div>
+      <div class="eq-right reveal">
+        <div class="eq-chart-card">
+          <div class="eq-chart-top">
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:2px">EQUITY CURVE · JAN–DEC 2025</span>
+            <span style="font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:700">▲ +83.9%</span>
+          </div>
+          <canvas id="equityMini" style="width:100%;height:180px;display:block"></canvas>
+          <div class="eq-months">
+            <span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span><span>Dec</span>
+          </div>
+          <!-- Floating tooltip -->
+          <div class="eq-tooltip" id="eqTooltip" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ANIMATED BEFORE / AFTER SECTION
+═══════════════════════════════════════ -->
+<section class="before-after-section">
+  <div class="container">
+    <div class="section-hd reveal" style="text-align:center">
+      <div class="eyebrow">THE TRANSFORMATION</div>
+      <h2>Before Giant Traders<br><span class="text-gold">vs After</span></h2>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-col ba-before reveal">
+        <div class="ba-label">😔 BEFORE</div>
+        <div class="ba-items">
+          <div class="ba-item"><span class="ba-x">✗</span>Trading on feelings and RSI signals</div>
+          <div class="ba-item"><span class="ba-x">✗</span>No clear entry or exit rules</div>
+          <div class="ba-item"><span class="ba-x">✗</span>Blowing account every few months</div>
+          <div class="ba-item"><span class="ba-x">✗</span>Chasing losses, averaging down</div>
+          <div class="ba-item"><span class="ba-x">✗</span>Panic selling at bottoms</div>
+          <div class="ba-item"><span class="ba-x">✗</span>No position sizing discipline</div>
+          <div class="ba-item"><span class="ba-x">✗</span>Watching YouTube tips every day</div>
+        </div>
+      </div>
+      <div class="ba-col ba-after reveal">
+        <div class="ba-label">🚀 AFTER</div>
+        <div class="ba-items">
+          <div class="ba-item"><span class="ba-chk">✓</span>Rule-based entries — zero guesswork</div>
+          <div class="ba-item"><span class="ba-chk">✓</span>Clear target and stop on every trade</div>
+          <div class="ba-item"><span class="ba-chk">✓</span>Capital protection model always active</div>
+          <div class="ba-item"><span class="ba-chk">✓</span>Structured position sizing every time</div>
+          <div class="ba-item"><span class="ba-chk">✓</span>Trades 5 indices with clear strategy</div>
+          <div class="ba-item"><span class="ba-chk">✓</span>73% win rate with 1:2.4 R:R</div>
+          <div class="ba-item"><span class="ba-chk">✓</span>Part of active 500+ trader community</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ MINI -->
+<section class="faq-mini"><div class="container">
+  <div class="faq-layout">
+    <div class="faq-sticky">
+      <div class="eyebrow">FAQ</div>
+      <h2>Got Questions?</h2>
+      <p class="section-sub">Common questions answered. For more, visit our full FAQ page.</p>
+      <div class="faq-cta-box">
+        <p>Can't find your answer? WhatsApp us — we reply within minutes.</p>
+        <a href="tel:+916381384612" class="btn-gold" style="font-size:14px;padding:12px 20px">📞 WhatsApp Us</a>
+      </div>
+    </div>
+    <div>
+      <div class="faq-item"><div class="faq-q">Is this algo trading or automation? <div class="faq-ico">+</div></div><div class="faq-a">No. This is a pure teaching program. We teach you to manually trade index options using a structured rule-based system — no bots, no software.</div></div>
+      <div class="faq-item"><div class="faq-q">Who is this program for? <div class="faq-ico">+</div></div><div class="faq-a">Serious traders — beginners who want to start correctly, and experienced traders switching from indicator-based approaches to a structured system.</div></div>
+      <div class="faq-item"><div class="faq-q">What's included after enrollment? <div class="faq-ico">+</div></div><div class="faq-a">Lifetime video access, 90-day Google Sheet updates, 2 live mentorship sessions, and 1 year in the active student group.</div></div>
+      <div class="faq-item"><div class="faq-q">Why is it ₹30,000 and not ₹50,000? <div class="faq-ico">+</div></div><div class="faq-a">This is a limited-time offer for a fixed number of students. Once seats fill or the window closes, price returns to ₹50,000 without any notice.</div></div>
+      <div style="margin-top:20px;text-align:right"><a href="faq.html" class="btn-ghost" style="font-size:13px;padding:10px 18px">View All FAQs →</a></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CONTACT STRIP -->
+<section class="contact-strip"><div class="container">
+  <div style="text-align:center"><div class="eyebrow">REACH US</div><h2>Call or WhatsApp</h2><p class="section-sub" style="max-width:400px;margin:12px auto 0">We're here to answer questions and help you enroll.</p></div>
+  <div class="contact-cards">
+    <a href="tel:+916381384612" class="contact-card"><div class="contact-icon-box">📞</div><div><div class="contact-num">+91 63813 84612</div><div class="contact-lbl">CALL / WHATSAPP</div></div></a>
+    <a href="tel:+919659448833" class="contact-card"><div class="contact-icon-box">📞</div><div><div class="contact-num">+91 96594 48833</div><div class="contact-lbl">CALL / WHATSAPP</div></div></a>
+    <a href="tel:+917200899334" class="contact-card"><div class="contact-icon-box">📞</div><div><div class="contact-num">+91 72008 99334</div><div class="contact-lbl">CALL / WHATSAPP</div></div></a>
+  </div>
+</div></section>
+
+
+
+<!-- ANIMATED PROFIT CHART SECTION -->
+<section class="live-chart-section">
+  <div class="container">
+    <div class="section-hd reveal" style="text-align:center;margin-bottom:48px">
+      <div class="eyebrow">12-MONTH PERFORMANCE</div>
+      <h2>Equity Curve — <span class="text-gold">Our Growth Story</span></h2>
+      <p class="section-sub" style="max-width:480px;margin:0 auto">Starting capital Rs.2,00,000. Watch how disciplined compounding works.</p>
+    </div>
+    <div class="svg-chart-wrap reveal">
+      <div class="spotlight" id="chartSpotlight"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+        <div>
+          <div style="font-family:var(--font-mono,monospace);font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:6px">STARTING CAPITAL</div>
+          <div style="font-family:var(--font-heading,sans-serif);font-size:28px;font-weight:900;color:var(--muted2);letter-spacing:-1px">Rs.2,00,000</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:var(--font-mono,monospace);font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:6px">TOTAL RETURN</div>
+          <div style="font-family:var(--font-heading,sans-serif);font-size:28px;font-weight:900;color:var(--green);letter-spacing:-1px">+83.9%</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:var(--font-mono,monospace);font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:6px">CURRENT VALUE</div>
+          <div style="font-family:var(--font-heading,sans-serif);font-size:28px;font-weight:900;color:var(--gold);letter-spacing:-1px">Rs.3,67,800</div>
+        </div>
+      </div>
+      <canvas id="equityChart" style="width:100%;height:220px;display:block"></canvas>
+      <div style="display:flex;justify-content:space-between;margin-top:12px;padding:0 4px">
+        <span style="font-family:var(--font-mono,monospace);font-size:10px;color:var(--muted)">Jan 25</span>
+        <span style="font-family:var(--font-mono,monospace);font-size:10px;color:var(--muted)">Mar 25</span>
+        <span style="font-family:var(--font-mono,monospace);font-size:10px;color:var(--muted)">May 25</span>
+        <span style="font-family:var(--font-mono,monospace);font-size:10px;color:var(--muted)">Jul 25</span>
+        <span style="font-family:var(--font-mono,monospace);font-size:10px;color:var(--muted)">Sep 25</span>
+        <span style="font-family:var(--font-mono,monospace);font-size:10px;color:var(--muted)">Nov 25</span>
+        <span style="font-family:var(--font-mono,monospace);font-size:10px;color:var(--muted)">Dec 25</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD CAPTURE -->
+<section class="lead-section" id="callback">
+  <div class="container">
+    <div class="lead-wrap">
+      <div class="lead-left">
+        <div class="eyebrow">GET A FREE CALLBACK</div>
+        <h2>Interested? Let Us<br><span class="text-gold">Call You Back.</span></h2>
+        <p class="section-sub">Fill in your details and our team will call you within 24 hours to answer your questions and help you decide if this program is right for you.</p>
+        <div class="lead-promises">
+          <div class="lead-promise"><div class="lp-icon">✅</div><div>No spam calls — one focused conversation</div></div>
+          <div class="lead-promise"><div class="lp-icon">✅</div><div>We'll answer every question you have</div></div>
+          <div class="lead-promise"><div class="lp-icon">✅</div><div>Zero pressure to enroll</div></div>
+          <div class="lead-promise"><div class="lp-icon">✅</div><div>Call back within 24 hours, usually faster</div></div>
+        </div>
+        <div class="lead-contact-strip">
+          <div class="lcs-label">OR REACH US DIRECTLY</div>
+          <div class="lcs-numbers">
+            <a href="tel:+916381384612">📞 63813 84612</a>
+            <a href="tel:+919659448833">📞 96594 48833</a>
+          </div>
+        </div>
+      </div>
+      <div class="lead-right">
+        <div class="lead-form-card" id="leadForm">
+          <div class="lf-header">
+            <div class="lf-title">Request a Free Callback</div>
+            <div class="lf-sub">We typically respond within a few hours</div>
+          </div>
+          <div class="lf-body">
+            <div class="lf-group">
+              <label>YOUR NAME *</label>
+              <input type="text" id="lfName" placeholder="e.g. Ravi Kumar" autocomplete="name">
+            </div>
+            <div class="lf-group">
+              <label>PHONE NUMBER *</label>
+              <input type="tel" id="lfPhone" placeholder="+91 98765 43210" autocomplete="tel">
+            </div>
+            <div class="lf-row">
+              <div class="lf-group">
+                <label>CITY</label>
+                <input type="text" id="lfCity" placeholder="Chennai">
+              </div>
+              <div class="lf-group">
+                <label>TRADING EXPERIENCE</label>
+                <select id="lfExp">
+                  <option value="">Select...</option>
+                  <option>Complete beginner</option>
+                  <option>Less than 1 year</option>
+                  <option>1–3 years</option>
+                  <option>3+ years</option>
+                </select>
+              </div>
+            </div>
+            <div class="lf-group">
+              <label>WHICH INDEX ARE YOU MOST INTERESTED IN?</label>
+              <div class="lf-chips" id="lfChips">
+                <div class="chip" data-val="Nifty">Nifty</div>
+                <div class="chip" data-val="Bank Nifty">Bank Nifty</div>
+                <div class="chip" data-val="Fin Nifty">Fin Nifty</div>
+                <div class="chip" data-val="Sensex">Sensex</div>
+                <div class="chip" data-val="Midcap">Midcap</div>
+                <div class="chip" data-val="All of them">All of them</div>
+              </div>
+            </div>
+            <div class="lf-group">
+              <label>ANY SPECIFIC QUESTION? (OPTIONAL)</label>
+              <textarea id="lfMsg" placeholder="e.g. Is this course right for a beginner? What capital do I need?" rows="3"></textarea>
+            </div>
+            <button class="lf-btn" id="lfSubmit" onclick="submitLead()">
+              <span id="lfBtnText">📞 Request Free Callback</span>
+            </button>
+            <p class="lf-disclaimer">By submitting, you agree to be contacted on WhatsApp/call. We do not share your data with anyone.</p>
+          </div>
+          <!-- Success state -->
+          <div class="lf-success" id="lfSuccess" style="display:none">
+            <div class="lf-success-icon">✅</div>
+            <h3>Request Received!</h3>
+            <p>Our team will call you within 24 hours. You can also reach us directly:</p>
+            <a href="tel:+916381384612" class="btn-gold" style="width:100%;justify-content:center;margin-top:16px">📞 Call Now: 63813 84612</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="eyebrow" style="justify-content:center">LIMITED SEATS</div>
+  <h2>Stop Guessing.<br><span class="text-gold">Start Trading Right.</span></h2>
+  <p>One-time investment of ₹30,000 for a skill you'll use forever. Serious traders only.</p>
+  <a href="contact.html" class="btn-gold" style="font-size:16px;padding:16px 36px">🎓 Enroll Now – ₹30,000</a>
+</section>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/916381384612?text=Hi%2C%20I%27m%20interested%20in%20Giant%20Traders%20Academy%20program" target="_blank" class="wa-float" aria-label="WhatsApp us">
+  <div class="wa-tooltip">💬 Chat with us</div>
+  <div class="wa-btn">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.851L0 24l6.335-1.509A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.722.886.916-3.618-.235-.373A9.818 9.818 0 0112 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.421-4.398 9.818-9.818 9.818z"/></svg>
+  </div>
+</a>
+
+<!-- STICKY MOBILE ENROLL BAR -->
+<div class="mobile-enroll-bar">
+  <div><div class="meb-orig">₹50,000</div><div class="meb-price">₹30,000</div></div>
+  <a href="contact.html">🎓 Enroll Now →</a>
+</div>
+
+<!-- TIMED POPUP -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <button class="popup-close" id="popupClose">✕</button>
+    <div class="popup-badge">⏰ LIMITED OFFER</div>
+    <h3>Wait — Don't Miss<br><span class="text-gold">₹20,000 Off!</span></h3>
+    <p>Enroll today at ₹30,000 before the price goes back to ₹50,000. Drop your number — we'll call you within minutes.</p>
+    <input class="popup-input" id="ppName" type="text" placeholder="Your name" autocomplete="name">
+    <input class="popup-input" id="ppPhone" type="tel" placeholder="Your WhatsApp number" autocomplete="tel">
+    <button class="popup-submit" onclick="submitPopup()">📞 Get Free Callback Now</button>
+    <span class="popup-skip" id="popupSkip">No thanks, I'll pay full price later</span>
+  </div>
+</div>
+
+<!-- EXIT INTENT POPUP -->
+<div class="exit-popup" id="exitPopup">
+  <div class="exit-box">
+    <button class="exit-close" onclick="document.getElementById('exitPopup').classList.remove('show')">✕</button>
+    <div class="exit-emoji">⚠️</div>
+    <h3>Wait! Don't leave yet.</h3>
+    <p>You're about to miss a <strong style="color:var(--gold)">₹20,000 discount</strong>. This offer won't be here when you come back.</p>
+    <a href="contact.html" class="btn-gold" style="width:100%;justify-content:center;margin-bottom:10px">🎓 Claim My Seat — ₹30,000</a>
+    <a href="https://wa.me/916381384612" target="_blank" class="btn-ghost" style="width:100%;justify-content:center;font-size:13px">💬 Ask a Question First</a>
+    <span class="exit-skip" onclick="document.getElementById('exitPopup').classList.remove('show')">No thanks, I'll pay ₹50,000 later</span>
+  </div>
+</div>
+
+</main>
+
+
+<!-- FOOTER — Custom SVG Icons + Social + Maps -->
+<footer class="site-footer">
+  <!-- Social bar top -->
+  <div class="footer-social-bar">
+    <div class="fsb-inner">
+      <span class="fsb-label">FOLLOW & JOIN US</span>
+      <div class="fsb-icons">
+        <a href="https://wa.me/916381384612" target="_blank" class="fsb-icon fsb-wa" title="WhatsApp">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.45.65 4.75 1.78 6.74L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.5c-2.17 0-4.22-.6-5.97-1.63l-.43-.26-4.42 1.04 1.07-4.31-.28-.45A11.47 11.47 0 014.5 16c0-6.35 5.15-11.5 11.5-11.5S27.5 9.65 27.5 16 22.35 27.5 16 27.5zm6.34-8.6c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17s-.9 1.13-1.1 1.36c-.2.23-.4.26-.74.09-.35-.17-1.47-.54-2.8-1.73a10.5 10.5 0 01-1.94-2.41c-.2-.35-.02-.54.15-.71.15-.15.35-.4.52-.6.17-.2.23-.35.35-.58.12-.23.06-.43-.03-.6-.09-.17-.78-1.87-1.06-2.56-.28-.67-.56-.58-.78-.59-.2-.01-.43-.01-.66-.01-.23 0-.6.09-.91.43-.32.34-1.2 1.17-1.2 2.86s1.23 3.32 1.4 3.55c.17.23 2.42 3.7 5.87 5.19.82.35 1.46.56 1.96.72.82.26 1.57.22 2.16.13.66-.1 2.05-.84 2.34-1.65.29-.81.29-1.5.2-1.65-.09-.15-.32-.23-.67-.4z"/></svg><span>WhatsApp</span>
+        </a>
+        <a href="https://t.me/gianttradersacademy" target="_blank" class="fsb-icon fsb-tg" title="Telegram">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16s6.27 14 14 14 14-6.27 14-14S23.73 2 16 2zm6.84 9.56l-2.37 11.16c-.18.79-.64.98-1.3.61l-3.6-2.65-1.73 1.67c-.19.19-.35.35-.72.35l.26-3.64 6.65-6.01c.29-.26-.06-.4-.45-.14l-8.22 5.18-3.54-1.11c-.77-.24-.78-.77.16-1.14l13.84-5.34c.64-.23 1.2.16.99 1.06h.03z"/></svg><span>Telegram</span>
+        </a>
+        <a href="https://www.instagram.com/gianttradersacademy" target="_blank" class="fsb-icon fsb-ig" title="Instagram">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92C6.17 19.58 6.16 19.2 6.16 16c0-3.2.01-3.58.07-4.85.15-3.23 1.67-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM16 0c-3.26 0-3.67.01-4.95.07C7.09.3 4.3 3.09 4.07 7.05 4.01 8.33 4 8.74 4 16c0 7.26.01 7.67.07 8.95.23 3.96 3.02 6.75 6.98 6.98C12.33 31.99 12.74 32 16 32c3.26 0 3.67-.01 4.95-.07 3.96-.23 6.75-3.02 6.98-6.98.06-1.28.07-1.69.07-8.95 0-7.26-.01-7.67-.07-8.95C27.7 3.09 24.91.3 20.95.07 19.67.01 19.26 0 16 0zm0 7.78a8.22 8.22 0 100 16.44A8.22 8.22 0 0016 7.78zm0 13.55a5.33 5.33 0 110-10.66 5.33 5.33 0 010 10.66zm8.54-13.89a1.92 1.92 0 100-3.84 1.92 1.92 0 000 3.84z"/></svg><span>Instagram</span>
+        </a>
+        <a href="https://www.youtube.com/@gianttradersacademy" target="_blank" class="fsb-icon fsb-yt" title="YouTube">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M29.41 9.26a3.5 3.5 0 00-2.46-2.47C24.76 6.2 16 6.2 16 6.2s-8.76 0-10.95.59A3.5 3.5 0 002.59 9.26C2 11.45 2 16 2 16s0 4.55.59 6.74a3.5 3.5 0 002.46 2.47C7.24 25.8 16 25.8 16 25.8s8.76 0 10.95-.59a3.5 3.5 0 002.46-2.47C30 20.55 30 16 30 16s0-4.55-.59-6.74zm-17.91 9.63V13.1L21.5 16l-10 2.89z"/></svg><span>YouTube</span>
+        </a>
+        <a href="https://maps.app.goo.gl/gianttraders" target="_blank" class="fsb-icon fsb-gm" title="Find Us on Google Maps">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C10.48 2 6 6.48 6 12c0 7.5 10 18 10 18s10-10.5 10-18c0-5.52-4.48-10-10-10zm0 13.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z"/></svg><span>Find Us</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-main">
+    <!-- Brand col -->
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <img src="logo.png" alt="Giant Traders Academy" class="footer-logo-img">
+        <div class="footer-logo-text">
+          <span class="flt-main">Giant Traders</span>
+          <span class="flt-sub">ACADEMY</span>
+        </div>
+      </div>
+      <p class="footer-desc">India's most structured Index Options Buying program. Pure number logic — no charts, no indicators, no guesswork.</p>
+      <!-- Google Maps embed card -->
+      <a href="https://maps.app.goo.gl/gianttraders" target="_blank" class="footer-maps-card">
+        <div class="fmc-icon"><svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C10.48 2 6 6.48 6 12c0 7.5 10 18 10 18s10-10.5 10-18c0-5.52-4.48-10-10-10zm0 13.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z"/></svg></div>
+        <div>
+          <div class="fmc-title">Visit Us</div>
+          <div class="fmc-addr">Tamil Nadu, India</div>
+        </div>
+        <div class="fmc-arr">→</div>
+      </a>
+    </div>
+
+    <!-- Program -->
+    <div class="footer-col">
+      <h4 class="footer-col-title">Program</h4>
+      <ul class="footer-links">
+        <li><a href="course-details.html">Course Details</a></li>
+        <li><a href="results.html">P&amp;L Results</a></li>
+        <li><a href="testimonials.html">Student Reviews</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="checkout.html">Enroll Now</a></li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <div class="footer-col">
+      <h4 class="footer-col-title">Support</h4>
+      <ul class="footer-links">
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="tel:+916381384612">+91 63813 84612</a></li>
+        <li><a href="tel:+919659448833">+91 96594 48833</a></li>
+        <li><a href="tel:+917200899334">+91 72008 99334</a></li>
+      </ul>
+    </div>
+
+    <!-- Connect -->
+    <div class="footer-col">
+      <h4 class="footer-col-title">Connect</h4>
+      <div class="footer-social-stack">
+        <a href="https://wa.me/916381384612" target="_blank" class="fss-link fss-wa">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.45.65 4.75 1.78 6.74L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.5c-2.17 0-4.22-.6-5.97-1.63l-.43-.26-4.42 1.04 1.07-4.31-.28-.45A11.47 11.47 0 014.5 16c0-6.35 5.15-11.5 11.5-11.5S27.5 9.65 27.5 16 22.35 27.5 16 27.5zm6.34-8.6c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17s-.9 1.13-1.1 1.36c-.2.23-.4.26-.74.09-.35-.17-1.47-.54-2.8-1.73a10.5 10.5 0 01-1.94-2.41c-.2-.35-.02-.54.15-.71.15-.15.35-.4.52-.6.17-.2.23-.35.35-.58.12-.23.06-.43-.03-.6-.09-.17-.78-1.87-1.06-2.56-.28-.67-.56-.58-.78-.59-.2-.01-.43-.01-.66-.01-.23 0-.6.09-.91.43-.32.34-1.2 1.17-1.2 2.86s1.23 3.32 1.4 3.55c.17.23 2.42 3.7 5.87 5.19.82.35 1.46.56 1.96.72.82.26 1.57.22 2.16.13.66-.1 2.05-.84 2.34-1.65.29-.81.29-1.5.2-1.65-.09-.15-.32-.23-.67-.4z"/></svg>
+          <span>WhatsApp Community</span>
+        </a>
+        <a href="https://t.me/gianttradersacademy" target="_blank" class="fss-link fss-tg">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16s6.27 14 14 14 14-6.27 14-14S23.73 2 16 2zm6.84 9.56l-2.37 11.16c-.18.79-.64.98-1.3.61l-3.6-2.65-1.73 1.67c-.19.19-.35.35-.72.35l.26-3.64 6.65-6.01c.29-.26-.06-.4-.45-.14l-8.22 5.18-3.54-1.11c-.77-.24-.78-.77.16-1.14l13.84-5.34c.64-.23 1.2.16.99 1.06h.03z"/></svg>
+          <span>Telegram Channel</span>
+        </a>
+        <a href="https://www.instagram.com/gianttradersacademy" target="_blank" class="fss-link fss-ig">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92C6.17 19.58 6.16 19.2 6.16 16c0-3.2.01-3.58.07-4.85.15-3.23 1.67-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM16 0c-3.26 0-3.67.01-4.95.07C7.09.3 4.3 3.09 4.07 7.05 4.01 8.33 4 8.74 4 16c0 7.26.01 7.67.07 8.95.23 3.96 3.02 6.75 6.98 6.98C12.33 31.99 12.74 32 16 32c3.26 0 3.67-.01 4.95-.07 3.96-.23 6.75-3.02 6.98-6.98.06-1.28.07-1.69.07-8.95 0-7.26-.01-7.67-.07-8.95C27.7 3.09 24.91.3 20.95.07 19.67.01 19.26 0 16 0zm0 7.78a8.22 8.22 0 100 16.44A8.22 8.22 0 0016 7.78zm0 13.55a5.33 5.33 0 110-10.66 5.33 5.33 0 010 10.66zm8.54-13.89a1.92 1.92 0 100-3.84 1.92 1.92 0 000 3.84z"/></svg>
+          <span>Instagram Page</span>
+        </a>
+        <a href="https://www.youtube.com/@gianttradersacademy" target="_blank" class="fss-link fss-yt">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M29.41 9.26a3.5 3.5 0 00-2.46-2.47C24.76 6.2 16 6.2 16 6.2s-8.76 0-10.95.59A3.5 3.5 0 002.59 9.26C2 11.45 2 16 2 16s0 4.55.59 6.74a3.5 3.5 0 002.46 2.47C7.24 25.8 16 25.8 16 25.8s8.76 0 10.95-.59a3.5 3.5 0 002.46-2.47C30 20.55 30 16 30 16s0-4.55-.59-6.74zm-17.91 9.63V13.1L21.5 16l-10 2.89z"/></svg>
+          <span>YouTube Channel</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="fb-left">
+      <span>© 2026 Giant Traders Academy</span>
+      <span class="fb-sep">·</span>
+      <span>Tamil Nadu, India</span>
+      <span class="fb-sep">·</span>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <span class="fb-sep">·</span>
+      <a href="terms.html">Terms</a>
+    </div>
+    <div class="fb-right">
+      <span style="color:var(--muted);font-size:11px">Taught by traders. Built for discipline.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+/* ══════════════════════════════════════════════════
+   INDEX PAGE — INLINE SCRIPTS  v6 CLEAN
+   Validated: zero syntax errors
+══════════════════════════════════════════════════ */
+
+/* ── ANIMATED CHART CANVAS (hero background) ── */
+(function(){
+  const canvas = document.getElementById('chartCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, points=[], frame=0;
+  function resize(){
+    W = canvas.width  = canvas.offsetWidth  * devicePixelRatio;
+    H = canvas.height = canvas.offsetHeight * devicePixelRatio;
+  }
+  resize();
+  window.addEventListener('resize', resize, {passive:true});
+  for(let i=0;i<120;i++) points.push(H*0.5 + (Math.random()-0.5)*H*0.3);
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    points.push(points[points.length-1] + (Math.random()-0.48)*H*0.012);
+    if(points.length > 200) points.shift();
+    const step = W/(points.length-1);
+    const grad = ctx.createLinearGradient(0,0,0,H);
+    grad.addColorStop(0,'rgba(245,200,66,0.08)');
+    grad.addColorStop(1,'rgba(245,200,66,0)');
+    ctx.beginPath();
+    points.forEach((p,i)=>{ i===0?ctx.moveTo(0,p):ctx.lineTo(i*step,p); });
+    ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath();
+    ctx.fillStyle = grad; ctx.fill();
+    ctx.beginPath();
+    points.forEach((p,i)=>{ i===0?ctx.moveTo(0,p):ctx.lineTo(i*step,p); });
+    ctx.strokeStyle='rgba(245,200,66,0.18)'; ctx.lineWidth=1.5*devicePixelRatio;
+    ctx.stroke();
+    frame++;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── CHIP SELECT (lead form) ── */
+document.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>chip.classList.toggle('active'));
+});
+
+/* ── HERO SPOTLIGHT ── */
+(function(){
+  const hero = document.querySelector('.hero');
+  const spot = document.getElementById('heroSpotlight');
+  if(!hero || !spot) return;
+  hero.addEventListener('mousemove', e=>{
+    const r = hero.getBoundingClientRect();
+    const x = ((e.clientX-r.left)/r.width*100).toFixed(1);
+    const y = ((e.clientY-r.top)/r.height*100).toFixed(1);
+    spot.style.background = `radial-gradient(600px circle at ${x}% ${y}%, rgba(245,200,66,0.05), transparent 40%)`;
+  });
+})();
+
+/* ── 3D CARD TILT ── */
+document.querySelectorAll('.tilt-card').forEach(card=>{
+  card.addEventListener('mousemove', e=>{
+    const r  = card.getBoundingClientRect();
+    const x  = (e.clientX-r.left)/r.width  - 0.5;
+    const y  = (e.clientY-r.top) /r.height - 0.5;
+    card.style.transform = `perspective(800px) rotateY(${x*10}deg) rotateX(${-y*10}deg) scale(1.02)`;
+  });
+  card.addEventListener('mouseleave', ()=>{ card.style.transform=''; });
+});
+
+/* ── LIVE TICKER V2 ── */
+(function(){
+  const tickers = document.querySelectorAll('.t2-ticker-inner');
+  if(!tickers.length) return;
+  const base = {
+    NIFTY:22541, BANKNIFTY:48210, FINNIFTY:21380,
+    SENSEX:73800, MIDCAP:12100, VIX:13.4, 'USD/INR':83.5
+  };
+  const prices = {...base};
+  function updateTicker(){
+    Object.keys(prices).forEach(k=>{
+      const range = base[k]*0.003;
+      prices[k] = +(prices[k] + (Math.random()-0.48)*range).toFixed(k==='VIX'||k==='USD/INR'?2:0);
+    });
+    tickers.forEach(ticker=>{
+      const items = ticker.querySelectorAll('.t2-item');
+      items.forEach(item=>{
+        const sym = item.dataset.sym;
+        if(!sym || !prices[sym]) return;
+        const chg = ((prices[sym]-base[sym])/base[sym]*100).toFixed(2);
+        const priceEl = item.querySelector('.t2-price');
+        const chgEl   = item.querySelector('.t2-chg');
+        if(priceEl) priceEl.textContent = prices[sym].toLocaleString('en-IN');
+        if(chgEl){
+          const up = parseFloat(chg)>=0;
+          chgEl.textContent   = (up?'▲ ':'▼ ')+Math.abs(chg)+'%';
+          chgEl.style.color   = up?'#00d68f':'#ff4757';
+        }
+      });
+    });
+  }
+  setInterval(updateTicker, 2000);
+})();
+
+/* ── PARTICLE SYSTEM (hero) ── */
+(function(){
+  const container = document.getElementById('particleContainer');
+  if(!container) return;
+  const colors=['#f5c842','#00e5b0','#7c5cfc','rgba(255,255,255,0.6)'];
+  for(let i=0;i<28;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const size=Math.random()*3+2;
+    p.style.cssText=`
+      width:${size}px;height:${size}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      left:${Math.random()*100}%;
+      animation-duration:${Math.random()*14+8}s;
+      animation-delay:${Math.random()*-20}s;
+      border-radius:50%;position:absolute;
+    `;
+    container.appendChild(p);
+  }
+})();
+
+/* ── EQUITY CURVE CHART ── */
+(function(){
+  const canvas = document.getElementById('equityMini');
+  if(!canvas) return;
+  const ctx    = canvas.getContext('2d');
+  const dpr    = devicePixelRatio||1;
+  const months = [200000,214200,222500,238800,231400,256700,271900,263200,289400,312100,341700,367800];
+  const lbls   = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const tooltip= canvas.parentElement?.querySelector('.eq-tooltip');
+  let animated = false;
+
+  function resize(){
+    canvas.width  = canvas.offsetWidth  * dpr;
+    canvas.height = canvas.offsetHeight * dpr;
+    ctx.scale(dpr,dpr);
+  }
+  resize();
+
+  function draw(progress){
+    const W = canvas.offsetWidth, H = canvas.offsetHeight;
+    ctx.clearRect(0,0,W,H);
+    const pad={t:20,r:20,b:36,l:10};
+    const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
+    const min=180000, max=400000;
+    const toX=i=>pad.l+i/(months.length-1)*cW;
+    const toY=v=>pad.t+cH-(v-min)/(max-min)*cH;
+    const count=Math.max(2,Math.round(progress*(months.length-1))+1);
+    const grad=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
+    grad.addColorStop(0,'rgba(0,214,143,0.2)');
+    grad.addColorStop(1,'rgba(0,214,143,0.01)');
+    ctx.beginPath();
+    for(let i=0;i<count;i++) i===0?ctx.moveTo(toX(i),toY(months[i])):ctx.lineTo(toX(i),toY(months[i]));
+    ctx.lineTo(toX(count-1),H-pad.b); ctx.lineTo(toX(0),H-pad.b); ctx.closePath();
+    ctx.fillStyle=grad; ctx.fill();
+    ctx.beginPath();
+    for(let i=0;i<count;i++) i===0?ctx.moveTo(toX(i),toY(months[i])):ctx.lineTo(toX(i),toY(months[i]));
+    ctx.strokeStyle='#00d68f'; ctx.lineWidth=2.5; ctx.lineJoin='round'; ctx.stroke();
+    for(let i=0;i<count;i++){
+      ctx.beginPath(); ctx.arc(toX(i),toY(months[i]),4,0,Math.PI*2);
+      ctx.fillStyle='#00d68f'; ctx.fill();
+    }
+    if(progress>=1){
+      const lx=toX(months.length-1), ly=toY(months[months.length-1]);
+      ctx.beginPath(); ctx.arc(lx,ly,6,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,214,143,0.3)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(lx,ly,4,0,Math.PI*2);
+      ctx.fillStyle='#00d68f'; ctx.fill();
+    }
+    ctx.font=`9px JetBrains Mono,monospace`;
+    ctx.fillStyle='rgba(140,155,180,0.7)'; ctx.textAlign='center';
+    lbls.forEach((l,i)=>{ if(i%2===0) ctx.fillText(l,toX(i),H-pad.b+14); });
+  }
+
+  new IntersectionObserver(entries=>{
+    if(!entries[0].isIntersecting || animated) return;
+    animated=true;
+    const dur=2400, t0=Date.now();
+    (function anim(){
+      const p=Math.min((Date.now()-t0)/dur,1), ease=1-Math.pow(1-p,3);
+      draw(ease);
+      if(p<1) requestAnimationFrame(anim);
+    })();
+  },{threshold:0.3}).observe(canvas);
+
+  if(tooltip){
+    const W2=canvas.offsetWidth, pad2={t:20,r:20,b:36,l:10};
+    const cW2=W2-pad2.l-pad2.r;
+    canvas.parentElement.addEventListener('mousemove',e=>{
+      if(!animated) return;
+      const r=canvas.parentElement.getBoundingClientRect();
+      const mx=e.clientX-r.left-pad2.l;
+      const idx=Math.round(Math.max(0,Math.min(months.length-1,mx/cW2*(months.length-1))));
+      tooltip.style.display='block';
+      tooltip.style.left=(e.clientX-r.left-80)+'px';
+      tooltip.style.top=(e.clientY-r.top-56)+'px';
+      const val=(months[idx]/100000).toFixed(2);
+      const pct=((months[idx]-200000)/200000*100).toFixed(1);
+      tooltip.innerHTML='<span style="color:var(--muted);font-size:9px">'+lbls[idx]+' 2025</span><br><span style="color:#00d68f;font-weight:700">Rs.'+val+'L</span> <span style="color:var(--muted2)">(+'+pct+'%)</span>';
+    });
+    canvas.parentElement.addEventListener('mouseleave',()=>{ tooltip.style.display='none'; });
+  }
+})();
+
+/* ── BEFORE/AFTER STAGGER ── */
+(function(){
+  const grid = document.querySelector('.ba-grid');
+  if(!grid) return;
+  const items = grid.querySelectorAll('.ba-item');
+  items.forEach(item=>{
+    item.style.opacity='0';
+    item.style.transform='translateX(-14px)';
+  });
+  new IntersectionObserver(entries=>{
+    if(!entries[0].isIntersecting) return;
+    items.forEach((item,i)=>{
+      setTimeout(()=>{
+        item.style.transition='opacity 0.4s ease, transform 0.4s ease';
+        item.style.opacity='1';
+        item.style.transform='none';
+      }, i*55+80);
+    });
+  },{threshold:0.2}).observe(grid);
+})();
+/* ── SCROLL INDICATOR HIDE ── */
+(function(){
+  const si = document.querySelector('.scroll-indicator');
+  if(!si) return;
+  window.addEventListener('scroll', ()=>{
+    si.style.opacity = window.scrollY > 80 ? '0' : '';
+  },{passive:true});
+})();
+
+/* ── SECTION BLUR REVEALS ── */
+(function(){
+  const els = document.querySelectorAll('.section-enter-blur');
+  if(!els.length) return;
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      e.target.classList.add('vis');
+      obs.unobserve(e.target);
+    });
+  },{threshold:0.1});
+  els.forEach(el=>obs.observe(el));
+})();
+
+/* ── STAT FLIP EFFECT ── */
+(function(){
+  document.querySelectorAll('.stat-item').forEach(item=>{
+    item.addEventListener('mouseenter',()=>{
+      const num = item.querySelector('.stat-num');
+      if(num){ num.classList.remove('flipping'); void num.offsetWidth; num.classList.add('flipping'); }
+    });
+  });
+})();
+
+/* ── LAZY LOAD BG VIDEOS ── */
+(function(){
+  const videos = document.querySelectorAll('.bgvid-video');
+  if(!videos.length) return;
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const v = e.target;
+      if(v.readyState===0) v.load();
+      v.play().catch(()=>{});
+      obs.unobserve(v);
+    });
+  },{threshold:0.1, rootMargin:'200px'});
+  videos.forEach(v=>{ v.pause(); obs.observe(v); });
+})();
+
+/* ── HERO BG VIDEO AUTOPLAY ── */
+(function(){
+  const vid = document.getElementById('heroBgVid');
+  if(!vid) return;
+  vid.muted = true;
+  function tryPlay(){
+    vid.play().catch(()=>{
+      ['click','scroll','touchstart'].forEach(ev=>
+        document.addEventListener(ev, ()=>vid.play().catch(()=>{}), {once:true})
+      );
+    });
+  }
+  vid.readyState >= 2 ? tryPlay() : vid.addEventListener('canplay', tryPlay, {once:true});
+  let scale=1.06, zooming=true;
+  (function zoomAnim(){
+    if(!zooming) return;
+    if(scale<1.12) scale+=0.00008;
+    vid.style.transform=`scale(${scale})`;
+    requestAnimationFrame(zoomAnim);
+  })();
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){ vid.pause(); zooming=false; }
+    else { vid.play().catch(()=>{}); zooming=true; }
+  });
+})();
+
+</script>
+</body>
+</html>
