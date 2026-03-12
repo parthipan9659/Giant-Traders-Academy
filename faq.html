@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Giant Traders Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--font-heading:'Syne','Arial Black',Impact,sans-serif;--font-body:'Space Grotesk','Inter','Segoe UI',Arial,sans-serif;--font-mono:'JetBrains Mono','Consolas','Courier New',monospace;}
+  body{font-family:var(--font-body);}
+  h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);}
+</style>
+<link rel="stylesheet" href="shared.css">
+<style>
+.faq-page-layout { display: grid; grid-template-columns: 260px 1fr; gap: 60px; align-items: start; padding: 80px 0; }
+.faq-nav { position: sticky; top: 90px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+.faq-nav h4 { font-family: 'Syne', 'Arial Black', sans-serif; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 16px; letter-spacing: 1px; font-family: 'JetBrains Mono', monospace; }
+.faq-nav a { display: block; color: var(--muted2); text-decoration: none; font-size: 13px; padding: 9px 12px; border-radius: 8px; transition: all 0.2s; margin-bottom: 2px; }
+.faq-nav a:hover, .faq-nav a.active { background: rgba(245,200,66,0.08); color: var(--gold); }
+.faq-group { margin-bottom: 56px; }
+.faq-group-title { font-family: 'Syne', 'Arial Black', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 8px; padding-bottom: 16px; border-bottom: 1px solid var(--border2); }
+.faq-group-icon { font-size: 24px; margin-right: 10px; }
+@media(max-width:900px){
+  .faq-page-layout { grid-template-columns: 1fr; gap: 32px; padding: 56px 0; }
+  .faq-nav { position: static; }
+  .faq-nav a { display: inline-block; margin-right: 6px; margin-bottom: 4px; }
+}
+@media(max-width:580px){
+  .faq-group-title { font-size: 18px; }
+  .faq-page-layout { padding: 40px 0; }
+}
+</style>
+</head>
+<body>
+<div class="page-transition"></div>
+
+<div id="scrollProgress"></div>
+<div class="page-transition" id="pageTransition"></div>
+<a href="https://wa.me/916381384612" class="wa-float" target="_blank" rel="noopener" title="WhatsApp Us">
+  <span class="wa-float-label">Chat on WhatsApp</span>
+  💬
+</a>
+
+<nav id="mainNav">
+  <a href="index.html" class="logo"><img src="logo.png" alt="Giant Traders Academy" class="logo-img"><div class="logo-text"><span class="lt-main">Giant Traders</span><span class="lt-sub">ACADEMY</span></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="course-details.html">Course</a></li><li><a href="about.html">About</a></li><li><a href="testimonials.html">Reviews</a></li>
+    <li><a href="results.html">Results</a></li><li><a href="faq.html" class="active">FAQ</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right"><div class="nav-phone">📞 <b>63813 84612</b></div><button class="nav-cta" onclick="location.href='checkout.html'">Enroll Now →</button></div>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+</nav>
+<div class="nav-mobile" id="mobileNav"><a href="index.html">Home</a><a href="course-details.html">Course Details</a><a href="about.html">About Us</a><a href="testimonials.html">Reviews</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="contact.html" class="nav-cta">Enroll Now – ₹30,000 →</a></div>
+
+<main>
+<section class="page-hero">
+  <video class="page-hero-bgvid" autoplay muted loop playsinline preload="none">
+    <source src="https://videos.pexels.com/video-files/3194836/3194836-hd_1920_1080_25fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/3775709/3775709-hd_1920_1080_25fps.mp4" type="video/mp4">
+  </video>
+  <div class="page-hero-vidoverlay"></div>
+  <div class="page-hero-bg"></div><div class="page-hero-lines"></div>
+  <div class="container page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / <span>FAQ</span></div>
+    <div class="eyebrow">FREQUENTLY ASKED</div>
+    <h1>Everything You Want<br><span class="text-gold">To Know</span></h1>
+    <p class="section-sub" style="margin-top:16px">Can't find your answer? WhatsApp us on <strong style="color:var(--gold)">63813 84612</strong> — we reply within minutes.</p>
+  </div>
+</section>
+
+<section><div class="container">
+  <div class="faq-page-layout">
+    <div class="faq-nav">
+      <h4>JUMP TO</h4>
+      <a href="#general">General</a>
+      <a href="#program">The Program</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#after">After Enrollment</a>
+      <a href="#trading">Trading Questions</a>
+      <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border)">
+        <p style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px">Still have questions?</p>
+        <a href="tel:+916381384612" class="btn-gold" style="font-size:12px;padding:10px 14px;width:100%;justify-content:center">📞 WhatsApp Us</a>
+      </div>
+    </div>
+    <div>
+      <div id="general" class="faq-group">
+        <div class="faq-group-title"><span class="faq-group-icon">💬</span>General Questions</div>
+        <div class="faq-item"><div class="faq-q">What is Giant Traders Academy? <div class="faq-ico">+</div></div><div class="faq-a">Giant Traders Academy is a premium trading education program based in Tamil Nadu, India. We teach rule-based index options buying strategies for Nifty, Bank Nifty, Fin Nifty, Sensex, and Midcap — with a focus on capital protection and trader discipline.</div></div>
+        <div class="faq-item"><div class="faq-q">Is this about algo trading or automation? <div class="faq-ico">+</div></div><div class="faq-a">No. This is a 100% manual trading education program. We teach you the strategy, logic, and discipline to manually trade index options yourself — no software, no bots, no automation required.</div></div>
+        <div class="faq-item"><div class="faq-q">Who is this program designed for? <div class="faq-ico">+</div></div><div class="faq-a">This program is designed for serious traders — beginners who want to start with the right foundation, and experienced traders who want to replace indicator-based approaches with a structured, rule-based system.</div></div>
+        <div class="faq-item"><div class="faq-q">Do I need prior trading experience? <div class="faq-ico">+</div></div><div class="faq-a">No prior experience is required, but you should have basic familiarity with what options are and how the stock market functions. Absolute beginners may need to spend a few hours understanding options basics before enrolling.</div></div>
+      </div>
+
+      <div id="program" class="faq-group">
+        <div class="faq-group-title"><span class="faq-group-icon">🎓</span>The Program</div>
+        <div class="faq-item"><div class="faq-q">Which indices and strategies are covered? <div class="faq-ico">+</div></div><div class="faq-a">The program covers all 5 major Indian indices — Nifty, Bank Nifty, Fin Nifty, Sensex, and Midcap Index — each with its own specific options buying strategy, entry logic, exit framework, and risk management approach.</div></div>
+        <div class="faq-item"><div class="faq-q">Is this indicator-based or rule-based? <div class="faq-ico">+</div></div><div class="faq-a">100% rule-based. We do not use RSI, MACD, Bollinger Bands, or any other indicators. Every entry and exit decision is determined by a defined rule — making the system objective, repeatable, and teachable.</div></div>
+        <div class="faq-item"><div class="faq-q">How long is the course? <div class="faq-ico">+</div></div><div class="faq-a">The core video content spans 6 comprehensive modules. Most students complete the core videos within 2–3 weeks. However, real mastery comes from applying the strategies live over 60–90 days, supported by our Google Sheet updates and mentorship sessions.</div></div>
+        <div class="faq-item"><div class="faq-q">Is the course in Tamil or English? <div class="faq-ico">+</div></div><div class="faq-a">The course is primarily taught in Tamil, with key concepts also explained in English. Our student community uses both languages freely.</div></div>
+      </div>
+
+      <div id="pricing" class="faq-group">
+        <div class="faq-group-title"><span class="faq-group-icon">💰</span>Pricing & Payment</div>
+        <div class="faq-item"><div class="faq-q">Why is the price ₹30,000 instead of ₹50,000? <div class="faq-ico">+</div></div><div class="faq-a">This is a strictly limited-time offer. The program's actual value is ₹50,000. We're opening enrollment at ₹30,000 for a limited number of students in this batch. Once seats are filled or the offer window closes, the price returns to ₹50,000 without any prior notice.</div></div>
+        <div class="faq-item"><div class="faq-q">What payment methods are accepted? <div class="faq-ico">+</div></div><div class="faq-a">We accept UPI, bank transfer, and all major payment apps. Contact us on WhatsApp to initiate your enrollment and we'll guide you through the payment process.</div></div>
+        <div class="faq-item"><div class="faq-q">Is there a refund policy? <div class="faq-ico">+</div></div><div class="faq-a">Due to the nature of digital educational content, we do not offer refunds after enrollment. We encourage you to speak with us on WhatsApp before enrolling to ensure this program is the right fit for you.</div></div>
+        <div class="faq-item"><div class="faq-q">Are there any hidden fees or subscription charges? <div class="faq-ico">+</div></div><div class="faq-a">None. Your enrollment fee is a one-time payment. There are no monthly charges, no renewal fees, and no hidden costs. Lifetime video access is included, and all future course updates are free.</div></div>
+      </div>
+
+      <div id="after" class="faq-group">
+        <div class="faq-group-title"><span class="faq-group-icon">🤝</span>After Enrollment</div>
+        <div class="faq-item"><div class="faq-q">What exactly is included after enrollment? <div class="faq-ico">+</div></div><div class="faq-a">You receive: lifetime access to all 6 course video modules, 90 days of live Google Sheet updates tracking real market application of the strategies, 2 direct live mentorship sessions with your mentor, and 1 full year of access to our active student community group.</div></div>
+        <div class="faq-item"><div class="faq-q">How do the 2 live mentorship sessions work? <div class="faq-ico">+</div></div><div class="faq-a">The mentorship sessions are conducted via Google Meet or Zoom. You'll have the opportunity to ask questions directly about your trades, setups, and any doubts from the course content. Schedules are communicated through the student group.</div></div>
+        <div class="faq-item"><div class="faq-q">What happens after the 90-day support period? <div class="faq-ico">+</div></div><div class="faq-a">Your lifetime video access and student group membership (for 1 year) continue. The Google Sheet live updates are specific to the 90-day post-enrollment period, after which you'll be applying the strategies independently with community support.</div></div>
+        <div class="faq-item"><div class="faq-q">How long will I have access to the course videos? <div class="faq-ico">+</div></div><div class="faq-a">Lifetime. You can revisit any module at any time, as many times as you like, forever. There is no expiry date on your course content.</div></div>
+      </div>
+
+      <div id="trading" class="faq-group">
+        <div class="faq-group-title"><span class="faq-group-icon">📈</span>Trading Questions</div>
+        <div class="faq-item"><div class="faq-q">How much capital do I need to start trading? <div class="faq-ico">+</div></div><div class="faq-a">We recommend starting with a minimum of ₹1–2 lakh dedicated trading capital. The exact amount depends on your risk appetite and the index you choose to trade. This is discussed in detail in the Capital Protection Model module.</div></div>
+        <div class="faq-item"><div class="faq-q">Can I trade with a small account? <div class="faq-ico">+</div></div><div class="faq-a">Yes, but with certain limitations. Some index strategies require higher premium budgets. We'll guide you on which strategies are most suitable based on your available capital during the program.</div></div>
+        <div class="faq-item"><div class="faq-q">How much time per day does trading require? <div class="faq-ico">+</div></div><div class="faq-a">The strategies are designed for focused, rule-based decision making — not screen-watching. Most students dedicate 1–2 hours per trading day to market monitoring and trade execution. Specific time requirements are covered in the program.</div></div>
+        <div class="faq-item"><div class="faq-q">Does this guarantee profits? <div class="faq-ico">+</div></div><div class="faq-a">No. Trading involves risk and no legitimate program can guarantee profits. What we guarantee is teaching you a structured, proven approach to index options buying — with built-in capital protection and discipline training. Your results depend on how consistently you apply the system.</div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-logo"><img src="logo.png" alt="Giant Traders Academy" class="footer-logo-img"><div style="font-family:var(--font-heading);font-size:15px;font-weight:900;line-height:1.2;margin-left:10px">Giant Traders<span style="color:var(--gold);display:block;font-size:11px;font-family:var(--font-mono);letter-spacing:1px">ACADEMY</span></div></div></div><p class="footer-desc">India's most structured index options buying program. Rule-based strategies, capital protection, and discipline framework — for serious traders only.</p></div>
+    <div class="footer-col"><h4>Program</h4><ul><li><a href="course-details.html">Course Details</a></li><li><a href="about.html">About Us</a></li><li><a href="testimonials.html">Student Reviews</a></li></ul></div>
+    <div class="footer-col"><h4>Support</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="tel:+916381384612">WhatsApp Now</a></li></ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Giant Traders Academy. All rights reserved.</p><code>Taught by traders · Tamil Nadu, India</code></div>
+</footer>
+<script src="shared.js"></script>
+</body></html>
