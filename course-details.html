@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Courses — Giant Traders Academy</title>
+<meta name="description" content="Choose from 3 premium Index & Stock Options courses. Pure numerical strategy, no indicators, no guesswork. Enroll today.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--font-heading:'Syne','Arial Black',Impact,sans-serif;--font-body:'Space Grotesk','Inter','Segoe UI',Arial,sans-serif;--font-mono:'JetBrains Mono','Consolas','Courier New',monospace;}
+body{font-family:var(--font-body);}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);}
+</style>
+<link rel="stylesheet" href="shared.css">
+<style>
+
+/* ══ COURSE PAGE LAYOUT ══ */
+.courses-hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.28);
+  border-radius:100px;padding:5px 16px;
+  font-family:var(--font-mono);font-size:10px;color:var(--gold);
+  letter-spacing:2px;margin-bottom:20px;
+}
+
+/* ══ COURSE SWITCHER TABS ══ */
+.course-tabs{
+  display:flex;align-items:center;gap:0;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;padding:6px;
+  max-width:700px;margin:0 auto 72px;
+  flex-wrap:wrap;
+  gap:4px;
+}
+.course-tab{
+  flex:1;min-width:150px;
+  padding:14px 20px;border-radius:12px;
+  border:none;background:transparent;
+  color:var(--muted2);font-family:var(--font-body);
+  font-size:13px;font-weight:600;cursor:pointer;
+  transition:all 0.2s;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.course-tab .ct-label{font-size:13px;font-weight:700;}
+.course-tab .ct-price{font-family:var(--font-mono);font-size:11px;color:var(--muted);transition:color 0.2s;}
+.course-tab.active{
+  background:var(--card2);
+  border:1px solid rgba(245,200,66,0.25);
+  color:#fff;
+  box-shadow:0 4px 20px rgba(0,0,0,0.3);
+}
+.course-tab.active .ct-price{color:var(--gold);}
+.course-tab:hover:not(.active){background:rgba(255,255,255,0.04);color:#fff;}
+
+/* ══ COURSE PANEL ══ */
+.course-panel{display:none;}
+.course-panel.active{display:block;}
+
+/* ══ COURSE HERO BANNER ══ */
+.course-banner{
+  border-radius:24px;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);
+  margin-bottom:64px;
+  position:relative;
+}
+.course-banner-inner{
+  display:grid;grid-template-columns:1fr 360px;
+  gap:0;align-items:stretch;
+  min-height:320px;
+}
+.cb-left{
+  padding:52px 56px;
+  position:relative;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.cb-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  border-radius:100px;padding:5px 14px;
+  font-family:var(--font-mono);font-size:10px;font-weight:700;
+  letter-spacing:1.5px;margin-bottom:20px;width:fit-content;
+}
+.cb-badge-gold{background:rgba(245,200,66,0.12);border:1px solid rgba(245,200,66,0.3);color:var(--gold);}
+.cb-badge-teal{background:rgba(0,229,176,0.12);border:1px solid rgba(0,229,176,0.3);color:#00e5b0;}
+.cb-badge-red{background:rgba(255,64,64,0.12);border:1px solid rgba(255,64,64,0.3);color:#ff4040;}
+.cb-title{font-size:clamp(28px,3.5vw,44px);font-weight:900;letter-spacing:-1px;line-height:1.05;margin-bottom:16px;color:#fff;}
+.cb-desc{font-size:15px;color:var(--muted2);line-height:1.78;max-width:480px;margin-bottom:28px;}
+.cb-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.cb-tag{
+  padding:5px 12px;border-radius:6px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  font-family:var(--font-mono);font-size:10px;color:var(--muted2);
+  letter-spacing:0.5px;
+}
+.cb-right{
+  padding:40px 36px;
+  display:flex;flex-direction:column;justify-content:center;
+  border-left:1px solid rgba(255,255,255,0.07);
+  position:relative;
+}
+.cb-right-bg-gold{background:linear-gradient(135deg,rgba(245,200,66,0.06),rgba(245,200,66,0.02));}
+.cb-right-bg-teal{background:linear-gradient(135deg,rgba(0,229,176,0.06),rgba(0,229,176,0.02));}
+.cb-right-bg-red{background:linear-gradient(135deg,rgba(255,64,64,0.06),rgba(255,64,64,0.02));}
+.cb-price-label{font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:8px;}
+.cb-price-orig{font-family:var(--font-mono);font-size:14px;color:var(--muted);text-decoration:line-through;margin-bottom:4px;}
+.cb-price-now{font-family:var(--font-heading);font-size:56px;font-weight:900;letter-spacing:-2px;line-height:1;margin-bottom:6px;}
+.cb-price-save{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(0,214,143,0.12);border:1px solid rgba(0,214,143,0.25);
+  border-radius:100px;padding:4px 12px;
+  font-family:var(--font-mono);font-size:10px;color:#00d68f;
+  margin-bottom:24px;
+}
+.cb-enroll-btn{
+  display:block;width:100%;padding:15px;
+  border:none;border-radius:12px;cursor:pointer;
+  font-family:var(--font-heading);font-size:18px;font-weight:900;
+  letter-spacing:0.5px;transition:all 0.25s;text-align:center;
+  text-decoration:none;
+}
+.cb-enroll-gold{background:linear-gradient(135deg,#f5c842,#e8a020);color:#000;}
+.cb-enroll-gold:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(245,200,66,0.4);}
+.cb-enroll-teal{background:linear-gradient(135deg,#00e5b0,#00b48a);color:#000;}
+.cb-enroll-teal:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,229,176,0.4);}
+.cb-enroll-red{background:linear-gradient(135deg,#ff6464,#ff4040);color:#fff;}
+.cb-enroll-red:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,64,64,0.4);}
+.cb-wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:10px;padding:11px;border-radius:10px;
+  background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.2);
+  color:#25D366;font-weight:700;font-size:13px;
+  text-decoration:none;transition:all 0.2s;
+}
+.cb-wa-btn:hover{background:rgba(37,211,102,0.12);}
+.cb-seats{
+  margin-top:12px;padding:10px 14px;border-radius:10px;
+  background:rgba(255,64,64,0.06);border:1px solid rgba(255,64,64,0.15);
+  font-family:var(--font-mono);font-size:11px;color:#ff6464;
+  text-align:center;
+}
+
+/* ══ WHAT YOU LEARN GRID ══ */
+.learn-grid-section{margin-bottom:64px;}
+.learn-grid-section h2{margin-bottom:36px;}
+.what-learn-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+}
+.wl-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:18px 20px;
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:14px;
+  transition:all 0.2s;
+}
+.wl-item:hover{border-color:rgba(245,200,66,0.18);background:rgba(245,200,66,0.03);}
+.wl-check{
+  width:26px;height:26px;border-radius:7px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;margin-top:1px;
+}
+.wl-check-gold{background:rgba(245,200,66,0.12);border:1px solid rgba(245,200,66,0.25);color:var(--gold);}
+.wl-check-teal{background:rgba(0,229,176,0.12);border:1px solid rgba(0,229,176,0.25);color:#00e5b0;}
+.wl-check-red{background:rgba(255,64,64,0.12);border:1px solid rgba(255,64,64,0.25);color:#ff6464;}
+.wl-text{}
+.wl-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;}
+.wl-desc{font-size:13px;color:var(--muted2);line-height:1.6;}
+
+/* ══ CURRICULUM ══ */
+.curriculum-section{margin-bottom:64px;}
+.curriculum-section h2{margin-bottom:36px;}
+.curr-item{
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:14px;overflow:hidden;
+  margin-bottom:10px;transition:border-color 0.2s;
+}
+.curr-item.open{border-color:rgba(245,200,66,0.2);}
+.curr-head{
+  padding:18px 24px;cursor:pointer;
+  display:flex;align-items:center;gap:16px;
+  background:rgba(255,255,255,0.02);
+  transition:background 0.2s;
+}
+.curr-head:hover{background:rgba(255,255,255,0.04);}
+.curr-num{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:12px;color:var(--gold);font-weight:700;
+}
+.curr-title{flex:1;font-size:15px;font-weight:700;color:#fff;}
+.curr-arrow{color:var(--gold);font-size:18px;transition:transform 0.3s;flex-shrink:0;}
+.curr-item.open .curr-arrow{transform:rotate(45deg);}
+.curr-body{
+  max-height:0;overflow:hidden;
+  transition:max-height 0.35s ease,padding 0.2s;
+  padding:0 24px;
+}
+.curr-item.open .curr-body{max-height:300px;padding:0 24px 20px;}
+.curr-topics{display:flex;flex-direction:column;gap:8px;margin-top:4px;}
+.curr-topic{
+  display:flex;align-items:center;gap:10px;
+  font-size:13.5px;color:var(--muted2);
+  padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.curr-topic:last-child{border-bottom:none;}
+.curr-topic::before{content:'→';color:var(--gold);font-family:var(--font-mono);font-size:11px;flex-shrink:0;}
+
+/* ══ INCLUDES STRIP ══ */
+.includes-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  margin-bottom:64px;
+}
+.inc-box{
+  background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);
+  border-radius:16px;padding:24px 20px;text-align:center;
+  transition:all 0.2s;
+}
+.inc-box:hover{border-color:rgba(245,200,66,0.2);transform:translateY(-3px);}
+.inc-icon{font-size:28px;display:block;margin-bottom:10px;}
+.inc-val{font-family:var(--font-heading);font-size:24px;font-weight:900;color:var(--gold);letter-spacing:-0.5px;display:block;}
+.inc-label{font-size:13px;font-weight:700;color:#fff;display:block;margin:4px 0 2px;}
+.inc-sub{font-size:11px;color:var(--muted);font-family:var(--font-mono);}
+
+/* ══ COMPARE TABLE ══ */
+.compare-section{margin-bottom:64px;}
+.compare-section h2{margin-bottom:36px;}
+.compare-tbl{width:100%;border-collapse:collapse;background:var(--card);border-radius:16px;overflow:hidden;}
+.compare-tbl th{padding:16px 20px;text-align:left;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.06);}
+.compare-tbl th:last-child{text-align:center;color:var(--gold);}
+.compare-tbl td{padding:15px 20px;font-size:13.5px;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,0.04);}
+.compare-tbl td:first-child{font-weight:600;color:#fff;}
+.compare-tbl td:last-child{text-align:center;}
+.compare-tbl tr:last-child td{border-bottom:none;}
+.compare-tbl tr:hover td{background:rgba(255,255,255,0.02);}
+.cmp-yes{color:#00d68f;font-weight:700;}
+.cmp-no{color:var(--muted);font-size:18px;}
+
+/* ══ TESTIMONIAL STRIP ══ */
+.testi-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  margin-bottom:64px;
+}
+.ts-card{
+  background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);
+  border-radius:16px;padding:24px;
+}
+.ts-stars{color:var(--gold);font-size:13px;margin-bottom:12px;}
+.ts-text{font-size:13.5px;color:var(--muted2);line-height:1.78;font-style:italic;margin-bottom:16px;}
+.ts-author{display:flex;align-items:center;gap:10px;}
+.ts-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#000;flex-shrink:0;}
+.ts-name{font-size:13px;font-weight:700;color:#fff;}
+.ts-loc{font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:2px;}
+
+/* ══ BOTTOM CTA ══ */
+.course-bottom-cta{
+  background:linear-gradient(135deg,rgba(245,200,66,0.06),rgba(245,200,66,0.02));
+  border:1px solid rgba(245,200,66,0.15);
+  border-radius:24px;padding:48px;text-align:center;
+  margin-bottom:80px;position:relative;overflow:hidden;
+}
+.course-bottom-cta::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:60%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.course-bottom-cta h2{margin-bottom:12px;}
+.course-bottom-cta p{max-width:480px;margin:0 auto 32px;font-size:15px;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1024px){
+  .course-banner-inner{grid-template-columns:1fr;}
+  .cb-right{border-left:none;border-top:1px solid rgba(255,255,255,0.07);}
+  .includes-strip{grid-template-columns:repeat(2,1fr);}
+  .testi-strip{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .what-learn-grid{grid-template-columns:1fr;}
+  .includes-strip{grid-template-columns:1fr 1fr;}
+  .testi-strip{grid-template-columns:1fr;}
+  .compare-tbl{font-size:12px;}
+  .cb-left{padding:32px 24px;}
+  .cb-right{padding:28px 24px;}
+  .cb-price-now{font-size:44px;}
+  .course-bottom-cta{padding:32px 24px;}
+  .course-tabs{max-width:100%;}
+  .course-tab{min-width:120px;padding:12px 14px;}
+}
+@media(max-width:480px){
+  .includes-strip{grid-template-columns:1fr 1fr;}
+  .cb-title{font-size:26px;}
+  .course-tab .ct-label{font-size:12px;}
+}
+</style>
+</head>
+<body>
+<div class="page-transition" id="pageTransition"></div>
+<div id="scrollProgress"></div>
+<a href="https://wa.me/916381384612" class="wa-float" target="_blank" rel="noopener">💬</a>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="index.html" class="logo"><img src="logo.png" alt="GTA" class="logo-img"><div class="logo-text"><span class="lt-main">Giant Traders</span><span class="lt-sub">ACADEMY</span></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="course-details.html" class="active">Courses</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="testimonials.html">Reviews</a></li>
+    <li><a href="results.html">Results</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-phone">📞 <b>63813 84612</b></div>
+    <button class="nav-cta" onclick="location.href='checkout.html'">Enroll Now →</button>
+  </div>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+</nav>
+<div class="nav-mobile" id="mobileNav">
+  <a href="index.html">Home</a><a href="course-details.html">Courses</a>
+  <a href="about.html">About</a><a href="testimonials.html">Reviews</a>
+  <a href="results.html">Results</a><a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="checkout.html" class="nav-cta">Enroll Now →</a>
+</div>
+
+<main>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <video class="page-hero-bgvid" autoplay muted loop playsinline preload="none">
+    <source src="https://videos.pexels.com/video-files/3773935/3773935-hd_1920_1080_25fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/4019818/4019818-hd_1920_1080_25fps.mp4" type="video/mp4">
+  </video>
+  <div class="page-hero-vidoverlay"></div>
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-lines"></div>
+  <div class="container page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / <span>Courses</span></div>
+    <div class="courses-hero-tag">🎓 3 PROGRAMS AVAILABLE</div>
+    <h1>Choose Your<br><span class="text-gold">Trading Program</span></h1>
+    <p class="section-sub" style="margin-top:16px;max-width:580px">From individual stock options to exclusive live Nifty masterclasses — pure numerical strategy across every program. Pick what fits your goal.</p>
+  </div>
+</section>
+
+<!-- COURSE TABS -->
+<section style="padding:64px 0 0;background:var(--bg);">
+  <div class="container">
+    <div class="course-tabs">
+      <button class="course-tab active" onclick="switchCourse(0,this)">
+        <span class="ct-label">📊 Index Options Pro</span>
+        <span class="ct-price">₹30,000</span>
+      </button>
+      <button class="course-tab" onclick="switchCourse(1,this)">
+        <span class="ct-label">📈 Stock Options</span>
+        <span class="ct-price">₹4,999</span>
+      </button>
+      <button class="course-tab" onclick="switchCourse(2,this)">
+        <span class="ct-label">⚡ Nifty Masterclass</span>
+        <span class="ct-price">₹10,000</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     COURSE 1: INDEX OPTIONS PRO
+══════════════════════════════════════ -->
+<section style="padding:0 0 100px;background:var(--bg);">
+<div class="container">
+<div class="course-panel active" id="panel-0">
+
+  <!-- Banner -->
+  <div class="course-banner">
+    <div class="course-banner-inner">
+      <div class="cb-left" style="background:linear-gradient(135deg,rgba(245,200,66,0.04),rgba(245,200,66,0.01));">
+        <div class="cb-badge cb-badge-gold">🏆 MOST POPULAR PROGRAM</div>
+        <div class="cb-title">Index Options Buying<br>Pro Master Program</div>
+        <p class="cb-desc">India's most structured Index Options Buying program. Trade Nifty, Bank Nifty, Fin Nifty, Sensex & Midcap using 100% numerical strategy — no charts, no guesswork, no emotions.</p>
+        <div class="cb-tags">
+          <span class="cb-tag">5 INDICES</span>
+          <span class="cb-tag">LIFETIME ACCESS</span>
+          <span class="cb-tag">LIVE MENTORSHIP</span>
+          <span class="cb-tag">PURE NUMERICAL</span>
+          <span class="cb-tag">600 DAYS UPDATES</span>
+        </div>
+      </div>
+      <div class="cb-right cb-right-bg-gold">
+        <div class="cb-price-label">SPECIAL OFFER PRICE</div>
+        <div class="cb-price-orig">₹50,000</div>
+        <div class="cb-price-now" style="color:var(--gold);">₹30,000</div>
+        <div class="cb-price-save">✓ You save ₹20,000 today</div>
+        <a href="checkout.html" class="cb-enroll-btn cb-enroll-gold">Enroll Now →</a>
+        <a href="https://wa.me/916381384612?text=Hi%2C%20I%27m%20interested%20in%20the%20Index%20Options%20Pro%20Master%20Program" target="_blank" class="cb-wa-btn">
+          <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.45.65 4.75 1.78 6.74L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- What you learn -->
+  <div class="learn-grid-section">
+    <div class="eyebrow">WHAT YOU'LL LEARN</div>
+    <h2>Master All 5 Indices with<br><span class="text-gold">Pure Number Logic</span></h2>
+    <div class="what-learn-grid">
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">Numerical Strategy System</div><div class="wl-desc">Complete rule-based framework built entirely on numbers. Read the market objectively, act with precision.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">All 5 Index Options Buying</div><div class="wl-desc">Nifty, Bank Nifty, Fin Nifty, Sensex & Midcap — structured entry, exit, and position-sizing for each.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">Capital Protection Model</div><div class="wl-desc">Hard stop-loss rules and risk management framework built into every strategy — protect first, profit second.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">Structured Entry Logic</div><div class="wl-desc">Defined entry conditions with no ambiguity. Know exactly when to enter, when to wait, when to exit.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">Trader Discipline Framework</div><div class="wl-desc">Behavioral rules that separate consistent traders from gamblers. Follow the system, remove emotion entirely.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">Stock Options — Numerical Strategy</div><div class="wl-desc">Apply the same proven numerical system to individual stock options for broader market opportunity.</div></div></div>
+    </div>
+  </div>
+
+  <!-- Curriculum -->
+  <div class="curriculum-section">
+    <div class="eyebrow">CURRICULUM</div>
+    <h2>7 Modules. Complete<br><span class="text-gold">Mastery.</span></h2>
+    <div class="curr-list">
+      <div class="curr-item open">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">01</div>
+          <div class="curr-title">Numerical Strategy Foundation</div>
+          <div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-topics">
+            <div class="curr-topic">Understanding numerical market reading — what numbers tell you</div>
+            <div class="curr-topic">How numbers eliminate subjectivity in every trade</div>
+            <div class="curr-topic">Building your numerical framework from scratch</div>
+            <div class="curr-topic">Reading market structure using pure number logic</div>
+          </div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">02</div>
+          <div class="curr-title">Index Options Buying — All 5 Indices</div>
+          <div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-topics">
+            <div class="curr-topic">Nifty options buying — exact number-based entry rules</div>
+            <div class="curr-topic">Bank Nifty strategy — high volatility handling</div>
+            <div class="curr-topic">Fin Nifty, Sensex & Midcap specific entry systems</div>
+            <div class="curr-topic">Strike price selection using numbers — no guesswork</div>
+          </div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">03</div>
+          <div class="curr-title">Capital Protection Model</div>
+          <div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-topics">
+            <div class="curr-topic">Hard stop-loss methodology — defined before every entry</div>
+            <div class="curr-topic">Position sizing — how much capital per trade</div>
+            <div class="curr-topic">Risk-reward calculation using the numerical system</div>
+            <div class="curr-topic">Drawdown recovery framework</div>
+          </div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">04</div>
+          <div class="curr-title">Structured Entry & Exit Logic</div>
+          <div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-topics">
+            <div class="curr-topic">Entry checklist — every condition must be met</div>
+            <div class="curr-topic">Target calculation — number-based exit points</div>
+            <div class="curr-topic">Trailing stop methodology for larger moves</div>
+            <div class="curr-topic">How to handle gaps and sudden volatility</div>
+          </div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">05</div>
+          <div class="curr-title">Trader Discipline Framework</div>
+          <div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-topics">
+            <div class="curr-topic">Behavioral rules of a professional trader</div>
+            <div class="curr-topic">How to follow the system and eliminate emotion</div>
+            <div class="curr-topic">Daily routine and pre-market preparation</div>
+            <div class="curr-topic">Handling losing streaks with discipline</div>
+          </div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">06</div>
+          <div class="curr-title">Live Mentorship & Community</div>
+          <div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-topics">
+            <div class="curr-topic">2 live mentorship sessions — real questions, full clarity</div>
+            <div class="curr-topic">1 year active student group access</div>
+            <div class="curr-topic">600 days of daily market updates via Google Sheets</div>
+            <div class="curr-topic">Post-course doubt sessions — never get stuck</div>
+          </div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">07</div>
+          <div class="curr-title">Stock Options — Numerical Strategy</div>
+          <div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-topics">
+            <div class="curr-topic">Apply the numerical system to individual stocks</div>
+            <div class="curr-topic">Reliance, HDFC, Infosys, TCS options trading</div>
+            <div class="curr-topic">Strike price selection for stocks using numbers</div>
+            <div class="curr-topic">Risk management for individual stock positions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Includes strip -->
+  <div class="includes-strip">
+    <div class="inc-box"><span class="inc-icon">♾️</span><span class="inc-val">Lifetime</span><span class="inc-label">Video Access</span><span class="inc-sub">All modules, forever</span></div>
+    <div class="inc-box"><span class="inc-icon">📊</span><span class="inc-val">600</span><span class="inc-label">Days Market Updates</span><span class="inc-sub">Daily Google Sheets</span></div>
+    <div class="inc-box"><span class="inc-icon">👨‍🏫</span><span class="inc-val">2</span><span class="inc-label">Live Mentorship Sessions</span><span class="inc-sub">Direct with mentor</span></div>
+    <div class="inc-box"><span class="inc-icon">👥</span><span class="inc-val">1yr</span><span class="inc-label">Group Support</span><span class="inc-sub">Active student community</span></div>
+  </div>
+
+  <!-- Testimonials -->
+  <div style="margin-bottom:64px;">
+    <div class="eyebrow">STUDENT RESULTS</div>
+    <h2 style="margin-bottom:32px;">What Our Students<br><span class="text-gold">Say</span></h2>
+    <div class="testi-strip">
+      <div class="ts-card"><div class="ts-stars">★★★★★</div><p class="ts-text">"The numerical system changed everything. I stopped guessing and started following the numbers. Profitable in my 3rd month."</p><div class="ts-author"><div class="ts-av" style="background:linear-gradient(135deg,#f5c842,#e8a020)">R</div><div><div class="ts-name">Rajesh Kumar</div><div class="ts-loc">Chennai · NIFTY OPTIONS</div></div></div></div>
+      <div class="ts-card"><div class="ts-stars">★★★★★</div><p class="ts-text">"Best decision of my trading journey. 3 courses before this taught me nothing. GTA taught me to NOT lose first, then win."</p><div class="ts-author"><div class="ts-av" style="background:linear-gradient(135deg,#7c5cfc,#00e5b0)">K</div><div><div class="ts-name">Karthik Balaji</div><div class="ts-loc">Madurai · BANK NIFTY</div></div></div></div>
+      <div class="ts-card"><div class="ts-stars">★★★★★</div><p class="ts-text">"+83% return in 12 months. My account grew from ₹2L to ₹3.68L following exactly what the course teaches. Worth every rupee."</p><div class="ts-author"><div class="ts-av" style="background:linear-gradient(135deg,#00d68f,#00e5b0)">S</div><div><div class="ts-name">Sunitha Devi</div><div class="ts-loc">Coimbatore · ALL 5 INDICES</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- Bottom CTA -->
+  <div class="course-bottom-cta">
+    <div class="eyebrow">READY TO START?</div>
+    <h2>Start Your Journey<br><span class="text-gold">Today — ₹30,000</span></h2>
+    <p>Join 500+ students who've transformed their trading. Lifetime access, no hidden fees.</p>
+    <div class="cta-btns">
+      <a href="checkout.html" class="btn-gold">🎓 Enroll Now — ₹30,000</a>
+      <a href="https://wa.me/916381384612?text=Hi%2C%20I%27m%20interested%20in%20Index%20Options%20Pro%20Program" target="_blank" class="btn-ghost">💬 WhatsApp to Know More</a>
+    </div>
+    <p style="margin-top:16px;font-family:var(--font-mono);font-size:11px;color:var(--muted);">📞 Call: 6381384612 · 9659448833 · 7200899334</p>
+  </div>
+
+</div><!-- /panel-0 -->
+
+
+<!-- ══════════════════════════════════════
+     COURSE 2: STOCK OPTIONS
+══════════════════════════════════════ -->
+<div class="course-panel" id="panel-1">
+
+  <div class="course-banner">
+    <div class="course-banner-inner">
+      <div class="cb-left" style="background:linear-gradient(135deg,rgba(245,200,66,0.04),rgba(245,200,66,0.01));">
+        <div class="cb-badge cb-badge-gold">📈 BESTSELLER COURSE</div>
+        <div class="cb-title">Stock Options Buying<br>Simple Maths Strategy</div>
+        <p class="cb-desc">Trade individual stocks with clarity, not confusion. Exact entry, stop-loss and target using pure number logic. No charts, no indicators — only simple mathematics that works.</p>
+        <div class="cb-tags">
+          <span class="cb-tag">LIFETIME ACCESS</span>
+          <span class="cb-tag">RECORDED TRAINING</span>
+          <span class="cb-tag">PURE LOGIC</span>
+          <span class="cb-tag">NO CHARTS</span>
+          <span class="cb-tag">RISK MANAGEMENT</span>
+        </div>
+      </div>
+      <div class="cb-right cb-right-bg-gold">
+        <div class="cb-price-label">LIMITED TIME OFFER</div>
+        <div class="cb-price-orig">₹15,000</div>
+        <div class="cb-price-now" style="color:var(--gold);">₹4,999</div>
+        <div class="cb-price-save">✓ You save ₹10,001 today</div>
+        <a href="https://wa.me/916381384612?text=Hi%2C%20I%20want%20to%20enroll%20in%20the%20Stock%20Options%20Course%20for%20%E2%82%B94%2C999" target="_blank" class="cb-enroll-btn cb-enroll-gold">Enroll Now — ₹4,999 →</a>
+        <a href="https://wa.me/916381384612?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Stock%20Options%20Course" target="_blank" class="cb-wa-btn">
+          <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.45.65 4.75 1.78 6.74L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2z"/></svg>
+          Chat on WhatsApp
+        </a>
+        <div class="cb-seats">⚠ Price may increase anytime — enroll now</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="learn-grid-section">
+    <div class="eyebrow">WHAT YOU'LL LEARN</div>
+    <h2>Trade Stocks with<br><span class="text-gold">Mathematical Precision</span></h2>
+    <div class="what-learn-grid">
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">High Probability Trade Identification</div><div class="wl-desc">Use number-based filters to identify only the highest quality stock options setups every day.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">Exact Entry — Stop-Loss — Target</div><div class="wl-desc">Every trade has a defined entry, defined stop-loss, and defined target. No ambiguity, no second-guessing.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">Strike Price Selection Using Numbers</div><div class="wl-desc">Learn which strike price to buy based purely on numerical values — no random selection, ever.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">Strong Risk Management System</div><div class="wl-desc">Capital protection built into every trade. How much to risk, when to exit, how to recover losses.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">No Charts, No Indicators</div><div class="wl-desc">100% pure logic. No trendlines, no RSI, no MACD. Just numbers that the market gives you.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-gold">✓</div><div class="wl-text"><div class="wl-title">Real Market Proven Performance</div><div class="wl-desc">Strategy tested and proven on live markets — Reliance, HDFC, Infosys, TCS and more.</div></div></div>
+    </div>
+  </div>
+
+  <div class="curriculum-section">
+    <div class="eyebrow">COURSE CURRICULUM</div>
+    <h2>Complete Stock Options<br><span class="text-gold">Training</span></h2>
+    <div class="curr-list">
+      <div class="curr-item open">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">01</div><div class="curr-title">Introduction to Stock Options & The Numerical Approach</div><div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body"><div class="curr-topics">
+          <div class="curr-topic">What are stock options and how they differ from index options</div>
+          <div class="curr-topic">Why pure maths beats charts for stock options</div>
+          <div class="curr-topic">Setting up your workspace and data sources</div>
+        </div></div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">02</div><div class="curr-title">Numerical Entry System for Stocks</div><div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body"><div class="curr-topics">
+          <div class="curr-topic">Number-based entry conditions for stock calls and puts</div>
+          <div class="curr-topic">Strike price selection using the numerical formula</div>
+          <div class="curr-topic">How to screen stocks daily using the number system</div>
+        </div></div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">03</div><div class="curr-title">Stop-Loss & Target System</div><div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body"><div class="curr-topics">
+          <div class="curr-topic">How to calculate stop-loss using numbers — not feelings</div>
+          <div class="curr-topic">Target calculation and trailing methodology</div>
+          <div class="curr-topic">When to exit early and when to hold</div>
+        </div></div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">04</div><div class="curr-title">Risk Management & Position Sizing</div><div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body"><div class="curr-topics">
+          <div class="curr-topic">How much capital to risk per stock options trade</div>
+          <div class="curr-topic">Portfolio-level risk rules — never blow your account</div>
+          <div class="curr-topic">Recovery strategy after losing trades</div>
+        </div></div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num">05</div><div class="curr-title">Live Market Application & Practice</div><div class="curr-arrow">+</div>
+        </div>
+        <div class="curr-body"><div class="curr-topics">
+          <div class="curr-topic">Real market examples — trades explained step by step</div>
+          <div class="curr-topic">Paper trading exercises to build confidence</div>
+          <div class="curr-topic">Common mistakes and how to avoid them</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="includes-strip">
+    <div class="inc-box"><span class="inc-icon">🎬</span><span class="inc-val">Complete</span><span class="inc-label">Recorded Training</span><span class="inc-sub">Watch at your own pace</span></div>
+    <div class="inc-box"><span class="inc-icon">♾️</span><span class="inc-val">Lifetime</span><span class="inc-label">Video Access</span><span class="inc-sub">Never expires</span></div>
+    <div class="inc-box"><span class="inc-icon">📱</span><span class="inc-val">WhatsApp</span><span class="inc-label">Support Access</span><span class="inc-sub">Doubt clearing</span></div>
+    <div class="inc-box"><span class="inc-icon">💰</span><span class="inc-val">₹4,999</span><span class="inc-label">One-Time Payment</span><span class="inc-sub">No hidden charges</span></div>
+  </div>
+
+  <div class="course-bottom-cta">
+    <div class="eyebrow">LIMITED TIME PRICE</div>
+    <h2>Start Trading Stocks<br><span class="text-gold">Smarter — ₹4,999</span></h2>
+    <p>Complete recorded training. Lifetime access. Pure numerical strategy that works on any stock.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/916381384612?text=Hi%2C%20I%20want%20to%20enroll%20in%20the%20Stock%20Options%20Course%20for%20%E2%82%B94%2C999" target="_blank" class="btn-gold">📈 Enroll Now — ₹4,999</a>
+      <a href="https://wa.me/916381384612?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Stock%20Options%20Course" target="_blank" class="btn-ghost">💬 Ask Us First</a>
+    </div>
+    <p style="margin-top:16px;font-family:var(--font-mono);font-size:11px;color:var(--muted);">📞 6381384612 · 9659448833 · 7200899334</p>
+  </div>
+
+</div><!-- /panel-1 -->
+
+
+<!-- ══════════════════════════════════════
+     COURSE 3: NIFTY MASTERCLASS
+══════════════════════════════════════ -->
+<div class="course-panel" id="panel-2">
+
+  <div class="course-banner">
+    <div class="course-banner-inner">
+      <div class="cb-left" style="background:linear-gradient(135deg,rgba(0,229,176,0.04),rgba(0,229,176,0.01));">
+        <div class="cb-badge cb-badge-red">⚡ ONLY 5 SEATS PER BATCH</div>
+        <div class="cb-title">Nifty Options<br>Exclusive Masterclass</div>
+        <p class="cb-desc">The most personal trading program we offer. Maximum 5 students per batch. 1 week intensive training followed by 5 days of live market sessions. Direct mentor access throughout.</p>
+        <div class="cb-tags">
+          <span class="cb-tag">ONLY 5 SEATS</span>
+          <span class="cb-tag">5 LIVE CLASSES</span>
+          <span class="cb-tag">NIFTY FOCUSED</span>
+          <span class="cb-tag">1-ON-1 ATTENTION</span>
+          <span class="cb-tag">PERSONAL BATCH</span>
+        </div>
+      </div>
+      <div class="cb-right cb-right-bg-teal">
+        <div class="cb-price-label">EXCLUSIVE BATCH PRICE</div>
+        <div class="cb-price-orig">₹20,000</div>
+        <div class="cb-price-now" style="color:#00e5b0;">₹10,000</div>
+        <div class="cb-price-save">✓ 50% off — limited batch</div>
+        <a href="https://wa.me/916381384612?text=Hi%2C%20I%20want%20to%20enroll%20in%20the%20Nifty%20Masterclass%20for%20%E2%82%B910%2C000.%20Please%20confirm%20my%20seat." target="_blank" class="cb-enroll-btn cb-enroll-teal">Lock My Seat →</a>
+        <a href="nifty-masterclass.html" class="cb-wa-btn" style="color:var(--teal);border-color:rgba(0,229,176,0.2);background:rgba(0,229,176,0.04);">
+          📄 View Full Masterclass Page
+        </a>
+        <div class="cb-seats">🔴 2 seats remaining in current batch</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="learn-grid-section">
+    <div class="eyebrow">WHAT YOU'LL LEARN</div>
+    <h2>5 Days Live. Real Trades.<br><span class="text-gold">Real Results.</span></h2>
+    <div class="what-learn-grid">
+      <div class="wl-item"><div class="wl-check wl-check-teal">✓</div><div class="wl-text"><div class="wl-title">Number-Based Nifty Entry Strategy</div><div class="wl-desc">Exact numerical entry conditions for Nifty Call and Put options. Know precisely when to enter — no guessing.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-teal">✓</div><div class="wl-text"><div class="wl-title">Live Market Entry & Exit Practice</div><div class="wl-desc">5 full days of live market application. Watch, practice, and execute real trades with mentor oversight.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-teal">✓</div><div class="wl-text"><div class="wl-title">Risk Management & Position Sizing</div><div class="wl-desc">How much capital per trade. Stop-loss placement. Never lose more than you planned on any Nifty trade.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-teal">✓</div><div class="wl-text"><div class="wl-title">Option Chain Reading Using Numbers</div><div class="wl-desc">Read the option chain numerically. Identify support/resistance levels without a single chart.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-teal">✓</div><div class="wl-text"><div class="wl-title">Daily Market Briefing</div><div class="wl-desc">Each morning: number-based market context, key levels, and what to watch for during the session.</div></div></div>
+      <div class="wl-item"><div class="wl-check wl-check-teal">✓</div><div class="wl-text"><div class="wl-title">Personal Doubt Clearing</div><div class="wl-desc">With only 5 students, every question gets answered. Direct WhatsApp access to mentor throughout batch.</div></div></div>
+    </div>
+  </div>
+
+  <div class="curriculum-section">
+    <div class="eyebrow">PROGRAM SCHEDULE</div>
+    <h2>2-Week Intensive<br><span class="text-gold">Structure</span></h2>
+    <div class="curr-list">
+      <div class="curr-item open">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num" style="background:rgba(0,229,176,0.08);border-color:rgba(0,229,176,0.2);color:#00e5b0;">W1</div>
+          <div class="curr-title">Week 1 — Foundation Training (5 Sessions)</div>
+          <div class="curr-arrow" style="color:#00e5b0;">+</div>
+        </div>
+        <div class="curr-body"><div class="curr-topics">
+          <div class="curr-topic">Day 1: Numerical foundation — how the system works for Nifty</div>
+          <div class="curr-topic">Day 2: Entry rules for Nifty Calls and Puts — exact conditions</div>
+          <div class="curr-topic">Day 3: Exit strategy, target calculation, and stop-loss placement</div>
+          <div class="curr-topic">Day 4: Position sizing, risk management, capital protection</div>
+          <div class="curr-topic">Day 5: Paper trading practice + Q&A session — all doubts cleared</div>
+        </div></div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="curr-num" style="background:rgba(255,64,64,0.08);border-color:rgba(255,64,64,0.2);color:#ff6464;">W2</div>
+          <div class="curr-title">Week 2 — 5 Days Live Market Sessions 🔴 LIVE</div>
+          <div class="curr-arrow" style="color:#ff6464;">+</div>
+        </div>
+        <div class="curr-body"><div class="curr-topics">
+          <div class="curr-topic">Live Day 1: Mentor applies numerical system in real market — watch and learn</div>
+          <div class="curr-topic">Live Day 2: Students identify entry signals — mentor validates in real time</div>
+          <div class="curr-topic">Live Day 3: Handling volatile/sideways days with the numerical filters</div>
+          <div class="curr-topic">Live Day 4: Students trade independently — mentor gives post-session review</div>
+          <div class="curr-topic">Live Day 5: Final session + P&L review + individual feedback + graduation</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="includes-strip">
+    <div class="inc-box"><span class="inc-icon">👥</span><span class="inc-val">Max 5</span><span class="inc-label">Students Per Batch</span><span class="inc-sub">Full personal attention</span></div>
+    <div class="inc-box"><span class="inc-icon">🔴</span><span class="inc-val">5 Days</span><span class="inc-label">Live Market Class</span><span class="inc-sub">Real trades, real learning</span></div>
+    <div class="inc-box"><span class="inc-icon">📱</span><span class="inc-val">Direct</span><span class="inc-label">WhatsApp Access</span><span class="inc-sub">Throughout batch period</span></div>
+    <div class="inc-box"><span class="inc-icon">📋</span><span class="inc-val">Full</span><span class="inc-label">P&L Review Session</span><span class="inc-sub">Individual feedback</span></div>
+  </div>
+
+  <div class="course-bottom-cta" style="border-color:rgba(0,229,176,0.2);background:linear-gradient(135deg,rgba(0,229,176,0.05),rgba(0,229,176,0.01));">
+    <div class="eyebrow">ONLY 2 SEATS LEFT</div>
+    <h2>Join the Exclusive Batch<br><span style="color:#00e5b0;">₹10,000 Only</span></h2>
+    <p>Maximum 5 students. Personal attention. 5 days live trading. This batch fills fast — secure your seat now.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/916381384612?text=Hi%2C%20I%20want%20to%20enroll%20in%20the%20Nifty%20Masterclass%20for%20%E2%82%B910%2C000.%20Please%20confirm%20my%20seat." target="_blank" class="btn-gold">⚡ Lock My Seat — ₹10,000</a>
+      <a href="nifty-masterclass.html" class="btn-ghost">📄 Full Details Page</a>
+    </div>
+    <p style="margin-top:16px;font-family:var(--font-mono);font-size:11px;color:var(--muted);">📞 6381384612 · 9659448833 · 7200899334</p>
+  </div>
+
+</div><!-- /panel-2 -->
+
+</div><!-- /container -->
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-social-bar">
+    <div class="fsb-inner">
+      <span class="fsb-label">Follow & Join</span>
+      <div class="fsb-icons">
+        <a href="https://wa.me/916381384612" target="_blank" class="fsb-icon fsb-wa"><svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.45.65 4.75 1.78 6.74L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2z"/></svg><span>WhatsApp</span></a>
+        <a href="https://whatsapp.com/channel/0029Vb50KlADuMRbUzdKF63t" target="_blank" class="fsb-icon fsb-wa"><svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.45.65 4.75 1.78 6.74L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2z"/></svg><span>WA Channel</span></a>
+        <a href="https://t.me/+8wYYePjfWYplOTQ1" target="_blank" class="fsb-icon fsb-tg"><svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16s6.27 14 14 14 14-6.27 14-14S23.73 2 16 2zm6.84 9.56l-2.37 11.16c-.18.79-.64.98-1.3.61l-3.6-2.65-1.73 1.67c-.19.19-.35.35-.72.35l.26-3.64 6.65-6.01c.29-.26-.06-.4-.45-.14l-8.22 5.18-3.54-1.11c-.77-.24-.78-.77.16-1.14l13.84-5.34c.64-.23 1.2.16.99 1.06h.03z"/></svg><span>Telegram</span></a>
+        <a href="https://www.instagram.com/gianttradersacademy" target="_blank" class="fsb-icon fsb-ig"><svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92C6.17 19.58 6.16 19.2 6.16 16c0-3.2.01-3.58.07-4.85.15-3.23 1.67-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM16 0c-3.26 0-3.67.01-4.95.07C7.09.3 4.3 3.09 4.07 7.05 4.01 8.33 4 8.74 4 16c0 7.26.01 7.67.07 8.95.23 3.96 3.02 6.75 6.98 6.98C12.33 31.99 12.74 32 16 32c3.26 0 3.67-.01 4.95-.07 3.96-.23 6.75-3.02 6.98-6.98.06-1.28.07-1.69.07-8.95 0-7.26-.01-7.67-.07-8.95C27.7 3.09 24.91.3 20.95.07 19.67.01 19.26 0 16 0zm0 7.78a8.22 8.22 0 100 16.44A8.22 8.22 0 0016 7.78zm0 13.55a5.33 5.33 0 110-10.66 5.33 5.33 0 010 10.66zm8.54-13.89a1.92 1.92 0 100-3.84 1.92 1.92 0 000 3.84z"/></svg><span>Instagram</span></a>
+        <a href="https://www.youtube.com/@gianttradersacademy1" target="_blank" class="fsb-icon fsb-yt"><svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M29.41 9.26a3.5 3.5 0 00-2.46-2.47C24.76 6.2 16 6.2 16 6.2s-8.76 0-10.95.59A3.5 3.5 0 002.59 9.26C2 11.45 2 16 2 16s0 4.55.59 6.74a3.5 3.5 0 002.46 2.47C7.24 25.8 16 25.8 16 25.8s8.76 0 10.95-.59a3.5 3.5 0 002.46-2.47C30 20.55 30 16 30 16s0-4.55-.59-6.74zm-17.91 9.63V13.1L21.5 16l-10 2.89z"/></svg><span>YouTube</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap"><img src="logo.png" alt="GTA" class="footer-logo-img"><div><span class="flt-main">Giant Traders</span><span class="flt-sub">ACADEMY</span></div></div>
+      <p class="footer-desc">India's most structured Index Options program. Pure number logic — no charts, no indicators.</p>
+      <a href="https://maps.app.goo.gl/gianttraders" target="_blank" class="footer-maps-card"><div class="fmc-icon"><svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C10.48 2 6 6.48 6 12c0 7.5 10 18 10 18s10-10.5 10-18c0-5.52-4.48-10-10-10zm0 13.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z"/></svg></div><div><div class="fmc-title">Visit Us</div><div class="fmc-addr">Tamil Nadu, India</div></div><div class="fmc-arr">→</div></a>
+    </div>
+    <div class="footer-col"><span class="footer-col-title">Courses</span><ul class="footer-links"><li><a href="course-details.html">Index Options Pro</a></li><li><a href="course-details.html">Stock Options Course</a></li><li><a href="nifty-masterclass.html">Nifty Masterclass</a></li><li><a href="results.html">P&amp;L Results</a></li><li><a href="checkout.html">Enroll Now</a></li></ul></div>
+    <div class="footer-col"><span class="footer-col-title">Support</span><ul class="footer-links"><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms</a></li><li><a href="https://wa.me/916381384612" target="_blank">WhatsApp Now</a></li></ul></div>
+    <div class="footer-col"><span class="footer-col-title">Connect</span><div class="footer-social-stack">
+      <a href="https://wa.me/916381384612" target="_blank" class="fss-link fss-wa"><svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.45.65 4.75 1.78 6.74L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2z"/></svg><span>WhatsApp</span></a>
+      <a href="https://www.youtube.com/@gianttradersacademy1" target="_blank" class="fss-link fss-yt"><svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M29.41 9.26a3.5 3.5 0 00-2.46-2.47C24.76 6.2 16 6.2 16 6.2s-8.76 0-10.95.59A3.5 3.5 0 002.59 9.26C2 11.45 2 16 2 16s0 4.55.59 6.74a3.5 3.5 0 002.46 2.47C7.24 25.8 16 25.8 16 25.8s8.76 0 10.95-.59a3.5 3.5 0 002.46-2.47C30 20.55 30 16 30 16s0-4.55-.59-6.74zm-17.91 9.63V13.1L21.5 16l-10 2.89z"/></svg><span>YouTube</span></a>
+      <a href="https://t.me/+8wYYePjfWYplOTQ1" target="_blank" class="fss-link fss-tg"><svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16s6.27 14 14 14 14-6.27 14-14S23.73 2 16 2zm6.84 9.56l-2.37 11.16c-.18.79-.64.98-1.3.61l-3.6-2.65-1.73 1.67c-.19.19-.35.35-.72.35l.26-3.64 6.65-6.01c.29-.26-.06-.4-.45-.14l-8.22 5.18-3.54-1.11c-.77-.24-.78-.77.16-1.14l13.84-5.34c.64-.23 1.2.16.99 1.06h.03z"/></svg><span>Telegram</span></a>
+      <a href="https://www.instagram.com/gianttradersacademy" target="_blank" class="fss-link fss-ig"><svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 7.78a8.22 8.22 0 100 16.44A8.22 8.22 0 0016 7.78z"/></svg><span>Instagram</span></a>
+    </div></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="fb-left"><span>© 2026 Giant Traders Academy</span><span class="fb-sep">·</span><span>Tamil Nadu, India</span><span class="fb-sep">·</span><a href="privacy-policy.html">Privacy</a><span class="fb-sep">·</span><a href="terms.html">Terms</a></div>
+    <div class="fb-right">Taught by traders · Built for discipline.</div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+function switchCourse(idx, btn){
+  document.querySelectorAll('.course-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.course-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-'+idx).classList.add('active');
+  // Smooth scroll to panel
+  document.querySelector('.course-tabs').scrollIntoView({behavior:'smooth',block:'center'});
+}
+// Curriculum accordions
+document.querySelectorAll('.curr-head').forEach(h=>{
+  h.addEventListener('click',()=>{
+    const item=h.parentElement;
+    const wasOpen=item.classList.contains('open');
+    item.closest('.curr-list').querySelectorAll('.curr-item').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
