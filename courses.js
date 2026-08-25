@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded',()=>{const b=[...document.querySelectorAll('#courseFilters .filter-btn')],c=[...document.querySelectorAll('#courseGrid .course-card')];b.forEach(x=>x.onclick=()=>{b.forEach(y=>y.classList.remove('active'));x.classList.add('active');const f=x.dataset.filter;c.forEach(i=>i.style.display=(f==='all'||i.dataset.type===f)?'flex':'none')})})
