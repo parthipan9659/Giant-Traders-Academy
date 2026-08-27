@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nifty Options Masterclass — Giant Traders Academy</title>
+<meta name="description" content="5-student exclusive Nifty Options Buying masterclass. 1 week training + 5 days live class. Only ₹10,000. Limited to 5 seats.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ══ RESET & BASE ══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#050709;
+  --bg2:#0a0d14;
+  --card:#0e1320;
+  --card2:#131925;
+  --border:rgba(255,255,255,0.07);
+  --gold:#f5c842;
+  --gold2:#e8961a;
+  --teal:#00e5b0;
+  --red:#ff4040;
+  --text:#f2f4fc;
+  --muted:#8a96b0;
+  --muted2:#b2bdd4;
+  --fh:'Bebas Neue',Impact,sans-serif;
+  --fb:'DM Sans','Segoe UI',Arial,sans-serif;
+  --fm:'JetBrains Mono','Consolas',monospace;
+}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{
+  background:var(--bg);
+  font-family:var(--fb);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;}
+
+/* ══ TYPOGRAPHY ══ */
+h1,h2,h3{font-family:var(--fh);letter-spacing:1px;line-height:0.95;}
+h1{font-size:clamp(52px,9vw,110px);color:#fff;}
+h2{font-size:clamp(36px,5vw,64px);color:#fff;}
+h3{font-size:clamp(22px,3vw,32px);}
+p{color:var(--muted2);line-height:1.78;font-size:15px;}
+
+/* ══ UTILITIES ══ */
+.container{max-width:1100px;margin:0 auto;padding:0 40px;}
+.gold{color:var(--gold);}
+.teal{color:var(--teal);}
+.tag{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--fm);font-size:10px;font-weight:700;
+  letter-spacing:2.5px;text-transform:uppercase;
+  padding:6px 16px;border-radius:100px;
+}
+.tag-gold{background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.3);color:var(--gold);}
+.tag-red{background:rgba(255,64,64,0.1);border:1px solid rgba(255,64,64,0.35);color:var(--red);}
+.tag-teal{background:rgba(0,229,176,0.1);border:1px solid rgba(0,229,176,0.3);color:var(--teal);}
+
+/* ══ ANIMATIONS ══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:none;}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.7;transform:scale(1.2);}}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 20px rgba(245,200,66,0.2);}50%{box-shadow:0 0 40px rgba(245,200,66,0.5),0 0 80px rgba(245,200,66,0.2);}}
+@keyframes countdown-flip{0%{transform:rotateX(-90deg);opacity:0;}40%{transform:rotateX(0);opacity:1;}100%{transform:rotateX(0);opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes scanline{0%{top:-100%;}100%{top:200%;}}
+
+/* ══ NAV ══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  padding:18px 0;
+  background:rgba(5,7,9,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  transition:all 0.3s;
+}
+.nav-inner{
+  max-width:1100px;margin:0 auto;padding:0 40px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.nav-logo{font-family:var(--fh);font-size:22px;letter-spacing:2px;color:#fff;}
+.nav-logo span{color:var(--gold);}
+.nav-cta{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-weight:700;font-family:var(--fb);font-size:13px;
+  padding:10px 24px;border-radius:8px;border:none;cursor:pointer;
+  transition:all 0.2s;white-space:nowrap;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,200,66,0.4);}
+.nav-phone{font-family:var(--fm);font-size:11px;color:var(--muted2);}
+
+/* ══ URGENCY TICKER ══ */
+.urgency-bar{
+  background:linear-gradient(90deg,#1a0a00,#0d0500,#1a0a00);
+  border-bottom:1px solid rgba(245,200,66,0.2);
+  padding:10px 0;overflow:hidden;position:relative;
+}
+.urgency-track{
+  display:flex;align-items:center;gap:0;
+  animation:ticker 18s linear infinite;
+  width:max-content;
+}
+.urgency-item{
+  display:flex;align-items:center;gap:10px;
+  padding:0 48px;font-family:var(--fm);font-size:11px;
+  color:var(--gold);letter-spacing:1px;white-space:nowrap;
+}
+.urgency-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 1s infinite;}
+
+/* ══ HERO ══ */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding-top:80px;position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 40%, rgba(245,200,66,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 85% 60%, rgba(0,229,176,0.05) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(245,200,66,0.04) 0%, transparent 50%);
+}
+/* Grid pattern */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+}
+/* Scanline effect */
+.hero-scan{
+  position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg, transparent, rgba(245,200,66,0.15), transparent);
+  animation:scanline 4s ease-in-out infinite;
+  pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:2;
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 440px;
+  gap:60px;align-items:center;
+  padding:80px 0;
+}
+/* Floating chart bg illustration */
+.hero-chart-bg{
+  position:absolute;right:-60px;top:50%;transform:translateY(-50%);
+  width:520px;height:400px;opacity:0.06;pointer-events:none;z-index:0;
+}
+
+.hero-left{animation:fadeUp 0.7s ease both;}
+.hero-eyebrow{margin-bottom:24px;}
+.hero-pre{
+  font-family:var(--fm);font-size:11px;color:var(--teal);
+  letter-spacing:3px;display:block;margin-bottom:6px;
+}
+.hero h1{margin-bottom:20px;line-height:0.9;}
+.hero h1 em{font-style:normal;color:var(--gold);}
+.hero-sub{font-size:17px;color:var(--muted2);line-height:1.7;max-width:500px;margin-bottom:36px;}
+.hero-sub strong{color:#fff;font-weight:600;}
+
+.hero-facts{
+  display:flex;gap:32px;flex-wrap:wrap;margin-bottom:40px;
+}
+.hf-item{display:flex;align-items:center;gap:10px;}
+.hf-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.2);
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;
+}
+.hf-text{font-size:13px;color:var(--muted2);line-height:1.4;}
+.hf-text strong{display:block;color:#fff;font-size:14px;font-weight:700;}
+
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-weight:800;font-family:var(--fb);font-size:16px;
+  padding:16px 32px;border-radius:12px;border:none;cursor:pointer;
+  transition:all 0.25s;animation:glowPulse 2.5s ease-in-out infinite;
+  text-decoration:none;
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(245,200,66,0.45);}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);
+  color:var(--text);font-weight:600;font-family:var(--fb);font-size:15px;
+  padding:16px 28px;border-radius:12px;cursor:pointer;
+  transition:all 0.2s;text-decoration:none;
+}
+.btn-secondary:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);}
+
+/* ══ HERO CARD (right) ══ */
+.hero-card{
+  background:linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:24px;overflow:hidden;
+  box-shadow:0 40px 80px rgba(0,0,0,0.6);
+  position:relative;animation:fadeUp 0.8s 0.15s ease both;
+}
+.hero-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(245,200,66,0.6),transparent);
+}
+.hc-top{
+  padding:28px 28px 20px;
+  background:linear-gradient(180deg,rgba(245,200,66,0.06),transparent);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.hc-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,64,64,0.15);border:1px solid rgba(255,64,64,0.3);
+  border-radius:100px;padding:4px 12px;
+  font-family:var(--fm);font-size:10px;color:var(--red);letter-spacing:1px;
+  margin-bottom:16px;
+}
+.hc-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 1s infinite;}
+.hc-title{font-family:var(--fh);font-size:26px;letter-spacing:1px;line-height:1.1;margin-bottom:6px;}
+.hc-sub{font-family:var(--fm);font-size:11px;color:var(--teal);letter-spacing:1px;}
+
+/* Seat tracker */
+.hc-seats{padding:18px 28px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.hc-seats-label{font-family:var(--fm);font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:10px;}
+.seats-track{display:flex;gap:8px;}
+.seat{
+  flex:1;height:10px;border-radius:100px;
+  transition:all 0.3s;
+}
+.seat.taken{background:linear-gradient(90deg,var(--red),#ff6b6b);}
+.seat.open{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);}
+.hc-seats-info{display:flex;justify-content:space-between;margin-top:8px;}
+.seats-taken{font-size:12px;color:var(--red);font-weight:700;font-family:var(--fm);}
+.seats-left{font-size:12px;color:var(--teal);font-weight:700;font-family:var(--fm);}
+
+/* Inclusions */
+.hc-includes{padding:20px 28px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.hc-inc-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:13.5px;color:var(--muted2);
+}
+.hc-inc-item:last-child{border-bottom:none;padding-bottom:0;}
+.hc-check{
+  width:22px;height:22px;border-radius:6px;flex-shrink:0;
+  background:rgba(0,229,176,0.12);border:1px solid rgba(0,229,176,0.25);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--teal);font-size:12px;margin-top:1px;
+}
+
+/* Price */
+.hc-price{padding:22px 28px;}
+.hc-price-row{display:flex;align-items:flex-end;gap:14px;margin-bottom:16px;}
+.hc-orig{
+  font-family:var(--fm);font-size:14px;color:var(--muted);
+  text-decoration:line-through;
+}
+.hc-now{
+  font-family:var(--fh);font-size:48px;color:var(--gold);letter-spacing:-1px;line-height:1;
+}
+.hc-emi{font-family:var(--fm);font-size:11px;color:var(--muted);margin-bottom:18px;}
+.hc-enroll{
+  width:100%;padding:16px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-family:var(--fh);font-size:20px;letter-spacing:1px;
+  border-radius:12px;transition:all 0.25s;
+  animation:glowPulse 2.5s ease-in-out infinite;
+}
+.hc-enroll:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(245,200,66,0.45);}
+.hc-watext{
+  text-align:center;margin-top:12px;
+  font-family:var(--fm);font-size:10px;color:var(--muted);letter-spacing:1px;
+}
+
+/* ══ COUNTDOWN ══ */
+.countdown-section{
+  background:linear-gradient(90deg,rgba(245,200,66,0.06),rgba(245,200,66,0.02),rgba(245,200,66,0.06));
+  border-top:1px solid rgba(245,200,66,0.1);
+  border-bottom:1px solid rgba(245,200,66,0.1);
+  padding:40px 0;
+}
+.cd-inner{
+  max-width:1100px;margin:0 auto;padding:0 40px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;
+}
+.cd-label{font-family:var(--fh);font-size:28px;color:#fff;letter-spacing:1px;}
+.cd-label span{color:var(--gold);}
+.cd-units{display:flex;align-items:center;gap:12px;}
+.cd-unit{text-align:center;}
+.cd-num{
+  font-family:var(--fh);font-size:52px;letter-spacing:2px;color:#fff;
+  background:var(--card);border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:8px 20px;min-width:80px;
+  display:block;text-align:center;
+  box-shadow:0 4px 20px rgba(0,0,0,0.4);
+}
+.cd-lbl{font-family:var(--fm);font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:6px;}
+.cd-sep{font-family:var(--fh);font-size:48px;color:var(--gold);opacity:0.6;padding-bottom:20px;}
+
+/* ══ WHAT YOU GET ══ */
+.what-section{padding:100px 0;}
+.section-header{text-align:center;margin-bottom:64px;}
+.section-eyebrow{
+  font-family:var(--fm);font-size:10px;color:var(--gold);
+  letter-spacing:3px;display:block;margin-bottom:12px;
+}
+.section-header p{max-width:520px;margin:16px auto 0;font-size:16px;}
+
+.what-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.what-card{
+  background:linear-gradient(145deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;padding:32px 28px;
+  position:relative;overflow:hidden;
+  transition:all 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.what-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);
+}
+.what-card:hover{transform:translateY(-6px);border-color:rgba(245,200,66,0.2);box-shadow:0 24px 60px rgba(0,0,0,0.4);}
+.wc-num{
+  font-family:var(--fm);font-size:10px;color:var(--muted);
+  letter-spacing:2px;margin-bottom:20px;opacity:0.7;
+}
+.wc-icon{
+  width:56px;height:56px;border-radius:16px;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.wc-icon::before{
+  content:'';position:absolute;inset:0;border-radius:16px;
+  opacity:0.35;filter:blur(12px);transform:scale(1.2) translateY(4px);
+  background:inherit;
+}
+.wc-icon-inner{position:relative;z-index:1;}
+.wci-gold{background:rgba(245,200,66,0.12);border:1px solid rgba(245,200,66,0.25);}
+.wci-teal{background:rgba(0,229,176,0.12);border:1px solid rgba(0,229,176,0.25);}
+.wci-purple{background:rgba(124,92,252,0.12);border:1px solid rgba(124,92,252,0.25);}
+.wci-red{background:rgba(255,100,100,0.12);border:1px solid rgba(255,100,100,0.25);}
+.wci-blue{background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);}
+.wci-green{background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);}
+.what-card h3{font-family:var(--fh);font-size:22px;letter-spacing:0.5px;margin-bottom:10px;line-height:1.1;}
+.what-card p{font-size:13.5px;color:var(--muted2);line-height:1.75;}
+
+/* ══ SCHEDULE ══ */
+.schedule-section{
+  padding:100px 0;
+  background:linear-gradient(180deg,transparent,rgba(245,200,66,0.02),transparent);
+  border-top:1px solid var(--border);
+}
+.schedule-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:56px;}
+.schedule-col-title{
+  font-family:var(--fm);font-size:11px;font-weight:700;color:var(--gold);
+  letter-spacing:2px;margin-bottom:20px;padding-bottom:12px;
+  border-bottom:1px solid rgba(245,200,66,0.15);
+}
+.sched-item{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.sched-item:last-child{border-bottom:none;}
+.sched-day{
+  width:52px;height:52px;border-radius:12px;flex-shrink:0;
+  background:var(--card);border:1px solid rgba(255,255,255,0.08);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.sched-day-num{font-family:var(--fh);font-size:22px;color:var(--gold);line-height:1;}
+.sched-day-lbl{font-family:var(--fm);font-size:8px;color:var(--muted);letter-spacing:1px;}
+.sched-content{}
+.sched-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;}
+.sched-desc{font-size:12.5px;color:var(--muted2);line-height:1.6;}
+
+.live-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,64,64,0.1);border:1px solid rgba(255,64,64,0.3);
+  border-radius:100px;padding:3px 10px;
+  font-family:var(--fm);font-size:9px;color:var(--red);letter-spacing:1px;margin-top:6px;
+}
+.live-dot-sm{width:5px;height:5px;border-radius:50%;background:var(--red);animation:pulse 1s infinite;}
+
+/* ══ WHO IS THIS FOR ══ */
+.who-section{padding:100px 0;border-top:1px solid var(--border);}
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:56px;}
+.who-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:24px;
+  display:flex;align-items:flex-start;gap:16px;
+  transition:all 0.2s;
+}
+.who-card:hover{border-color:rgba(0,229,176,0.2);transform:translateX(4px);}
+.who-check{
+  width:32px;height:32px;border-radius:8px;flex-shrink:0;
+  background:rgba(0,229,176,0.1);border:1px solid rgba(0,229,176,0.25);
+  display:flex;align-items:center;justify-content:center;color:var(--teal);
+  font-size:14px;margin-top:2px;
+}
+.who-text{font-size:14px;color:var(--muted2);line-height:1.7;}
+.who-text strong{display:block;color:#fff;font-size:15px;font-weight:700;margin-bottom:4px;}
+
+/* ══ ABOUT MENTOR ══ */
+.mentor-section{
+  padding:100px 0;
+  background:linear-gradient(135deg,rgba(245,200,66,0.03),transparent,rgba(0,229,176,0.02));
+  border-top:1px solid var(--border);
+}
+.mentor-wrap{
+  display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:center;
+}
+.mentor-card{
+  background:var(--card);border:1px solid rgba(245,200,66,0.15);
+  border-radius:24px;padding:40px;position:relative;overflow:hidden;
+  animation:float 5s ease-in-out infinite;
+}
+.mentor-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.mentor-av{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--fh);font-size:36px;color:#000;
+  margin-bottom:20px;box-shadow:0 8px 28px rgba(245,200,66,0.35);
+}
+.mentor-name{font-family:var(--fh);font-size:32px;letter-spacing:1px;margin-bottom:4px;}
+.mentor-title{font-family:var(--fm);font-size:11px;color:var(--gold);letter-spacing:1.5px;margin-bottom:20px;}
+.mentor-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+.mstat{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
+.mstat-val{font-family:var(--fh);font-size:28px;color:var(--gold);letter-spacing:-0.5px;}
+.mstat-lbl{font-family:var(--fm);font-size:9px;color:var(--muted);margin-top:3px;letter-spacing:1px;}
+.mentor-right h2{margin-bottom:20px;}
+.mentor-right p{margin-bottom:16px;}
+.mentor-points{margin-top:28px;display:flex;flex-direction:column;gap:12px;}
+.mp-item{
+  display:flex;align-items:center;gap:12px;
+  font-size:14px;color:var(--muted2);
+}
+.mp-dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+  background:var(--gold);box-shadow:0 0 8px rgba(245,200,66,0.5);
+}
+
+/* ══ PRICING ══ */
+.pricing-section{padding:100px 0;border-top:1px solid var(--border);}
+.price-center{max-width:560px;margin:56px auto 0;}
+.price-box{
+  background:linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));
+  border:1px solid rgba(245,200,66,0.2);
+  border-radius:28px;overflow:hidden;position:relative;
+  box-shadow:0 0 0 1px rgba(245,200,66,0.06),0 40px 80px rgba(0,0,0,0.5);
+}
+.price-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.price-box-top{
+  padding:36px 40px;
+  background:linear-gradient(180deg,rgba(245,200,66,0.06),transparent);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  text-align:center;
+}
+.pb-limited{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,64,64,0.1);border:1px solid rgba(255,64,64,0.3);
+  border-radius:100px;padding:5px 16px;
+  font-family:var(--fm);font-size:10px;color:var(--red);
+  letter-spacing:1.5px;margin-bottom:20px;
+}
+.pb-title{font-family:var(--fh);font-size:36px;letter-spacing:1px;margin-bottom:8px;}
+.pb-sub{font-size:14px;color:var(--muted2);}
+.price-box-mid{padding:32px 40px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.pb-inc-item{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:14px;color:var(--muted2);
+}
+.pb-inc-item:last-child{border-bottom:none;padding-bottom:0;}
+.pb-check{
+  width:22px;height:22px;flex-shrink:0;border-radius:6px;
+  background:rgba(0,229,176,0.1);border:1px solid rgba(0,229,176,0.25);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--teal);font-size:11px;
+}
+.price-box-bot{padding:32px 40px;text-align:center;}
+.pb-price-row{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:8px;}
+.pb-orig{font-family:var(--fm);font-size:16px;color:var(--muted);text-decoration:line-through;}
+.pb-now{font-family:var(--fh);font-size:64px;color:var(--gold);letter-spacing:-2px;line-height:1;}
+.pb-emi{font-family:var(--fm);font-size:12px;color:var(--muted);margin-bottom:24px;}
+.pb-enroll{
+  display:block;width:100%;
+  padding:18px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-family:var(--fh);font-size:24px;letter-spacing:1px;
+  border-radius:14px;transition:all 0.25s;
+  animation:glowPulse 2.5s ease-in-out infinite;
+  text-decoration:none;text-align:center;
+}
+.pb-enroll:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(245,200,66,0.45);}
+.pb-wa{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-top:14px;
+  padding:14px;border-radius:12px;
+  background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.2);
+  color:#25D366;font-weight:700;font-size:14px;
+  text-decoration:none;transition:all 0.2s;
+}
+.pb-wa:hover{background:rgba(37,211,102,0.12);border-color:rgba(37,211,102,0.4);}
+.pb-guarantee{
+  margin-top:16px;
+  font-family:var(--fm);font-size:10px;color:var(--muted);
+  text-align:center;letter-spacing:0.5px;
+}
+
+/* ══ FAQ ══ */
+.faq-section{padding:100px 0;border-top:1px solid var(--border);}
+.faq-list{max-width:720px;margin:56px auto 0;display:flex;flex-direction:column;gap:12px;}
+.faq-item{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;transition:border-color 0.2s;
+}
+.faq-item.open{border-color:rgba(245,200,66,0.2);}
+.faq-q{
+  padding:20px 24px;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  font-size:15px;font-weight:600;color:#fff;
+}
+.faq-icon{
+  width:28px;height:28px;border-radius:8px;flex-shrink:0;
+  background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--gold);transition:transform 0.3s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.2s;
+  padding:0 24px;font-size:14px;color:var(--muted2);line-height:1.8;
+}
+.faq-item.open .faq-a{max-height:200px;padding:0 24px 20px;}
+
+/* ══ FINAL CTA ══ */
+.final-section{
+  padding:120px 0;
+  background:linear-gradient(180deg,transparent,rgba(245,200,66,0.04),rgba(245,200,66,0.02));
+  border-top:1px solid var(--border);
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.final-glow{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:400px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(245,200,66,0.06),transparent 70%);
+  pointer-events:none;
+}
+.final-section h2{margin-bottom:20px;font-size:clamp(44px,7vw,80px);}
+.final-section p{max-width:480px;margin:0 auto 40px;font-size:16px;}
+.final-seats{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-bottom:36px;
+  font-family:var(--fm);font-size:13px;color:var(--red);font-weight:700;
+}
+.final-seats-dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1s infinite;}
+
+/* ══ FOOTER ══ */
+.lp-footer{
+  background:#020406;border-top:1px solid rgba(255,255,255,0.05);
+  padding:28px 0;text-align:center;
+}
+.lp-footer-inner{
+  max-width:1100px;margin:0 auto;padding:0 40px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+}
+.lp-footer p{font-family:var(--fm);font-size:11px;color:var(--muted);margin:0;}
+.lp-footer-links{display:flex;gap:20px;}
+.lp-footer-links a{font-family:var(--fm);font-size:11px;color:var(--muted);text-decoration:none;transition:color 0.15s;}
+.lp-footer-links a:hover{color:var(--gold);}
+
+/* WhatsApp float */
+.wa-float{
+  position:fixed;bottom:24px;right:24px;z-index:998;
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,#25D366,#1da851);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 24px rgba(37,211,102,0.4);
+  text-decoration:none;transition:all 0.25s;
+  animation:float 3s ease-in-out infinite;
+}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 12px 32px rgba(37,211,102,0.55);}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:48px;padding:60px 0 80px;}
+  .hero h1{font-size:clamp(48px,10vw,80px);}
+  .hero-card{max-width:480px;}
+  .mentor-wrap{grid-template-columns:1fr;gap:48px;}
+  .mentor-card{max-width:420px;animation:none;}
+  .schedule-grid{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .container{padding:0 20px;}
+  .what-grid{grid-template-columns:1fr 1fr;gap:14px;}
+  .who-grid{grid-template-columns:1fr;}
+  .cd-inner{flex-direction:column;text-align:center;gap:24px;}
+  .cd-num{font-size:40px;min-width:64px;}
+  .nav-phone{display:none;}
+  .price-box-top,.price-box-mid,.price-box-bot{padding:24px 24px;}
+  .pb-now{font-size:52px;}
+}
+@media(max-width:480px){
+  .what-grid{grid-template-columns:1fr;}
+  .hero-facts{gap:16px;}
+  .hero-btns{flex-direction:column;}
+  .hero-btns a,.hero-btns button{width:100%;text-align:center;justify-content:center;}
+  .schedule-grid{grid-template-columns:1fr;}
+  h1{font-size:clamp(44px,14vw,64px);}
+}
+</style>
+</head>
+<body>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/916381384612?text=Hi%2C%20I%27m%20interested%20in%20the%20Nifty%20Masterclass.%20Please%20share%20details." target="_blank" class="wa-float" title="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="white"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.45.65 4.75 1.78 6.74L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.5c-2.17 0-4.22-.6-5.97-1.63l-.43-.26-4.42 1.04 1.07-4.31-.28-.45A11.47 11.47 0 014.5 16c0-6.35 5.15-11.5 11.5-11.5S27.5 9.65 27.5 16 22.35 27.5 16 27.5zm6.34-8.6c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17s-.9 1.13-1.1 1.36c-.2.23-.4.26-.74.09-.35-.17-1.47-.54-2.8-1.73a10.5 10.5 0 01-1.94-2.41c-.2-.35-.02-.54.15-.71.15-.15.35-.4.52-.6.17-.2.23-.35.35-.58.12-.23.06-.43-.03-.6-.09-.17-.78-1.87-1.06-2.56-.28-.67-.56-.58-.78-.59-.2-.01-.43-.01-.66-.01-.23 0-.6.09-.91.43-.32.34-1.2 1.17-1.2 2.86s1.23 3.32 1.4 3.55c.17.23 2.42 3.7 5.87 5.19.82.35 1.46.56 1.96.72.82.26 1.57.22 2.16.13.66-.1 2.05-.84 2.34-1.65.29-.81.29-1.5.2-1.65-.09-.15-.32-.23-.67-.4z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">GIANT<span>TRADERS</span></a>
+    <div class="nav-phone">📞 63813 84612 &nbsp;|&nbsp; 96594 48833</div>
+    <a href="#enroll" class="nav-cta">Secure My Seat →</a>
+  </div>
+</nav>
+
+<!-- URGENCY TICKER -->
+<div style="margin-top:60px;" class="urgency-bar">
+  <div class="urgency-track">
+    <div class="urgency-item"><span class="urgency-dot"></span> ONLY 5 SEATS AVAILABLE — BATCH STARTS SOON</div>
+    <div class="urgency-item"><span class="urgency-dot"></span> NIFTY OPTIONS BUYING — PURE NUMERICAL STRATEGY</div>
+    <div class="urgency-item"><span class="urgency-dot"></span> 1 WEEK TRAINING + 5 DAYS LIVE CLASS</div>
+    <div class="urgency-item"><span class="urgency-dot"></span> SPECIAL PRICE ₹10,000 ONLY</div>
+    <div class="urgency-item"><span class="urgency-dot"></span> ONLY 5 SEATS AVAILABLE — BATCH STARTS SOON</div>
+    <div class="urgency-item"><span class="urgency-dot"></span> NIFTY OPTIONS BUYING — PURE NUMERICAL STRATEGY</div>
+    <div class="urgency-item"><span class="urgency-dot"></span> 1 WEEK TRAINING + 5 DAYS LIVE CLASS</div>
+    <div class="urgency-item"><span class="urgency-dot"></span> SPECIAL PRICE ₹10,000 ONLY</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-scan"></div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Left -->
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span class="hero-pre">⚡ EXCLUSIVE SMALL-BATCH MASTERCLASS</span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="tag tag-red">🔴 Only 5 Seats</span>
+            <span class="tag tag-teal">Nifty Focused</span>
+            <span class="tag tag-gold">₹10,000 Only</span>
+          </div>
+        </div>
+        <h1>NIFTY<br>OPTIONS<br><em>MASTERCLASS</em></h1>
+        <p class="hero-sub">
+          India's most <strong>focused</strong> Nifty Options Buying program.
+          <strong>100% numerical logic</strong> — no trendlines, no complexity.
+          1 week intensive training + 5 days of live market sessions.
+          Only <strong>5 students</strong> per batch for personal attention.
+        </p>
+        <div class="hero-facts">
+          <div class="hf-item">
+            <div class="hf-icon">📅</div>
+            <div class="hf-text">
+              <strong>1 Week Training</strong>
+              Complete foundation
+            </div>
+          </div>
+          <div class="hf-item">
+            <div class="hf-icon">📊</div>
+            <div class="hf-text">
+              <strong>5 Live Classes</strong>
+              Real market sessions
+            </div>
+          </div>
+          <div class="hf-item">
+            <div class="hf-icon">👥</div>
+            <div class="hf-text">
+              <strong>Max 5 Students</strong>
+              Personal guidance
+            </div>
+          </div>
+        </div>
+        <div class="hero-btns">
+          <a href="#enroll" class="btn-primary">🎓 Enroll Now — ₹10,000</a>
+          <a href="https://wa.me/916381384612?text=Hi%2C%20Nifty%20Masterclass%20details%20please" target="_blank" class="btn-secondary">💬 WhatsApp Us</a>
+        </div>
+      </div>
+
+      <!-- Right card -->
+      <div>
+        <div class="hero-card" id="enroll">
+          <div class="hc-top">
+            <div class="hc-badge"><span class="hc-badge-dot"></span> LIVE BATCH FILLING</div>
+            <div class="hc-title">Nifty Options<br>Masterclass</div>
+            <div class="hc-sub">GIANT TRADERS ACADEMY · EXCLUSIVE</div>
+          </div>
+
+          <!-- Seat tracker -->
+          <div class="hc-seats">
+            <div class="hc-seats-label">BATCH CAPACITY</div>
+            <div class="seats-track">
+              <div class="seat taken"></div>
+              <div class="seat taken"></div>
+              <div class="seat taken"></div>
+              <div class="seat open"></div>
+              <div class="seat open"></div>
+            </div>
+            <div class="hc-seats-info">
+              <span class="seats-taken">3 seats taken</span>
+              <span class="seats-left">2 open</span>
+            </div>
+          </div>
+
+          <!-- What's included -->
+          <div class="hc-includes">
+            <div class="hc-inc-item">
+              <div class="hc-check">✓</div>
+              <span>1 Week complete Nifty Options Buying training</span>
+            </div>
+            <div class="hc-inc-item">
+              <div class="hc-check">✓</div>
+              <span>5 days live market sessions — real trades, real learning</span>
+            </div>
+            <div class="hc-inc-item">
+              <div class="hc-check">✓</div>
+              <span>100% numerical strategy — no charts, no guesswork</span>
+            </div>
+            <div class="hc-inc-item">
+              <div class="hc-check">✓</div>
+              <span>Personal 1-on-1 attention (max 5 students)</span>
+            </div>
+            <div class="hc-inc-item">
+              <div class="hc-check">✓</div>
+              <span>WhatsApp support during batch period</span>
+            </div>
+          </div>
+
+          <!-- Price -->
+          <div class="hc-price">
+            <div class="hc-price-row">
+              <div>
+                <div class="hc-orig">₹20,000</div>
+                <div class="hc-now">₹10,000</div>
+              </div>
+              <div style="background:rgba(0,229,176,0.1);border:1px solid rgba(0,229,176,0.25);border-radius:8px;padding:8px 12px;font-family:var(--fm);font-size:11px;color:var(--teal);text-align:center;">
+                50% OFF<br>LIMITED
+              </div>
+            </div>
+            <div class="hc-emi">💳 Easy EMI available · Call us to know more</div>
+            <a href="https://wa.me/916381384612?text=Hi%2C%20I%20want%20to%20enroll%20in%20the%20Nifty%20Masterclass%20for%20%E2%82%B910%2C000.%20Please%20confirm%20my%20seat." target="_blank" class="hc-enroll">LOCK MY SEAT NOW →</a>
+            <div class="hc-watext">📲 OR CALL: 6381384612 · 9659448833 · 7200899334</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<div class="countdown-section">
+  <div class="cd-inner">
+    <div>
+      <div class="cd-label">⏰ Offer Closes In</div>
+      <div style="font-family:var(--fm);font-size:12px;color:var(--muted);margin-top:6px;">Price goes up after this batch fills</div>
+    </div>
+    <div class="cd-units">
+      <div class="cd-unit">
+        <span class="cd-num" id="cdD">02</span>
+        <div class="cd-lbl">DAYS</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <span class="cd-num" id="cdH">14</span>
+        <div class="cd-lbl">HOURS</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <span class="cd-num" id="cdM">37</span>
+        <div class="cd-lbl">MINS</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <span class="cd-num" id="cdS">00</span>
+        <div class="cd-lbl">SECS</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT YOU GET -->
+<section class="what-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">WHAT'S INSIDE</span>
+      <h2>Everything Inside<br><span class="gold">The Masterclass</span></h2>
+      <p>A focused, no-fluff program designed to make you confident in Nifty Options Buying using pure number logic.</p>
+    </div>
+    <div class="what-grid">
+
+      <div class="what-card">
+        <div class="wc-num">01 / 06</div>
+        <div class="wc-icon wci-gold">
+          <div class="wc-icon-inner">
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+              <rect x="7" y="7" width="11" height="11" rx="2.5" fill="#f5c842" fill-opacity=".8"/>
+              <rect x="22" y="7" width="11" height="11" rx="2.5" fill="#f5c842" fill-opacity=".35"/>
+              <rect x="7" y="22" width="11" height="11" rx="2.5" fill="#f5c842" fill-opacity=".35"/>
+              <rect x="22" y="22" width="11" height="11" rx="2.5" fill="#f5c842" fill-opacity=".8"/>
+            </svg>
+          </div>
+        </div>
+        <h3>Numerical<br>Foundation</h3>
+        <p>Learn the core number-based system that drives every trade decision — no subjective analysis, just clean math.</p>
+      </div>
+
+      <div class="what-card">
+        <div class="wc-num">02 / 06</div>
+        <div class="wc-icon wci-teal">
+          <div class="wc-icon-inner">
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+              <polyline points="5,31 13,18 21,24 31,9" stroke="#00e5b0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="31" cy="9" r="3.5" fill="#00e5b0" fill-opacity=".5" stroke="#00e5b0" stroke-width="1.5"/>
+            </svg>
+          </div>
+        </div>
+        <h3>Nifty Entry<br>Strategy</h3>
+        <p>Exact entry rules for Nifty Call and Put options — defined by numbers, not feelings. Know precisely when to enter.</p>
+      </div>
+
+      <div class="what-card">
+        <div class="wc-num">03 / 06</div>
+        <div class="wc-icon wci-purple">
+          <div class="wc-icon-inner">
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+              <path d="M20 5 C20 5 8 12 8 22 C8 31 14 35 20 35 C26 35 32 31 32 22 C32 12 20 5 20 5Z" stroke="#7c5cfc" stroke-width="1.5" fill="#7c5cfc" fill-opacity=".14"/>
+              <polyline points="14,23 18,27 27,17" stroke="#7c5cfc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <h3>Capital<br>Protection</h3>
+        <p>Hard stop-loss rules built into the system. Every trade is capped. Protect your capital through every market phase.</p>
+      </div>
+
+      <div class="what-card">
+        <div class="wc-num">04 / 06</div>
+        <div class="wc-icon wci-red">
+          <div class="wc-icon-inner">
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+              <rect x="9" y="16" width="6" height="14" rx="1.5" fill="#ff6464" fill-opacity=".75"/>
+              <line x1="12" y1="12" x2="12" y2="16" stroke="#ff6464" stroke-width="2" stroke-linecap="round"/>
+              <rect x="22" y="10" width="6" height="11" rx="1.5" fill="#ff6464" fill-opacity=".35" stroke="#ff6464" stroke-width="1.2"/>
+              <line x1="25" y1="6" x2="25" y2="10" stroke="#ff6464" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <h3>Live Market<br>Sessions</h3>
+        <p>5 full trading days — live analysis, live trade decisions, real-time numerical application. Learn by doing.</p>
+      </div>
+
+      <div class="what-card">
+        <div class="wc-num">05 / 06</div>
+        <div class="wc-icon wci-blue">
+          <div class="wc-icon-inner">
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="15" r="8" fill="#3b82f6" fill-opacity=".14" stroke="#3b82f6" stroke-width="1.5"/>
+              <circle cx="20" cy="15" r="3.5" fill="#3b82f6" fill-opacity=".5"/>
+              <line x1="20" y1="23" x2="20" y2="32" stroke="#3b82f6" stroke-width="2.2" stroke-linecap="round"/>
+              <line x1="13" y1="32" x2="27" y2="32" stroke="#3b82f6" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <h3>Trader<br>Mindset</h3>
+        <p>Discipline framework to follow the system without emotion. The mental edge that separates profitable traders.</p>
+      </div>
+
+      <div class="what-card">
+        <div class="wc-num">06 / 06</div>
+        <div class="wc-icon wci-green">
+          <div class="wc-icon-inner">
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+              <circle cx="14" cy="15" r="6" fill="#22c55e" fill-opacity=".14" stroke="#22c55e" stroke-width="1.5"/>
+              <circle cx="26" cy="15" r="6" fill="#22c55e" fill-opacity=".14" stroke="#22c55e" stroke-width="1.5"/>
+              <path d="M7 35 C7 27 11 22 14 22 C17 26 23 26 26 22 C29 22 33 27 33 35" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round" fill="#22c55e" fill-opacity=".08"/>
+            </svg>
+          </div>
+        </div>
+        <h3>Personal<br>Support</h3>
+        <p>With only 5 students per batch, get direct personal guidance and doubt-clearing throughout the program.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">PROGRAM STRUCTURE</span>
+      <h2>Your 2-Week<br><span class="gold">Journey</span></h2>
+      <p>Structured week-by-week so you build knowledge systematically before stepping into live markets.</p>
+    </div>
+    <div class="schedule-grid">
+
+      <!-- Week 1 -->
+      <div>
+        <div class="schedule-col-title">📚 WEEK 1 — TRAINING</div>
+        <div class="sched-item">
+          <div class="sched-day"><div class="sched-day-num">1</div><div class="sched-day-lbl">DAY</div></div>
+          <div class="sched-content">
+            <div class="sched-title">Introduction to Numerical System</div>
+            <div class="sched-desc">Understanding the core logic — what are numbers telling you, how to read them for Nifty options.</div>
+          </div>
+        </div>
+        <div class="sched-item">
+          <div class="sched-day"><div class="sched-day-num">2</div><div class="sched-day-lbl">DAY</div></div>
+          <div class="sched-content">
+            <div class="sched-title">Entry Rules — Calls & Puts</div>
+            <div class="sched-desc">Exact number-based entry conditions for buying Nifty calls and puts. No ambiguity.</div>
+          </div>
+        </div>
+        <div class="sched-item">
+          <div class="sched-day"><div class="sched-day-num">3</div><div class="sched-day-lbl">DAY</div></div>
+          <div class="sched-content">
+            <div class="sched-title">Exit Strategy & Stop Loss</div>
+            <div class="sched-desc">Define your targets and stops before entering. Capital protection built into every trade.</div>
+          </div>
+        </div>
+        <div class="sched-item">
+          <div class="sched-day"><div class="sched-day-num">4</div><div class="sched-day-lbl">DAY</div></div>
+          <div class="sched-content">
+            <div class="sched-title">Position Sizing & Risk Management</div>
+            <div class="sched-desc">How much capital per trade. Scaling rules. Never blow your account again.</div>
+          </div>
+        </div>
+        <div class="sched-item">
+          <div class="sched-day"><div class="sched-day-num">5</div><div class="sched-day-lbl">DAY</div></div>
+          <div class="sched-content">
+            <div class="sched-title">Paper Trading + Q&A Session</div>
+            <div class="sched-desc">Apply everything learned. Practice trades. All doubts cleared before going live.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 2 -->
+      <div>
+        <div class="schedule-col-title">🔴 WEEK 2 — 5 DAYS LIVE CLASS</div>
+        <div class="sched-item">
+          <div class="sched-day"><div class="sched-day-num">1</div><div class="sched-day-lbl">LIVE</div></div>
+          <div class="sched-content">
+            <div class="sched-title">First Live Session — Reading the Numbers</div>
+            <div class="sched-desc">Mentor applies the numerical system live. Watch real decisions being made in real market.</div>
+            <div class="live-badge"><span class="live-dot-sm"></span> LIVE CLASS</div>
+          </div>
+        </div>
+        <div class="sched-item">
+          <div class="sched-day"><div class="sched-day-num">2</div><div class="sched-day-lbl">LIVE</div></div>
+          <div class="sched-content">
+            <div class="sched-title">Live Trade Execution — Day 2</div>
+            <div class="sched-desc">Students spot entry signals independently. Mentor validates. Real execution, real feedback.</div>
+            <div class="live-badge"><span class="live-dot-sm"></span> LIVE CLASS</div>
+          </div>
+        </div>
+        <div class="sched-item">
+          <div class="sched-day"><div class="sched-day-num">3</div><div class="sched-day-lbl">LIVE</div></div>
+          <div class="sched-content">
+            <div class="sched-title">Handling Volatile Days</div>
+            <div class="sched-desc">How to behave when Nifty is unpredictable. Numerical filters to stay safe or stay out.</div>
+            <div class="live-badge"><span class="live-dot-sm"></span> LIVE CLASS</div>
+          </div>
+        </div>
+        <div class="sched-item">
+          <div class="sched-day"><div class="sched-day-num">4</div><div class="sched-day-lbl">LIVE</div></div>
+          <div class="sched-content">
+            <div class="sched-title">Independent Trading Session</div>
+            <div class="sched-desc">Students trade fully independently. Mentor observes and gives post-session review.</div>
+            <div class="live-badge"><span class="live-dot-sm"></span> LIVE CLASS</div>
+          </div>
+        </div>
+        <div class="sched-item">
+          <div class="sched-day"><div class="sched-day-num">5</div><div class="sched-day-lbl">LIVE</div></div>
+          <div class="sched-content">
+            <div class="sched-title">Final Session + Graduation Review</div>
+            <div class="sched-desc">Complete P&L review, individual feedback, what to do next. You leave as a confident Nifty trader.</div>
+            <div class="live-badge"><span class="live-dot-sm"></span> LIVE CLASS</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHO IS THIS FOR -->
+<section class="who-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">IS THIS FOR YOU?</span>
+      <h2>This Masterclass Is<br><span class="gold">Made For You If…</span></h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-check">✓</div>
+        <div class="who-text">
+          <strong>You trade Nifty but lack a system</strong>
+          You're buying options based on gut feel, tips, or YouTube — and losing money consistently.
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-check">✓</div>
+        <div class="who-text">
+          <strong>You want a focused, small-group learning</strong>
+          You don't want a 200-student course where nobody knows your name. Max 5 students per batch.
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-check">✓</div>
+        <div class="who-text">
+          <strong>You prefer numbers over charts</strong>
+          You believe in logic and math. Our system is 100% numerical — zero trendlines, zero guesswork.
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-check">✓</div>
+        <div class="who-text">
+          <strong>You can commit 2 weeks seriously</strong>
+          1 week of study + 5 live sessions. This is intense, practical, and hands-on.
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-check">✓</div>
+        <div class="who-text">
+          <strong>You're a beginner wanting the right foundation</strong>
+          Never traded options before? Perfect. Learn the right way from day one — no bad habits to unlearn.
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-check">✓</div>
+        <div class="who-text">
+          <strong>You want affordable, premium mentorship</strong>
+          ₹10,000 for 2 weeks of direct, personal mentorship. The ROI of a single good trade covers this 10x.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENTOR -->
+<section class="mentor-section">
+  <div class="container">
+    <div class="mentor-wrap">
+      <div class="mentor-card">
+        <div class="mentor-av">G</div>
+        <div class="mentor-name">Your Mentor</div>
+        <div class="mentor-title">FOUNDER · GIANT TRADERS ACADEMY</div>
+        <p style="font-size:14px;color:var(--muted2);line-height:1.75;">A full-time trader with years of experience trading Nifty, Bank Nifty, and all major indices using a pure numerical approach. Built this system from thousands of live trades.</p>
+        <div class="mentor-stats">
+          <div class="mstat"><div class="mstat-val">500+</div><div class="mstat-lbl">STUDENTS</div></div>
+          <div class="mstat"><div class="mstat-val">5</div><div class="mstat-lbl">INDICES</div></div>
+          <div class="mstat"><div class="mstat-val">73%</div><div class="mstat-lbl">WIN RATE</div></div>
+          <div class="mstat"><div class="mstat-val">100%</div><div class="mstat-lbl">NUMERICAL</div></div>
+        </div>
+      </div>
+      <div class="mentor-right">
+        <h2>Why Learn From<br><span class="gold">Giant Traders?</span></h2>
+        <p>Most trading courses teach you to read charts, draw trendlines, and guess. We teach you to read numbers — precise, objective, repeatable.</p>
+        <p>Our numerical strategy system has been tested live across all market conditions — trending, sideways, volatile. It works because it removes emotion entirely.</p>
+        <div class="mentor-points">
+          <div class="mp-item"><div class="mp-dot"></div> Real trader, not just a teacher</div>
+          <div class="mp-item"><div class="mp-dot"></div> 500+ students trained successfully across India</div>
+          <div class="mp-item"><div class="mp-dot"></div> Tamil Nadu's most trusted options academy</div>
+          <div class="mp-item"><div class="mp-dot"></div> This masterclass: maximum 5 students only</div>
+          <div class="mp-item"><div class="mp-dot"></div> Direct WhatsApp access during the program</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">INVEST IN YOURSELF</span>
+      <h2>Simple, Honest<br><span class="gold">Pricing</span></h2>
+      <p>One price. Everything included. No hidden fees, no upsells.</p>
+    </div>
+    <div class="price-center">
+      <div class="price-box">
+        <div class="price-box-top">
+          <div class="pb-limited"><span style="width:6px;height:6px;border-radius:50%;background:var(--red);display:inline-block;animation:pulse 1s infinite;"></span> ONLY 2 SEATS LEFT</div>
+          <div class="pb-title">Nifty Options Masterclass</div>
+          <div class="pb-sub">1 Week Training + 5 Days Live · Max 5 Students Per Batch</div>
+        </div>
+        <div class="price-box-mid">
+          <div class="pb-inc-item"><div class="pb-check">✓</div> 1 week complete training (5 sessions)</div>
+          <div class="pb-inc-item"><div class="pb-check">✓</div> 5 days live market sessions with mentor</div>
+          <div class="pb-inc-item"><div class="pb-check">✓</div> 100% numerical strategy system</div>
+          <div class="pb-inc-item"><div class="pb-check">✓</div> Personal 1-on-1 doubt clearing</div>
+          <div class="pb-inc-item"><div class="pb-check">✓</div> WhatsApp support throughout batch</div>
+          <div class="pb-inc-item"><div class="pb-check">✓</div> Post-batch review session</div>
+        </div>
+        <div class="price-box-bot">
+          <div class="pb-price-row">
+            <div class="pb-orig">₹20,000</div>
+            <div class="pb-now">₹10,000</div>
+          </div>
+          <div class="pb-emi">💳 EMI available · Ask us on WhatsApp</div>
+          <a href="https://wa.me/916381384612?text=Hi%2C%20I%20want%20to%20enroll%20in%20the%20Nifty%20Masterclass%20for%20%E2%82%B910%2C000.%20Please%20confirm%20my%20seat." target="_blank" class="pb-enroll">SECURE MY SEAT →</a>
+          <a href="https://wa.me/916381384612?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20Nifty%20Masterclass." target="_blank" class="pb-wa">
+            <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.45.65 4.75 1.78 6.74L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.34 17.9c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17s-.9 1.13-1.1 1.36c-.2.23-.4.26-.74.09-.35-.17-1.47-.54-2.8-1.73a10.5 10.5 0 01-1.94-2.41c-.2-.35-.02-.54.15-.71.15-.15.35-.4.52-.6.17-.2.23-.35.35-.58.12-.23.06-.43-.03-.6-.09-.17-.78-1.87-1.06-2.56-.28-.67-.56-.58-.78-.59h-.66c-.23 0-.6.09-.91.43-.32.34-1.2 1.17-1.2 2.86s1.23 3.32 1.4 3.55c.17.23 2.42 3.7 5.87 5.19.82.35 1.46.56 1.96.72.82.26 1.57.22 2.16.13.66-.1 2.05-.84 2.34-1.65.29-.81.29-1.5.2-1.65-.09-.15-.32-.23-.67-.4z"/></svg>
+            Chat on WhatsApp to Enroll
+          </a>
+          <div class="pb-guarantee">📞 Call us: 6381384612 · 9659448833 · 7200899334</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">COMMON QUESTIONS</span>
+      <h2>Got Questions?<br><span class="gold">We've Got Answers.</span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Why only 5 students per batch?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">We believe in quality over quantity. With only 5 students, your mentor can give every person direct attention, answer every doubt personally, and track your individual progress. This is not a mass course — it's a personal mentorship program.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          I'm a beginner. Can I join this masterclass?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Yes! This masterclass is designed to work for beginners and experienced traders alike. Week 1 builds your foundation from scratch using our numerical system. You'll be fully prepared before entering live sessions in Week 2.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          What is the Numerical Strategy? Do I need to know maths?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Our numerical strategy means we use specific number values from the market (not chart patterns) to make decisions. No advanced mathematics needed — just basic arithmetic. If you can read numbers, you can follow this system.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Are the live sessions recorded?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Live sessions are conducted in real-time via Google Meet or Zoom. Recordings may be shared for personal review, but the value of live sessions is in real-time interaction — asking questions and seeing the market live.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          How do I pay the ₹10,000 fee?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">You can pay via UPI (GPay, PhonePe), bank transfer, or discuss EMI options with us. WhatsApp us at 6381384612 or call any of our numbers and we'll guide you through the payment and enrollment process.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          When does the next batch start?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Batches start as soon as 5 seats are filled. With only 2 seats remaining in the current batch, the next batch date is not confirmed yet. Enroll now to guarantee your spot at the current price — next batch fee may be higher.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-section">
+  <div class="final-glow"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <h2>READY TO TRADE<br><span class="gold">NIFTY SMART?</span></h2>
+    <p>Join 500+ students who've already transformed their trading with Giant Traders' numerical system. Your seat won't wait.</p>
+    <div class="final-seats">
+      <span class="final-seats-dot"></span>
+      Only 2 seats remaining in current batch
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://wa.me/916381384612?text=Hi%2C%20I%20want%20to%20enroll%20in%20the%20Nifty%20Masterclass%20for%20%E2%82%B910%2C000.%20Please%20confirm%20my%20seat." target="_blank" class="btn-primary" style="font-size:18px;padding:18px 40px;">
+        🎓 Enroll Now — ₹10,000
+      </a>
+      <a href="tel:+916381384612" class="btn-secondary" style="font-size:16px;padding:18px 32px;">
+        📞 Call Us Now
+      </a>
+    </div>
+    <p style="margin-top:24px;font-family:var(--fm);font-size:11px;color:var(--muted);text-align:center;">
+      📲 WhatsApp: 6381384612 · 9659448833 · 7200899334 &nbsp;|&nbsp; 🌐 gianttradersacademy.in
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="lp-footer">
+  <div class="lp-footer-inner">
+    <p>© 2026 Giant Traders Academy · Tamil Nadu, India · All rights reserved.</p>
+    <div class="lp-footer-links">
+      <a href="index.html">Main Site</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── COUNTDOWN ── */
+(function(){
+  const end = new Date();
+  end.setDate(end.getDate() + 2);
+  end.setHours(end.getHours() + 14, 37, 0, 0);
+  const pad = n => String(Math.max(0,n)).padStart(2,'0');
+  function tick(){
+    const d = end - Date.now();
+    if(d <= 0) return;
+    document.getElementById('cdD').textContent = pad(Math.floor(d/86400000));
+    document.getElementById('cdH').textContent = pad(Math.floor((d%86400000)/3600000));
+    document.getElementById('cdM').textContent = pad(Math.floor((d%3600000)/60000));
+    document.getElementById('cdS').textContent = pad(Math.floor((d%60000)/1000));
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+/* ── SCROLL REVEALS ── */
+(function(){
+  const els = document.querySelectorAll('.what-card,.who-card,.sched-item,.price-box');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e,i) => {
+      if(!e.isIntersecting) return;
+      const delay = e.target.dataset.delay || 0;
+      setTimeout(() => {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }, delay);
+      obs.unobserve(e.target);
+    });
+  }, {threshold: 0.1});
+  els.forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    el.dataset.delay = (i % 3) * 80;
+    obs.observe(el);
+  });
+})();
+
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.boxShadow =
+    window.scrollY > 60 ? '0 4px 40px rgba(0,0,0,0.5)' : 'none';
+}, {passive:true});
+</script>
+</body>
+</html>
