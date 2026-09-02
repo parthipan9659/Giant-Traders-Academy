@@ -1,0 +1,589 @@
+/* ╔══════════════════════════════════════════════════════════════════
+   ║  GIANT TRADERS ACADEMY — animations.css
+   ║  Drop-in animation system. Zero dependencies.
+   ║  GPU-accelerated: transform + opacity only (no layout thrashing)
+   ╚══════════════════════════════════════════════════════════════════ */
+
+/* ── 0. RESPECT USER PREFERENCE ────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:    0.01ms !important;
+    animation-iteration-count: 1  !important;
+    transition-duration:   0.01ms !important;
+    scroll-behavior:       auto   !important;
+  }
+  .gta-float, .gta-num-particle, .gta-candle-wrap { display: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   1. SCROLL REVEAL SYSTEM
+   Usage: add class="gta-reveal"  (fade up)
+                    "gta-reveal-l" (slide from left)
+                    "gta-reveal-r" (slide from right)
+                    "gta-reveal-scale" (scale up)
+          data-delay="200"  (optional ms delay)
+═══════════════════════════════════════════════════════════════ */
+
+.gta-reveal,
+.gta-reveal-l,
+.gta-reveal-r,
+.gta-reveal-scale {
+  will-change: transform, opacity;
+  transition:
+    opacity  0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gta-reveal       { opacity: 0; transform: translateY(32px); }
+.gta-reveal-l     { opacity: 0; transform: translateX(-36px); }
+.gta-reveal-r     { opacity: 0; transform: translateX(36px); }
+.gta-reveal-scale { opacity: 0; transform: scale(0.92); }
+
+.gta-reveal.gta-vis,
+.gta-reveal-l.gta-vis,
+.gta-reveal-r.gta-vis,
+.gta-reveal-scale.gta-vis {
+  opacity:   1;
+  transform: none;
+}
+
+/* Stagger helper — add data-stagger="true" to parent */
+[data-stagger="true"] > *:nth-child(1) { transition-delay:  0ms; }
+[data-stagger="true"] > *:nth-child(2) { transition-delay: 80ms; }
+[data-stagger="true"] > *:nth-child(3) { transition-delay:160ms; }
+[data-stagger="true"] > *:nth-child(4) { transition-delay:240ms; }
+[data-stagger="true"] > *:nth-child(5) { transition-delay:320ms; }
+[data-stagger="true"] > *:nth-child(6) { transition-delay:400ms; }
+
+/* ═══════════════════════════════════════════════════════════════
+   2. GLOW BORDER PULSE
+   Usage: add class="gta-glow-border" to any card/section
+          data-glow-color="#f5c842" (optional, default gold)
+═══════════════════════════════════════════════════════════════ */
+
+.gta-glow-border {
+  position: relative;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.gta-glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--gta-spin, 0deg),
+    transparent 0deg,
+    rgba(245, 200, 66, 0.6) 60deg,
+    rgba(0, 229, 176, 0.4) 120deg,
+    transparent 180deg
+  );
+  animation: gta-border-spin 3s linear infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.gta-glow-border::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: #0d1123;
+  z-index: -1;
+}
+.gta-glow-border:hover::before { opacity: 1; }
+
+@keyframes gta-border-spin {
+  to { --gta-spin: 360deg; }
+}
+/* Fallback for browsers without @property */
+@supports not (background: conic-gradient(from 0deg, red, blue)) {
+  .gta-glow-border::before {
+    background: rgba(245, 200, 66, 0.25);
+    animation: gta-pulse-fallback 2s ease-in-out infinite;
+  }
+}
+@keyframes gta-pulse-fallback {
+  0%, 100% { opacity: 0;    }
+  50%       { opacity: 1;    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3. CARD HOVER TRANSFORMS (GPU-accelerated)
+   Usage: add class="gta-card-hover" to any card
+          Optional: "gta-card-tilt" for 3D tilt (JS handles)
+═══════════════════════════════════════════════════════════════ */
+
+.gta-card-hover {
+  will-change: transform, box-shadow;
+  transition:
+    transform   0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow  0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease;
+  cursor: pointer;
+}
+.gta-card-hover:hover {
+  transform:  translateY(-8px) scale(1.012);
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(245, 200, 66, 0.15);
+}
+.gta-card-hover:active {
+  transform: translateY(-2px) scale(1.004);
+}
+
+/* Shine sweep on hover */
+.gta-card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.gta-card-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.55s ease;
+  pointer-events: none;
+}
+.gta-card-shine:hover::after { transform: translateX(100%); }
+
+/* 3D tilt — applied by JS */
+.gta-card-tilt {
+  will-change: transform;
+  transition: transform 0.15s ease;
+  transform-style: preserve-3d;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   4. FLOATING NUMBER PARTICLES
+   Injected by JS. Pure CSS animation.
+═══════════════════════════════════════════════════════════════ */
+
+.gta-num-particle {
+  position: absolute;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-weight: 700;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: gta-float-up var(--dur, 8s) var(--delay, 0s) ease-in-out infinite;
+}
+@keyframes gta-float-up {
+  0%   { opacity: 0;    transform: translateY(0)   scale(0.8); }
+  15%  { opacity: 0.7;                                          }
+  85%  { opacity: 0.4;                                          }
+  100% { opacity: 0;    transform: translateY(-140px) scale(1.1); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5. CANDLESTICK CANVAS WRAPPER
+   Canvas drawn by JS. CSS controls the wrapper aesthetics.
+═══════════════════════════════════════════════════════════════ */
+
+.gta-candle-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(13,18,35,0.6) 0%, rgba(4,6,15,0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+.gta-candle-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Grid lines behind canvas */
+.gta-candle-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Price labels */
+.gta-price-label {
+  position: absolute;
+  right: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+.gta-price-up   { color: #00d68f; background: rgba(0,214,143,0.1); }
+.gta-price-down { color: #ff4757; background: rgba(255,71,87,0.1);  }
+
+/* ═══════════════════════════════════════════════════════════════
+   6. NUMBER GLOW ELEMENTS (hero accent numbers)
+   Usage: <div class="gta-glow-num" data-num="73%">
+═══════════════════════════════════════════════════════════════ */
+
+.gta-glow-num {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.gta-glow-num-val {
+  font-family: 'Syne', 'Arial Black', sans-serif;
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 52px);
+  letter-spacing: -1.5px;
+  line-height: 1;
+  color: #f5c842;
+  position: relative;
+}
+/* Gold glow behind number */
+.gta-glow-num-val::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  text-shadow: 0 0 32px rgba(245,200,66,0.7), 0 0 60px rgba(245,200,66,0.3);
+  animation: gta-num-glow 3s ease-in-out infinite;
+}
+@keyframes gta-num-glow {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1.0; }
+}
+.gta-glow-num-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(180, 192, 215, 0.7);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   7. HERO VIDEO BANNER
+   Usage: <section class="gta-hero-video">
+            <video class="gta-hero-vid" ...>
+            <div class="gta-hero-overlay"></div>
+            <img class="gta-hero-fallback" src="fallback.jpg">
+            <div class="gta-hero-content"> ... </div>
+          </section>
+═══════════════════════════════════════════════════════════════ */
+
+.gta-hero-video {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.gta-hero-vid,
+.gta-hero-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+.gta-hero-vid {
+  filter: saturate(0.2) brightness(0.18) contrast(1.1);
+  transform: scale(1.04);
+  transition: filter 2s ease, transform 12s ease;
+  will-change: transform;
+}
+.gta-hero-video:hover .gta-hero-vid {
+  filter: saturate(0.28) brightness(0.22) contrast(1.1);
+  transform: scale(1.08);
+}
+.gta-hero-fallback {
+  filter: saturate(0) brightness(0.15);
+  z-index: 0;
+}
+/* Show fallback while video loads */
+.gta-hero-vid:not([src]) + .gta-hero-fallback,
+.gta-hero-vid[src=""] + .gta-hero-fallback {
+  display: block;
+}
+
+/* Multi-layer dark gradient overlay */
+.gta-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg,
+      rgba(4,6,15,0.65) 0%,
+      rgba(4,6,15,0.15) 30%,
+      rgba(4,6,15,0.10) 60%,
+      rgba(4,6,15,0.85) 100%
+    ),
+    linear-gradient(90deg,
+      rgba(4,6,15,0.50) 0%,
+      transparent       55%,
+      rgba(4,6,15,0.20) 100%
+    );
+}
+
+/* Content always above video + overlay */
+.gta-hero-content { position: relative; z-index: 3; }
+
+/* Scanline top-to-bottom sweep */
+.gta-hero-scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,200,66,0.12), transparent);
+  z-index: 2;
+  pointer-events: none;
+  animation: gta-scanline 5s ease-in-out infinite;
+}
+@keyframes gta-scanline {
+  0%   { top: -2px;   opacity: 0; }
+  10%  {              opacity: 1; }
+  90%  {              opacity: 1; }
+  100% { top: 102%;   opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   8. LAZY VIDEO EMBED (testimonial reels)
+   Usage: <div class="gta-video-embed" data-src="YOUTUBE_EMBED_URL"
+               data-thumb="thumbnail.jpg">
+            <div class="gta-video-play">▶</div>
+          </div>
+═══════════════════════════════════════════════════════════════ */
+
+.gta-video-embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #0d1123;
+  border: 1px solid rgba(255,255,255,0.08);
+  will-change: transform;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s;
+}
+.gta-video-embed:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.5);
+}
+
+/* Thumbnail background */
+.gta-video-embed-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+  transition: filter 0.3s, transform 0.4s;
+}
+.gta-video-embed:hover .gta-video-embed-thumb {
+  filter: brightness(0.5);
+  transform: scale(1.04);
+}
+
+/* Play button */
+.gta-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(245, 200, 66, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s;
+  box-shadow: 0 8px 32px rgba(245, 200, 66, 0.45);
+}
+.gta-video-play svg {
+  width: 28px;
+  height: 28px;
+  fill: #000;
+  margin-left: 4px; /* optical center */
+}
+.gta-video-embed:hover .gta-video-play {
+  transform: translate(-50%, -50%) scale(1.12);
+  box-shadow: 0 12px 40px rgba(245, 200, 66, 0.6);
+}
+
+/* Pulse ring around play */
+.gta-video-play::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(245, 200, 66, 0.3);
+  animation: gta-play-ring 2s ease-out infinite;
+}
+@keyframes gta-play-ring {
+  0%   { transform: scale(1);    opacity: 0.8; }
+  100% { transform: scale(1.5);  opacity: 0;   }
+}
+
+/* Loading state */
+.gta-video-embed.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(4,6,15,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+.gta-video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9. TYPING CURSOR EFFECT
+   Usage: <span class="gta-typing">Trade Like a Pro</span>
+═══════════════════════════════════════════════════════════════ */
+
+.gta-typing::after {
+  content: '|';
+  display: inline-block;
+  color: #f5c842;
+  animation: gta-blink 1.1s step-end infinite;
+  font-weight: 300;
+  margin-left: 2px;
+}
+@keyframes gta-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   10. STAT COUNTER CARD
+   Usage: <div class="gta-stat-card">
+            <div class="gta-stat-val" data-count="73" data-suffix="%">0%</div>
+            <div class="gta-stat-label">Win Rate</div>
+          </div>
+═══════════════════════════════════════════════════════════════ */
+
+.gta-stat-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 28px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), border-color 0.25s;
+  will-change: transform;
+}
+.gta-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,200,66,0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.gta-stat-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(245,200,66,0.2);
+}
+.gta-stat-card:hover::before { opacity: 1; }
+
+.gta-stat-val {
+  font-family: 'Syne', 'Arial Black', sans-serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  color: #f5c842;
+  line-height: 1;
+  display: block;
+  margin-bottom: 8px;
+}
+.gta-stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: rgba(180,192,215,0.7);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   11. SCROLL PROGRESS BAR
+   Applied automatically by JS to #gta-scroll-bar
+═══════════════════════════════════════════════════════════════ */
+
+#gta-scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #f5c842, #00e5b0);
+  z-index: 99999;
+  transition: width 0.1s linear;
+  will-change: width;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   12. PULSE BADGE (live / limited seats)
+   Usage: <span class="gta-pulse-badge">● LIVE</span>
+═══════════════════════════════════════════════════════════════ */
+
+.gta-pulse-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+.gta-pulse-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+  animation: gta-dot-pulse 1.4s ease-in-out infinite;
+}
+@keyframes gta-dot-pulse {
+  0%, 100% { transform: scale(1);   opacity: 1;   }
+  50%       { transform: scale(1.5); opacity: 0.5; }
+}
+.gta-badge-red   { color: #ff4757; background: rgba(255,71,87,0.1);  border: 1px solid rgba(255,71,87,0.3);  }
+.gta-badge-gold  { color: #f5c842; background: rgba(245,200,66,0.1); border: 1px solid rgba(245,200,66,0.3); }
+.gta-badge-teal  { color: #00e5b0; background: rgba(0,229,176,0.1);  border: 1px solid rgba(0,229,176,0.3);  }
+.gta-badge-green { color: #00d68f; background: rgba(0,214,143,0.1);  border: 1px solid rgba(0,214,143,0.3);  }
+
+/* ═══════════════════════════════════════════════════════════════
+   13. MOBILE RESPONSIVE OVERRIDES
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .gta-reveal, .gta-reveal-l, .gta-reveal-r {
+    transform: translateY(20px) !important; /* softer on mobile */
+  }
+  .gta-card-hover:hover { transform: translateY(-4px); }
+  .gta-candle-wrap      { border-radius: 12px; }
+  .gta-video-play       { width: 52px; height: 52px; }
+  .gta-video-play svg   { width: 22px; height: 22px; }
+  .gta-num-particle     { display: none !important; } /* skip particles on mobile */
+}
